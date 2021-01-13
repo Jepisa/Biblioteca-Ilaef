@@ -62,26 +62,31 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         
-        if($request->role_id)
+        if( Auth::check() AND isset($request->role_id))
         {
-            if( Auth::check() AND Auth::user()->role->name == 'Administrador Principal' )
-
-            $roles = Role::where('visibility', true)->get('id')->toArray();
-            if($roles)
+            if(Auth::user()->role->name == 'Administrador Principal' )
             {
-                $rolesIdVisible = array_map( function ($role) { return $role['id']; }, $roles);
-                
-                $ruleRole_id = [ Rule::in($rolesIdVisible) ] ;
-                
+                $roles = Role::where('visibility', true)->get('id')->toArray();
+                if($roles)
+                {
+                    $rolesIdVisible = array_map( function ($role) { return $role['id']; }, $roles);
+                    
+                    $ruleRole_id = [ Rule::in($rolesIdVisible) ] ;
+                    
+                }
+            }
+            if( Auth::user()->role->name == 'Programador' )
+            {
+                $ruleRole_id = 'exists:rule,id';
             }
         }
-        $rules = [
+
+        $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'role_id' => (isset($ruleRole_id)) ? $ruleRole_id : '',
             'password' => 'required|string|confirmed|min:8',
-        ];
-        $request->validate($rules);
+        ]);
 
         if( Auth::check() )
         {
@@ -90,7 +95,7 @@ class RegisteredUserController extends Controller
             {
                 $user = User::create([
                     'name' => $request->name,
-                    'role_id' =>  (isset($request->role_id)) ? $request->role_id : 1 ,
+                    'role_id' =>  (isset($request->role_id)) ? $request->role_id : Role::firstOrCreate(['name' => 'Usuario'])->id ,
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                 ]);
