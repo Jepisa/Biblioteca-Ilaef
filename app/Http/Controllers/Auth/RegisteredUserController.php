@@ -77,7 +77,7 @@ class RegisteredUserController extends Controller
             }
             if( Auth::user()->role->name == 'Programador' )
             {
-                $ruleRole_id = 'exists:rule,id';
+                $ruleRole_id = 'exists:rules,id';
             }
         }
 
