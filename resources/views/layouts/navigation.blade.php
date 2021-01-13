@@ -44,6 +44,23 @@
                                 {{ __('Logout') }}
                             </x-dropdown-link>
                         </form>
+                        <x-dropdown-link :href="route('register')">
+                                {{ __('Register') }}
+                        </x-dropdown-link>
+
+                        @foreach (App\Models\User::all() as $user)
+                            
+                            <form method="POST" action="{{ route('impersonate.start', [$user->id]) }}" class="{{ (Auth::user()->email == $user->email) ? 'border font-black': ''}}">
+                                @csrf
+
+                                <x-dropdown-link :href="route('impersonate.start', [$user->id])"
+                                        onclick="event.preventDefault();
+                                                    this.closest('form').submit();">
+                                    {{$user->name." -> ".$user->role->name }}
+                                </x-dropdown-link>
+                            </form>
+                        @endforeach
+
                     </x-slot>
                 </x-dropdown>
             </div>
