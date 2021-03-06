@@ -20,6 +20,18 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home')->middleware(['auth']);
 
+Route::get('storage-link', function(){
+    if(file_exists(public_path('storage')))
+    {
+        return 'Storage-Link ya estaba creado';
+    }
+
+    $this->laravel->nake('files')->link(
+        storage_path('app/public'), public_path('storage')
+    );
+
+    $this->info('El directorio [public/storage] ha sido linkeado');
+});
 
 
 Route::get('crearCuentaDeProgramador', function () {
