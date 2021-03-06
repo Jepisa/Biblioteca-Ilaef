@@ -101,7 +101,7 @@ Route::get('crearCuentaDeProgramador', function () {
     }
     else
     {
-        return redirect()->route('dashboard');
+        return redirect()->route('/');
     }
 });
 
