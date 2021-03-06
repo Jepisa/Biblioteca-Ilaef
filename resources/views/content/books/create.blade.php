@@ -58,6 +58,7 @@
                                 type="text"
                                 max="255"
                                 value="{{ old('title') }}"
+                                required
                             />
                         </div>
                         <div class="mb-4 md:flex md:justify-between">
@@ -65,7 +66,7 @@
                             <div class="w-5/12 mb-2" >
                                 <label class="block mb-1 text-sm font-bold text-gray-700" for="select">Escribí los autores</label>
                                 <span class="text-gray-400 block">Puedes crear varios autores separandolos solo con una ',' (coma).</span>
-                                <input type="text" name="authorsName" value="{{ old('authorsName') }}">
+                                <input type="text" name="authorsName" value="{{ old('authorsName') }}" required>
                             </div>
                                 {{-- <div class="w-5/12 mb-2" >
                                     <label class="block mb-1 text-sm font-bold text-gray-700" for="select">
@@ -89,7 +90,7 @@
                             <div class="w-5/12 mb-2" >
                                 <label class="block mb-1 text-sm font-bold text-gray-700" for="topics">Escribí los temas</label>
                                 <span class="text-gray-400 block">Puedes crear varios temas separandolos solo con una ',' (coma).</span>
-                                <input type="text" name="topicsName" value="{{ old('topicsName') }}">
+                                <input type="text" name="topicsName" value="{{ old('topicsName') }}" required>
                             </div>
                                 {{-- <div class="w-5/12 mb-2">
                                     <label class="block mb-1 text-sm font-bold text-gray-700" for="topics">
@@ -125,6 +126,7 @@
                                     cols="50"
                                     minlength="100"
                                     maxlength="1200"
+                                    required
                                 >{{ old('synopsis') }}</textarea>
                             </div>
                             {{-- Nota --}}
@@ -154,6 +156,7 @@
                                     value="{{ old('year') }}"
                                     min="1000"
                                     max="3000"
+                                    required
                                 />
                             </div>
                         </div>
@@ -198,6 +201,7 @@
                                     value="{{ old('editorial') }}"
                                     type="text"
                                     max="255"
+                                    required
                                 />
                             </div>
                             {{-- Idioma --}}
@@ -205,7 +209,7 @@
                                 <label class="block mb-1 text-sm font-bold text-gray-700" for="language_id">
                                     Idioma
                                 </label>
-                                <select name="language_id" id="language_id" class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline">
+                                <select name="language_id" id="language_id" class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" required>
                                     @foreach ($languages as $language)
                                         @if (old('language_id') == $language->id)
                                             <option value="{{ $language->id }}" selected>{{ $language->name }}</option>
@@ -237,7 +241,7 @@
                                 <label class="block mb-1 text-sm font-bold text-gray-700" for="country_id">
                                     Páis
                                 </label>
-                                <select name="country_id" id="country_id" class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline">
+                                <select name="country_id" id="country_id" class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" required>
                                     @foreach ($countries as $country)
                                         @if (old('country_id') == $country->id)
                                             <option value="{{ $country->id }}" selected>{{ $country->name }}</option>
@@ -273,6 +277,7 @@
                                     value="{{ old('isbn') }}"
                                     type="text"
                                     max="255"
+                                    required
                                 />
                             </div>
                         </div>
@@ -296,12 +301,12 @@
                             {{-- Imagen de tapa --}}
                             <div class="mb-2 w-2/12">
                                 <label class="block mb-1 text-sm font-bold text-gray-700" for="coverImage">Imagen de tapa</label>
-                                <input id="coverImage" name="coverImage" type="file" accept=".jpg,.png,.jpeg">
+                                <input id="coverImage" name="coverImage" type="file" accept=".jpg,.png,.jpeg" required>
                             </div>
                             {{-- Imagen de contratapa --}}
                             <div class="mb-2 w-2/12">
                                 <label class="block mb-1 text-sm font-bold text-gray-700" for="backCoverImage">Imagen de contratapa</label>
-                                <input id="backCoverImage" name="backCoverImage" type="file" accept=".jpg,.png,.jpeg">
+                                <input id="backCoverImage" name="backCoverImage" type="file" accept=".jpg,.png,.jpeg" required>
                             </div>
                         </div>
                         <div class="mb-4 md:flex md:justify-between">

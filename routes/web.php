@@ -18,7 +18,7 @@ require __DIR__.'/programmer.php';
 // })->middleware(['verified','auth'])->name('dashboard');
 
 Route::get('books', [BookController::class, 'index'])->name('books.index')->middleware('auth');
-Route::get('book/create', [BookController::class, 'create'])->name('book.create')->middleware(['verified','auth']);
+Route::get('book/create', [BookController::class, 'create'])->name('book.create')->middleware(['auth']);
 Route::post('book',[BookController::class, 'store'])->name('book.store')->middleware('auth');
 
 Route::get('author/create', [Author::class, 'create'])->name('author.create');
