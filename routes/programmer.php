@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\State;
 use App\Models\Topic;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\Framework\Test;
@@ -33,6 +34,11 @@ Route::get('storage-link', function(){
     $this->info('El directorio [public/storage] ha sido linkeado');
 });
 
+Route::get('/clear', function() {
+    $exitCode = Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    return 'Cache y View Limpiada';
+});
 
 Route::get('crearCuentaDeProgramador', function () {
 
