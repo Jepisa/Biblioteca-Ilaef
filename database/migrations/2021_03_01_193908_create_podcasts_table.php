@@ -16,6 +16,7 @@ class CreatePodcastsTable extends Migration
         Schema::create('podcasts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug');
             $table->string('announcer')->nullable();//Locutor/a
             $table->text('synopsis');
             $table->text('note')->nullable();
@@ -29,7 +30,7 @@ class CreatePodcastsTable extends Migration
             $table->unsignedBigInteger('country_id');
             $table->foreign('country_id')->references('id')->on('countries');
             $table->integer('duration')->nullable();
-            $table->string('isbn')->nullable();
+            $table->string('isbn')->nullable()->unique();
             $table->string('downloadable')->nullable();
             $table->string('url')->nullable();
             $table->string('coverImage')->nullable();

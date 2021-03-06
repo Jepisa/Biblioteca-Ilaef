@@ -16,6 +16,7 @@ class CreateBooksTable extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug');
             $table->text('synopsis');
             $table->text('note')->nullable();
             $table->integer('year')->nullable();
@@ -28,11 +29,12 @@ class CreateBooksTable extends Migration
             $table->unsignedBigInteger('country_id');
             $table->foreign('country_id')->references('id')->on('countries');
             $table->integer('pages')->nullable();
-            $table->string('isbn');
+            $table->string('isbn')->unique();
             $table->string('downloadable')->nullable();
-            $table->string('url')->nullable();
+            $table->text('url')->nullable();
             $table->string('coverImage');
             $table->string('backCoverImage')->nullable();
+            
             $table->string('audiobook')->nullable();
             $table->string('format');
             $table->timestamps();

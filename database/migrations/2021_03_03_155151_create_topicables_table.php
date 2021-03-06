@@ -17,7 +17,7 @@ class CreateTopicablesTable extends Migration
             $table->id();
             $table->foreignId('topic_id')
                 ->constrained()
-                ->onDelete('cascade');
+                ->cascadeOnDelete();
             // $table->integer('topic_id')->unsigned();
             // $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');
             $table->morphs('topicable');

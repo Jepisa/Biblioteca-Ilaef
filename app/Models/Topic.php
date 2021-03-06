@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Topic extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
+    protected $fillable = ['name'];
 
 
     public function books()

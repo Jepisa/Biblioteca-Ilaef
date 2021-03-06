@@ -15,8 +15,7 @@ class CreateTopicsTable extends Migration
     {
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->morphs('topicable');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }

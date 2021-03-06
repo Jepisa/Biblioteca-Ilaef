@@ -20,7 +20,7 @@ class Book extends Model
         return $this->morphToMany(Topic::class, 'topicable');
     }
 
-    public function images()
+    public function extraImages()
     {
         return $this->morphMany(Extraimage::class, 'extraimageable');
     }
