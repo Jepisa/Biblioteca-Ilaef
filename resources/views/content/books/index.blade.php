@@ -55,11 +55,11 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center">
                                 <div>
-                                    <div class="flex-shrink-0 h-10">
-                                        <img class="h-full" src="{{ asset("storage/$book->coverImage") }}" alt="">
+                                    <div class="flex-shrink-0 w-10">
+                                        <img class="w-full" src="{{ asset("storage/$book->coverImage") }}" alt="">
                                     </div>
-                                    <div class="flex-shrink-0 h-10">
-                                        <img class="h-full" src="{{ asset("storage/$book->backCoverImage") }}" alt="">
+                                    <div class="flex-shrink-0 w-10">
+                                        <img class="w-full" src="{{ asset("storage/$book->backCoverImage") }}" alt="">
                                     </div>
                                 </div>
                                 <div class="ml-4">
@@ -107,7 +107,7 @@
                             
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex items-center flex-wrap">
+                            <div class="flex items-center flex-wrap w-20">
                                 @foreach ($book->extraimages as $image)
                                     <div class="flex-shrink-0 h-10 m-1">
                                         <img class="h-full" src="{{ asset("storage/$image->image") }}" alt="">

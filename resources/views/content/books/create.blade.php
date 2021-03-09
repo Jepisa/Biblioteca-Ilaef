@@ -124,7 +124,7 @@
                                     name="synopsis"
                                     rows="2"
                                     cols="50"
-                                    minlength="100"
+                                    minlength="400"
                                     maxlength="1200"
                                     required
                                 >{{ old('synopsis') }}</textarea>
@@ -156,7 +156,6 @@
                                     value="{{ old('year') }}"
                                     min="1000"
                                     max="3000"
-                                    required
                                 />
                             </div>
                         </div>
@@ -336,7 +335,7 @@
                             </button>
                         </div>
                         <hr class="mb-6 border-t" />
-                        <div class="text-center">
+                        {{-- <div class="text-center">
                             <a
                                 class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
                                 href="#"
@@ -350,7 +349,7 @@
                                 href="./index.html"
                             >
                                 Already have an account? Login!
-                            </a>
+                            </a> --}}
                         </div>
                     </form>
                 </div>
