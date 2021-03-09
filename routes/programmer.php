@@ -21,17 +21,23 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home')->middleware(['auth']);
 
-Route::get('storage-link', function(){
-    if(file_exists(public_path('storage')))
-    {
-        return 'Storage-Link ya estaba creado';
-    }
+// Route::get('storage-link', function(){
+//     if(file_exists(public_path('storage')))
+//     {
+//         return 'Storage-Link ya estaba creado';
+//     }
 
-    $this->laravel->nake('files')->link(
-        storage_path('app/public'), public_path('storage')
-    );
+//     $this->laravel->nake('files')->link(
+//         storage_path('app/public'), public_path('storage')
+//     );
 
-    $this->info('El directorio [public/storage] ha sido linkeado');
+//     $this->info('El directorio [public/storage] ha sido linkeado');
+// });
+
+Route::get('/storage-link', function() {
+    $exitCode = Artisan::call('storage:link');
+    // Artisan::call('view:clear');
+    return 'El directorio [public/storage] ha sido linkeado';
 });
 
 Route::get('/clear', function() {
