@@ -44,24 +44,24 @@ class StoreBookRequest extends FormRequest
             // 'authors.*' => 'required|integer|distinct|exists:authors,id',
             // 'topics' => 'required|array|min:1',
             // 'topics.*' => 'required|integer|distinct|exists:topics,id',
-            'synopsis' => 'required|min:100|max:1200',//Le cambié el min de 400 a 100 porque no sé si van a llegar...
+            'synopsis' => 'required|min:400|max:1200',//Le cambié el min de 400 a 100 porque no sé si van a llegar...
             'note' => 'nullable|string|max:600',
-            'year' => 'integer|min:1000|max:3000',
-            'collection' => 'string|max:255',
-            'edition' => 'string|max:255',
+            'year' => 'nullable|integer|min:1000|max:3000',
+            'collection' => 'nullable|string|max:255',
+            'edition' => 'nullable|string|max:255',
             'editorial' => 'required|string|max:255',
             'language_id' => 'required|integer|exists:languages,id',
-            'city' => 'string|max:255',
+            'city' => 'nullable|string|max:255',
             'country_id' => 'required|integer|exists:countries,id',
-            'pages' => 'integer',
+            'pages' => 'nullable|integer',
             'isbn' => 'required|string|max:255|unique:books,isbn',
             'downloadable' => 'file|mimes:pdf,doc',
-            'url' => 'url',
+            'url' => 'nullable|url',
             'coverImage' => 'required|file|mimes:jpg,png,jpeg|between:40,4000',
             'extraimages' => 'array',
             'extraimages.*' => 'required|file|mimes:jpg,png,jpeg|between:40,3000',
             'backCoverImage' => 'required|file|mimes:jpg,png,jpeg|between:40,4000',
-            'audioBook' => 'file|mimes:mp3,wma,aac',
+            'audioBook' => 'nullable|file|mimes:mp3,wma,aac',
         ];
     }
 

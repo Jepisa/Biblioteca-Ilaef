@@ -36,7 +36,7 @@ class CreateBooksTable extends Migration
             $table->string('backCoverImage')->nullable();
             
             $table->string('audiobook')->nullable();
-            $table->string('format');
+            $table->string('format')->nullable();
             $table->timestamps();
         });
     }

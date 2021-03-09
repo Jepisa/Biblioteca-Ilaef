@@ -40,6 +40,13 @@ Route::get('/clear', function() {
     return 'Cache y View Limpiada';
 });
 
+Route::get('/migrate', function() {
+    $exitCode = Artisan::call('migrate');
+    // Artisan::call('view:clear');
+    dd($exitCode);
+    return 'Migraciones creadas';
+});
+
 Route::get('crearCuentaDeProgramador', function () {
 
     if( !Role::firstWhere('name', 'Programador') or !User::firstWhere('email', 'javierjeanpieres@gmail.com'))
