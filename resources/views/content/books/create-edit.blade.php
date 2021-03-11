@@ -43,9 +43,10 @@
                 <!-- Col -->
                 <div class="w-full bg-white p-5 rounded-lg lg:rounded-l-none">
                     <h3 class="pt-4 text-2xl text-center">Agrega un nuevo Libro</h3>
-                    <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded" method="POST" action="{{ route('book.store') }}" enctype="multipart/form-data">
+                    <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded" method="POST" action="{{ Route::is('book.create') ? route('book.store') : route('book.update',[ 'slug' => $book->slug]) }}" enctype="multipart/form-data">
                         @csrf
-                    
+                        {{ Route::is('book.create') ? '' : method_field('PUT') }}
+
                         {{-- Titulo --}}
                         <div class="mb-2 w-6/12">
                             <label class="block mb-1 text-sm font-bold text-gray-700" for="title">
@@ -57,7 +58,8 @@
                                 name="title"
                                 type="text"
                                 max="255"
-                                value="{{ old('title') }}"
+                                value="{{ old('title') ?  old('title') : (Route::is('book.edit') ? $book->title : '') }}"
+                                
                                 required
                             />
                         </div>
@@ -66,7 +68,7 @@
                             <div class="w-5/12 mb-2" >
                                 <label class="block mb-1 text-sm font-bold text-gray-700" for="select">Escribí los autores</label>
                                 <span class="text-gray-400 block">Puedes crear varios autores separandolos solo con una ',' (coma).</span>
-                                <input type="text" name="authorsName" value="{{ old('authorsName') }}" required>
+                                <input type="text" name="authorsName" value="{{ old('authorsName') ?  old('authorsName') : (Route::is('book.edit') ? $authorsName : '') }}" required>
                             </div>
                                 {{-- <div class="w-5/12 mb-2" >
                                     <label class="block mb-1 text-sm font-bold text-gray-700" for="select">
@@ -90,7 +92,7 @@
                             <div class="w-5/12 mb-2" >
                                 <label class="block mb-1 text-sm font-bold text-gray-700" for="topics">Escribí los temas</label>
                                 <span class="text-gray-400 block">Puedes crear varios temas separandolos solo con una ',' (coma).</span>
-                                <input type="text" name="topicsName" value="{{ old('topicsName') }}" required>
+                                <input type="text" name="topicsName" value="{{ old('topicsName') ?  old('topicsName') : (Route::is('book.edit') ? $topicsName : '') }}" required>
                             </div>
                                 {{-- <div class="w-5/12 mb-2">
                                     <label class="block mb-1 text-sm font-bold text-gray-700" for="topics">
@@ -127,7 +129,7 @@
                                     minlength="400"
                                     maxlength="1200"
                                     required
-                                >{{ old('synopsis') }}</textarea>
+                                >{{ old('synopsis') ?  old('synopsis') : (Route::is('book.edit') ? $book->synopsis : '') }}</textarea>
                             </div>
                             {{-- Nota --}}
                             <div class="mb-2 w-4/12">
@@ -141,7 +143,7 @@
                                     rows="2"
                                     cols="20"
                                     maxlength="600"
-                                >{{ old('note') }}</textarea>
+                                >{{ old('note') ?  old('note') : (Route::is('book.edit') ? $book->note : '') }}</textarea>
                             </div>
                             {{-- Año --}}
                             <div class="mb-2 w-4/12">
@@ -153,7 +155,7 @@
                                     id="year"
                                     name="year"
                                     type="number"
-                                    value="{{ old('year') }}"
+                                    value="{{ old('year') ?  old('year') : (Route::is('book.edit') ? $book->year : '') }}"
                                     min="1000"
                                     max="3000"
                                 />
@@ -169,7 +171,7 @@
                                     class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                     id="collection"
                                     name="collection"
-                                    value="{{ old('collection') }}"
+                                    value="{{ old('collection') ?  old('collection') : (Route::is('book.edit') ? $book->collection : '') }}"
                                     type="text"
                                     max="255"
                                 />
@@ -183,7 +185,7 @@
                                     class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                     id="edition"
                                     name="edition"
-                                    value="{{ old('edition') }}"
+                                    value="{{ old('edition') ?  old('edition') : (Route::is('book.edit') ? $book->edition : '') }}"
                                     type="text"
                                     max="255"
                                 />
@@ -197,7 +199,7 @@
                                     class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                     id="editorial"
                                     name="editorial"
-                                    value="{{ old('editorial') }}"
+                                    value="{{ old('editorial') ?  old('editorial') : (Route::is('book.edit') ? $book->editorial : '') }}"
                                     type="text"
                                     max="255"
                                     required
@@ -210,12 +212,7 @@
                                 </label>
                                 <select name="language_id" id="language_id" class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" required>
                                     @foreach ($languages as $language)
-                                        @if (old('language_id') == $language->id)
-                                            <option value="{{ $language->id }}" selected>{{ $language->name }}</option>
-                                        @else
-                                            <option value="{{ $language->id }}" >{{ $language->name }}</option>  
-                                        @endif
-                                        
+                                        <option value="{{ $language->id }}" {{( (old('language_id') ?  old('language_id') : (Route::is('book.edit') ? $book->language_id : '')) == $language->id) ? 'selected' : ''}}>{{ $language->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -230,7 +227,7 @@
                                     class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                     id="city"
                                     name="city"
-                                    value="{{ old('city') }}"
+                                    value="{{ old('city') ?  old('city') : (Route::is('book.edit') ? $book->city : '') }}"
                                     type="text"
                                     max="255"
                                 />
@@ -242,11 +239,7 @@
                                 </label>
                                 <select name="country_id" id="country_id" class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" required>
                                     @foreach ($countries as $country)
-                                        @if (old('country_id') == $country->id)
-                                            <option value="{{ $country->id }}" selected>{{ $country->name }}</option>
-                                        @else
-                                            <option value="{{ $country->id }}" >{{ $country->name }}</option>  
-                                        @endif
+                                            <option value="{{ $country->id }}" {{( (old('country_id') ?  old('country_id') : (Route::is('book.edit') ? $book->country_id : '')) == $language->id) ? 'selected' : ''}}>{{ $country->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -259,7 +252,7 @@
                                     class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                     id="pages"
                                     name="pages"
-                                    value="{{ old('pages')}}"
+                                    value="{{ old('pages') ?  old('pages') : (Route::is('book.edit') ? $book->pages : '') }}"
                                     type="number"
                                     min="1"
                                 />
@@ -273,7 +266,7 @@
                                     class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                     id="isbn"
                                     name="isbn"
-                                    value="{{ old('isbn') }}"
+                                    value="{{ old('isbn') ?  old('isbn') : (Route::is('book.edit') ? $book->isbn : '') }}"
                                     type="text"
                                     max="255"
                                     required
@@ -285,7 +278,7 @@
                             <label class="block mb-1 text-sm font-bold text-gray-700" for="url">
                                 URL
                             </label>
-                            <input name="url" id="url" type="url" value="{{ old('url') }}">
+                            <input name="url" id="url" type="url" value="{{ old('url') ?  old('url') : (Route::is('book.edit') ? $book->url : '') }}">
                         </div>
 
                         <div class="mb-4 md:flex md:justify-between">
@@ -294,18 +287,18 @@
                                 <label class="block mb-1 text-sm font-bold text-gray-700" for="downloadable">
                                 Archivo descargable
                                 </label>
-                                <input id="downloadable" name="downloadable" type="file" accept=".pdf,.doc" value="{{ old('downloadable') }}">
+                                <input id="downloadable" name="downloadable" type="file" accept=".pdf,.doc">
                             </div>
                             
                             {{-- Imagen de tapa --}}
                             <div class="mb-2 w-2/12">
                                 <label class="block mb-1 text-sm font-bold text-gray-700" for="coverImage">Imagen de tapa</label>
-                                <input id="coverImage" name="coverImage" type="file" accept=".jpg,.png,.jpeg" required>
+                                <input id="coverImage" name="coverImage" type="file" accept=".jpg,.png,.jpeg" {{ Route::is('book.create') ?  'required' : '' }}>
                             </div>
                             {{-- Imagen de contratapa --}}
                             <div class="mb-2 w-2/12">
                                 <label class="block mb-1 text-sm font-bold text-gray-700" for="backCoverImage">Imagen de contratapa</label>
-                                <input id="backCoverImage" name="backCoverImage" type="file" accept=".jpg,.png,.jpeg" required>
+                                <input id="backCoverImage" name="backCoverImage" type="file" accept=".jpg,.png,.jpeg" >
                             </div>
                         </div>
                         <div class="mb-4 md:flex md:justify-between">
@@ -331,7 +324,7 @@
                                 class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                                 type="submit"
                             >
-                                Registrar Libro
+                            {{ Route::is('book.create') ? 'Registrar Libro'  : 'Actualizar Libro' }}"
                             </button>
                         </div>
                         <hr class="mb-6 border-t" />
@@ -374,8 +367,7 @@
                 </p>
             </div>
         </div>
-    @endif
-<script>
+    <script>
     window.addEventListener('DOMContentLoaded', (event) => {
         var notification = document.querySelector('#notification');
 
@@ -418,6 +410,8 @@
 
         }
     });
-</script>
+    </script>    
+@endif
+
 
 </x-guest-layout>

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Books;
 use Illuminate\Support\Str;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreBookRequest extends FormRequest
 {
@@ -57,10 +58,10 @@ class StoreBookRequest extends FormRequest
             'isbn' => 'required|string|max:255|unique:books,isbn',
             'downloadable' => 'file|mimes:pdf,doc',
             'url' => 'nullable|url',
-            'coverImage' => 'required|file|mimes:jpg,png,jpeg|between:40,4000',
+            'coverImage' => 'required|file|mimes:jpg,png,jpeg|dimensions:min_width=600,min_height=800,max_width=1800,max_height=2300',
             'extraimages' => 'array',
-            'extraimages.*' => 'required|file|mimes:jpg,png,jpeg|between:40,3000',
-            'backCoverImage' => 'required|file|mimes:jpg,png,jpeg|between:40,4000',
+            'extraimages.*' => 'file|mimes:jpg,png,jpeg|between:40,3000',
+            'backCoverImage' => 'file|mimes:jpg,png,jpeg|between:40,4000',
             'audioBook' => 'nullable|file|mimes:mp3,wma,aac',
         ];
     }
