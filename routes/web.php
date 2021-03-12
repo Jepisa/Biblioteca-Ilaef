@@ -21,8 +21,8 @@ Route::get('pru', function () {
 // })->middleware(['verified','auth'])->name('dashboard');
 
 Route::get('books', [BookController::class, 'index'])->name('books.index')->middleware('auth');
-Route::put('book/{slug}', [BookController::class, 'show'])->name('book.show');
 Route::get('book/create', [BookController::class, 'create'])->name('book.create')->middleware(['auth']);
+Route::get('book/{slug}', [BookController::class, 'show'])->name('book.show');
 Route::post('book',[BookController::class, 'store'])->name('book.store')->middleware('auth');
 Route::get('book/{slug}/edit', [BookController::class, 'edit'])->name('book.edit');
 Route::put('book/{slug}', [BookController::class, 'update'])->name('book.update');

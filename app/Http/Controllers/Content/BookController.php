@@ -219,6 +219,7 @@ class BookController extends Controller
 
         $book->authors()->sync($authorsOfTheBook);//
         $book->topics()->sync($topicsOfTheBook);//
+        $book->counter()->create(['views' => 0 ]);
 
         
         $notification = "El libro '$book->title' fue creado con éxito." ;
@@ -236,6 +237,10 @@ class BookController extends Controller
     {
         $book = Book::where('slug', '=', $slug)->firstOrFail();
         //Contar las visitas a cada libro
+        $book->counter()->update([
+            'views' => $book->counter->views + 1,
+            ]);
+        
         return view('books.show', compact('book'));
     }
 

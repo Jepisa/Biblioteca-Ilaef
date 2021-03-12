@@ -34,4 +34,9 @@ class Book extends Model
     {
         return $this->belongsTo(Country::class);
     }
+
+    public function counter()
+    {
+        return $this->morphOne(Counter::class, 'countable');
+    }
 }
