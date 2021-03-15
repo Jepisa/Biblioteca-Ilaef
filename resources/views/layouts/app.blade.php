@@ -8,29 +8,52 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
         <!-- Styles -->
+
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+    <body class="">
+        <div class="min-h-screen" style="background-color:#383E56;">
+            <div class="py-2">
+                @include('layouts.navigation')
+            </div>
 
             <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
+                {{-- <header class="bg-white shadow mt-20">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header> --}}
 
             <!-- Page Content -->
-            <main>
+            <main style="min-height:calc(100vh - 72px - 60px)">
                 {{ $slot }}
             </main>
+            <footer class="">
+                <div class="flex m-auto h-full" style="width:79.5%">
+                    <div class="w-6/12 h-full flex justify-start items-center">
+                        <div class="flex mr-3">
+                            <div class="mr-1">\*/</div><!-- Icono de ubicación -->
+                            <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro.</div>
+                        </div>
+                        <div class="flex">
+                            <div class="mr-1">\*/</div><!-- Icono de ubicación -->
+                            <div>+54 9 11 5745-0850</div>
+                        </div>
+                    </div>
+                    <div class="w-3/12 h-full flex justify-center items-center">
+                        <a href="{{ route('home') }}"></a>
+                    </div>
+                    <div class="redes-sociales w-3/12 h-full"></div>
+                </div>
+            </footer>
         </div>
     </body>
 </html>

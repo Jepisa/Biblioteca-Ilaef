@@ -16,9 +16,14 @@ Route::get('pru', function () {
 //     return view('welcome');
 // })->name('home');
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['verified','auth'])->name('dashboard');
+Route::get('aboutUs', [])->name('aboutUs')->middleware('auth');
+Route::get('contact', [])->name('contact')->middleware('auth');
+
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard'); //->middleware(['verified','auth'])
 
 Route::get('books', [BookController::class, 'index'])->name('books.index')->middleware('auth');
 Route::get('book/create', [BookController::class, 'create'])->name('book.create')->middleware(['auth']);
