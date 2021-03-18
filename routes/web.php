@@ -8,22 +8,23 @@ use Illuminate\Support\Facades\Storage;
 require __DIR__.'/auth.php';
 require __DIR__.'/programmer.php';
 
-Route::get('pru', function () {
-    dd(Storage::deleteDirectory('public/images/books/Primer Libro'));
-});
 
 // Route::get('/', function () {
 //     return view('welcome');
 // })->name('home');
 
-Route::get('aboutUs', [])->name('aboutUs')->middleware('auth');
-Route::get('contact', [])->name('contact')->middleware('auth');
+Route::get('aboutUs', function () {
+    return 'Proximamente';
+})->name('aboutUs')->middleware('auth');
+Route::get('contact', function () {
+    return 'Proximamente';
+})->name('contact')->middleware('auth');
 
 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard'); //->middleware(['verified','auth'])
+})->middleware(['verified','auth'])->name('dashboard'); //->middleware(['verified','auth'])
 
 Route::get('books', [BookController::class, 'index'])->name('books.index')->middleware('auth');
 Route::get('book/create', [BookController::class, 'create'])->name('book.create')->middleware(['auth']);
