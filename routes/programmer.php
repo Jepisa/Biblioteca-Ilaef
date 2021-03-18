@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Author;
+use App\Models\Book;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Gender;
@@ -19,7 +20,7 @@ use PHPUnit\Framework\Test;
 // Temporal Routes
 Route::get('/', function () {
     return view('welcome');
-})->name('home')->middleware(['auth']);
+})->name('home');
 
 // Route::get('storage-link', function(){
 //     if(file_exists(public_path('storage')))
