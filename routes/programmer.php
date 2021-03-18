@@ -19,8 +19,9 @@ use PHPUnit\Framework\Test;
 
 // Temporal Routes
 Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+    $books = Book::all();
+    return view('welcome')->with('books', $books);
+})->name('home')->middleware(['auth']);
 
 // Route::get('storage-link', function(){
 //     if(file_exists(public_path('storage')))
