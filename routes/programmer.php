@@ -43,7 +43,10 @@ Route::get('/storage-link', function() {
 });
 
 Route::get('/clear', function() {
-    $exitCode = Artisan::call('cache:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    Artisan::call('optimize:clear');
     Artisan::call('view:clear');
     return 'Cache y View Limpiada';
 });
