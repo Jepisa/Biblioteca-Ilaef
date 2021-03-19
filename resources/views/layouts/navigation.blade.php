@@ -139,6 +139,20 @@
 
                 </div> --}}
             @auth
+                @minAdmin
+                    <x-responsive-nav-link :href="route('book.create')" :active="request()->routeIs('book.create')">
+                        {{ __('Crear Libros') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')">
+                        {{ __('Listar Libros') }}
+                    </x-responsive-nav-link>
+                    @if (Auth::user()->isPrincipalAdminOrProgrammer())
+                        <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                            {{ __('Registar un usuario') }}
+                        </x-responsive-nav-link>
+                    @endif
+                @endminAdmin
+
                 <div class="space-y-1">
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">

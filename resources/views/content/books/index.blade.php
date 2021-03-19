@@ -60,7 +60,7 @@
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <p style="white-space: break-spaces; height: 175px; overflow: auto;">{{ $book->synopsis }}</p>
+                            <p style="white-space: break-spaces; height: 175px; width:340px; overflow: auto;">{{ $book->synopsis }}</p>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <ul>
