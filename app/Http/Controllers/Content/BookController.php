@@ -579,10 +579,10 @@ class BookController extends Controller
         //Eliminar su Contador (que aún no lo creé)
         
         //
-
+        $titleOfDeletedBook = $book->title;
         $book->delete();
         
-        $notification = "Se ha eliminado '$book->name' y todo lo que contenía.";
+        $notification = "Se ha eliminado '$titleOfDeletedBook' y todo lo que contenía.";
         
         
         $request->session()->flash('notification', $notification);

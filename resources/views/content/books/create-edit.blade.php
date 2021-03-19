@@ -1,18 +1,4 @@
-<x-guest-layout>
-    
-<div class="hidden fixed top-0 right-0 px-6 py-4 sm:block bg-gray-100 bg-opacity-50">
-    @auth
-    <a href="{{ url('/book/create') }}" class="text-sm text-gray-700 underline m-2">Crear Libro</a>
-    <a href="{{ url('/books') }}" class="text-sm text-gray-700 underline m-2">Lista de Libros</a>
-    <a href="{{ url('/') }}" class="text-sm text-gray-700 underline m-2" >Inicio</a>
-    @else
-        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline m-2">Login</a>
-
-        @if (Route::has('register'))
-            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline m-2">Register</a>
-        @endif
-    @endauth
-</div>
+<x-app-layout>
 
 @if ($errors->any())
     <!-- Validation Errors -->
@@ -280,37 +266,38 @@
                             </label>
                             <input name="url" id="url" type="url" value="{{ old('url') ?  old('url') : (Route::is('book.edit') ? $book->url : '') }}">
                         </div>
-
-                        <div class="mb-4 md:flex md:justify-between">
-                            {{-- Archivo descargable --}}
-                            <div class="mb-2 w-2/12">
-                                <label class="block mb-1 text-sm font-bold text-gray-700" for="downloadable">
-                                Archivo descargable
-                                </label>
-                                <input id="downloadable" name="downloadable" type="file" accept=".pdf,.doc">
+                        <div class="archivos w-10/12">
+                            <div class="mb-4 md:flex md:justify-between">
+                                {{-- Archivo descargable --}}
+                                <div class="mb-2 w-2/12">
+                                    <label class="block mb-1 text-sm font-bold text-gray-700" for="downloadable">
+                                    Archivo descargable
+                                    </label>
+                                    <input id="downloadable" name="downloadable" type="file" accept=".pdf,.doc">
+                                </div>
+                                
+                                {{-- Imagen de tapa --}}
+                                <div class="mb-2 w-2/12">
+                                    <label class="block mb-1 text-sm font-bold text-gray-700" for="coverImage">Imagen de tapa</label>
+                                    <input id="coverImage" name="coverImage" type="file" accept=".jpg,.png,.jpeg" {{ Route::is('book.create') ?  'required' : '' }}>
+                                </div>
+                                {{-- Imagen de contratapa --}}
+                                <div class="mb-2 w-2/12">
+                                    <label class="block mb-1 text-sm font-bold text-gray-700" for="backCoverImage">Imagen de contratapa</label>
+                                    <input id="backCoverImage" name="backCoverImage" type="file" accept=".jpg,.png,.jpeg" >
+                                </div>
                             </div>
-                            
-                            {{-- Imagen de tapa --}}
-                            <div class="mb-2 w-2/12">
-                                <label class="block mb-1 text-sm font-bold text-gray-700" for="coverImage">Imagen de tapa</label>
-                                <input id="coverImage" name="coverImage" type="file" accept=".jpg,.png,.jpeg" {{ Route::is('book.create') ?  'required' : '' }}>
-                            </div>
-                            {{-- Imagen de contratapa --}}
-                            <div class="mb-2 w-2/12">
-                                <label class="block mb-1 text-sm font-bold text-gray-700" for="backCoverImage">Imagen de contratapa</label>
-                                <input id="backCoverImage" name="backCoverImage" type="file" accept=".jpg,.png,.jpeg" >
-                            </div>
-                        </div>
-                        <div class="mb-4 md:flex md:justify-between">
-                            {{-- Imagenes extras --}}
-                            <div class="mb-2 w-2/12">
-                                <label class="block mb-1 text-sm font-bold text-gray-700" for="extraImages">Imagenes extras</label>
-                                <input id="extraImages" name="extraImages[]" type="file" accept=".jpg,.png,.jpeg" multiple>
-                            </div>
-                            {{-- Audiolibro --}}
-                            <div class="mb-2 w-2/12">
-                                <label class="block mb-1 text-sm font-bold text-gray-700" for="audioBook">Audiolibro</label>
-                                <input id="audioBook" name="audioBook" type="file" accept=".mp3,.wma,.aac">
+                            <div class="mb-4 md:flex md:justify-between">
+                                {{-- Imagenes extras --}}
+                                <div class="mb-2 w-2/12">
+                                    <label class="block mb-1 text-sm font-bold text-gray-700" for="extraImages">Imagenes extras</label>
+                                    <input id="extraImages" name="extraImages[]" type="file" accept=".jpg,.png,.jpeg" multiple>
+                                </div>
+                                {{-- Audiolibro --}}
+                                <div class="mb-2 w-2/12">
+                                    <label class="block mb-1 text-sm font-bold text-gray-700" for="audioBook">Audiolibro</label>
+                                    <input id="audioBook" name="audioBook" type="file" accept=".mp3,.wma,.aac">
+                                </div>
                             </div>
                         </div>
                         
@@ -414,4 +401,4 @@
 @endif
 
 
-</x-guest-layout>
+</x-app-layout>

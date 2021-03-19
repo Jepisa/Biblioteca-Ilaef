@@ -21,7 +21,7 @@ use PHPUnit\Framework\Test;
 Route::get('/', function () {
     $books = Book::all();
     return view('welcome')->with('books', $books);
-})->name('home')->middleware(['auth']);
+})->name('home')->middleware('auth');
 
 // Route::get('storage-link', function(){
 //     if(file_exists(public_path('storage')))

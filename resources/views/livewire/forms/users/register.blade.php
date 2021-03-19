@@ -21,9 +21,7 @@
 
     <form method="POST" action="{{ route('register') }}">
         @csrf
-
-        <div wire:ignore id="editor"></div>
-        
+ 
         <!-- Name and Last Name -->
         <div class="w-full flex justify-between mb-6">
             <!-- Name -->

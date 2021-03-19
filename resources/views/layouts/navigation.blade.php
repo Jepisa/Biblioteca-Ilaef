@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="">
     <!-- Primary Navigation Menu -->
-    <div class="w-full h-full">
+    <div class="navbar w-full h-full">
         <div class="flex justify-between h-full">
             <div class="flex">
                 <!-- Logo -->
@@ -28,65 +28,69 @@
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                            @auth
-                                <div>{{ Auth::user()->name }}</div>
-                            @endauth
-                            @guest
-                                Hola!
-                            @endguest
+            <div class="hidden sm:flex sm:items-center">
+                @guest
+                    <a class="left-items register" href="{{ route('register') }}">Registrarse</a>
+                    <a class="left-items" href="{{ route('login') }}" >Iniciar sesión</a>
+                @endguest
+                @auth
+                    <x-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                                @auth
+                                    <div class="">Hola {{ Auth::user()->name }}</div>
+                                @endauth
 
-                            <div class="ml-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
+                                <div class="ml-1">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </x-slot>
 
-                    <x-slot name="content">
-                        <!-- Authentication -->
-                        @auth
-                            <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                                <x-dropdown-link :href="route('logout')"
-                                        onclick="event.preventDefault();
-                                                    this.closest('form').submit();">
-                                    {{ __('Logout') }}
+                        <x-slot name="content">
+                            @minAdmin
+                                <x-dropdown-link :href="route('book.create')">
+                                    {{ __('Crear Libros') }}
                                 </x-dropdown-link>
-                            </form>
-                        @endauth
-                        @guest
-                            <x-dropdown-link :href="route('register')">
-                                {{ __('Register') }}
-                            </x-dropdown-link>
-                        @endguest
-                        
-@auth
-    
-
-@programmer
-                        @foreach (App\Models\User::all() as $user)
-                            
-                            <form method="POST" action="{{ route('impersonate.start', [$user->id]) }}" class="{{ (Auth::user()->email == $user->email) ? 'border font-black': ''}}">
+                                <x-dropdown-link :href="route('books.index')">
+                                    {{ __('Listar Libros') }}
+                                </x-dropdown-link>
+                                @if (Auth::user()->isPrincipalAdminOrProgrammer())
+                                    <x-dropdown-link :href="route('register')">
+                                        {{ __('Registar un usuario') }}
+                                    </x-dropdown-link>
+                                @endif
+                                
+                            @endminAdmin
+                            <!-- Authentication -->
+                                <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <x-dropdown-link :href="route('impersonate.start', [$user->id])"
-                                        onclick="event.preventDefault();
-                                                    this.closest('form').submit();">
-                                    {{$user->name." -> ".$user->role->name }}
-                                </x-dropdown-link>
-                            </form>
-                        @endforeach
-@endprogrammer
+                                    <x-dropdown-link :href="route('logout')"
+                                            onclick="event.preventDefault();
+                                                        this.closest('form').submit();">
+                                        {{ __('Logout') }}
+                                    </x-dropdown-link>
+                                </form>
+                            
+                            @programmer
+                                @foreach (App\Models\User::all() as $user)
+                                    <form method="POST" action="{{ route('impersonate.start', [$user->id]) }}" class="{{ (Auth::user()->email == $user->email) ? 'border font-black': ''}}">
+                                        @csrf
 
-@endauth
-                    </x-slot>
-                </x-dropdown>
+                                        <x-dropdown-link :href="route('impersonate.start', [$user->id])"
+                                                onclick="event.preventDefault();
+                                                            this.closest('form').submit();">
+                                            {{$user->name." -> ".$user->role->name }}
+                                        </x-dropdown-link>
+                                    </form>
+                                @endforeach
+                            @endprogrammer
+                        </x-slot>
+                    </x-dropdown>
+                @endauth
             </div>
 
             <!-- Hamburger -->
@@ -102,36 +106,52 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden" style="background: #383E56; border: 2px solid #D5E5E3; border-radius: 0 0 12px 12px">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Inicio') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('aboutUs')" :active="request()->routeIs('aboutUs')">
+                {{ __('Nosotros') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
+                {{ __('Contacto') }}
+            </x-responsive-nav-link>
         </div>
-
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="flex items-center px-4">
-                <div class="flex-shrink-0">
-                    <svg class="h-10 w-10 fill-current text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                </div>
-
-            </div>
-
-            <div class="mt-3 space-y-1">
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Logout') }}
+        
+            <!-- Responsive Settings Options -->
+            <div class="pt-1 pb-1 border-t border-gray-200">
+                @guest
+                    <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                        {{ __('Registate') }}
                     </x-responsive-nav-link>
-                </form>
+                    <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                        {{ __('Iniciar sesión') }}
+                    </x-responsive-nav-link>
+                @endguest
+                {{-- <div class="flex items-center px-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-10 w-10 fill-current text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </div>
+
+                </div> --}}
+            @auth
+                <div class="space-y-1">
+                    <!-- Authentication -->
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+
+                        <x-responsive-nav-link :href="route('logout')"
+                                onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                            {{ __('Logout') }}
+                        </x-responsive-nav-link>
+                    </form>
+                </div>
+            @endauth
             </div>
-        </div>
+        
     </div>
 </nav>
