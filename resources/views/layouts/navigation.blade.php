@@ -50,7 +50,8 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            @minAdmin
+                            @if (Auth::user()->isAdminPrincipalAdminOrProgrammer())
+                            {{-- @minAdmin --}} 
                                 <x-dropdown-link :href="route('book.create')">
                                     {{ __('Crear Libros') }}
                                 </x-dropdown-link>
@@ -62,8 +63,8 @@
                                         {{ __('Registar un usuario') }}
                                     </x-dropdown-link>
                                 @endif
-                                
-                            @endminAdmin
+                            @endif
+                            {{-- @endminAdmin --}}
                             <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">
                                 @csrf

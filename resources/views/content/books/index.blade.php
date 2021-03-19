@@ -137,50 +137,55 @@
                 </p>
             </div>
         </div>
-    <script>
-    window.addEventListener('DOMContentLoaded', (event) => {
-        var notification = document.querySelector('#notification');
 
-        if (notification) 
-        {
-
-            notification.style.display = "flex";
-            
-            setTimeout(() => {
-                notification.style.right = "10px";
-            }, 500);
-            setTimeout(() => {
-                notification.style.transition = "right 0.5s";
-                notification.style.right = "1px";
-            }, 2500);
-
-            setTimeout(() => {
-                sacarLaNotificacion();
-            }, 5000);
-
-            notification.addEventListener('click', (event) => {
-                sacarLaNotificacion();
-            });
-
-
-            function sacarLaNotificacion()
+        <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            var notification = document.querySelector('#notification');
+    
+            if (notification) 
             {
-                notification.style.pointerEvents = "none";
+    
+                notification.style.display = "flex";
+                
                 setTimeout(() => {
                     notification.style.right = "10px";
                 }, 500);
                 setTimeout(() => {
-                    notification.style.transition = "right 2s";
-                    notification.style.right = "-150vw";
-                }, 1000);
+                    notification.style.transition = "right 0.5s";
+                    notification.style.right = "1px";
+                }, 2500);
+    
                 setTimeout(() => {
-                    notification.remove();
-                }, 3500);
+                    sacarLaNotificacion();
+                }, 5000);
+    
+                notification.addEventListener('click', (event) => {
+                    sacarLaNotificacion();
+                });
+    
+    
+                function sacarLaNotificacion()
+                {
+                    notification.style.pointerEvents = "none";
+                    setTimeout(() => {
+                        notification.style.right = "10px";
+                    }, 500);
+                    setTimeout(() => {
+                        notification.style.transition = "right 2s";
+                        notification.style.right = "-150vw";
+                    }, 1000);
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 3500);
+                }
+    
             }
-
-        }
-    });
-    </script>    
+        });
+        </script> 
 @endif
+<x-slot name="scripts">
+</x-slot>
+<x-slot name="scriptsDown">
+</x-slot>
 
 </x-app-layout>

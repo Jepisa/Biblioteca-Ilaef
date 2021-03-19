@@ -51,6 +51,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function isAdminPrincipalAdminOrProgrammer()
+    {
+        return auth()->user()->role->name == "Administrador" or auth()->user()->role->name == "Administrador Principal" or auth()->user()->role->name == "Programador";
+    }
+
+
     public function isPrincipalAdminOrProgrammer()
     {
         return auth()->user()->role->name == "Administrador Principal" or auth()->user()->role->name == "Programador";

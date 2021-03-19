@@ -6,7 +6,7 @@
     </style>
 
     @programmer
-        @include('layouts.app')
+        @include('layouts.navigation')
     @endprogrammer
 
 

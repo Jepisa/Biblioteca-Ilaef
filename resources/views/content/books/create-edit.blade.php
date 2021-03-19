@@ -400,5 +400,9 @@
     </script>    
 @endif
 
+<x-slot name="scripts">
+</x-slot>
+<x-slot name="scriptsDown">
+</x-slot>
 
 </x-app-layout>
