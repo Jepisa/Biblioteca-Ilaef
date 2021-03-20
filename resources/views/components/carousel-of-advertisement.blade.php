@@ -1,38 +1,18 @@
-<div class="carousel">
-    <div class="title-of-carousel">
-        {{ $titleOfCarousel }}
-    </div>
-    <div class="glide {{ $carousel }}">
+<div class=" w-full my-2">
+    <div class="carousel-of-advertisement" style="position: relative;">
         <div class="glide__track" data-glide-el="track">
-        <ul  class="glide__slides">
-            {{-- @foreach ($books as $book)                
+        <ul id="imagenes-carousel" class="glide__slides">
+            @for ($i = 0; $i < 2; $i++)             
                 <li class="glide__slide">
-                    <div class="div-slide">
-                        <div class="image bg-gray-100">
-                            <img id="imagenes-carousel" class="none-carrousel" src="{{ asset('storage/'.$book->coverImage) }}" alt="{{ $book->title }}">
-                        </div>
-                        <div class="title-of-book">
-                            <p title="{{ $book->title }}">{{ $book->title }}</p>
-                        </div>
-                    </div>
-                </li>
-            @endforeach --}}
-            @for ($i = 0; $i <= 17; $i++)           
-                <li class="glide__slide">
-                    <div class="div-slide">
-                        <div class="image bg-gray-100">
-                            <img id="imagenes-carousel" class="none-carrousel" src="{{ asset('img/content/'.$i.'.jpg') }}" alt="{{ 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Et magnam.' }}">
-                        </div>
-                        <div class="title-of-book">
-                            <p title="{{ 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Et magnam.' }}">{{ 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Et magnam.' }}</p>
-                        </div>
+                    <div class="image">
+                        <img src="{{ asset('img/advertisement/'.$i.'.png') }}" alt="{{ $i }}">
                     </div>
                 </li>
             @endfor
         </ul>
         </div>
         <div class="glide__arrows" data-glide-el="controls">
-            <button class="glide__arrow glide__arrow--left principal" data-glide-dir="<">
+            <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 240.823 240.823" style="enable-background:new 0 0 240.823 240.823;" xml:space="preserve">
                     <g>
                         <path id="Chevron_Right" d="M57.633,129.007L165.93,237.268c4.752,4.74,12.451,4.74,17.215,0c4.752-4.74,4.752-12.439,0-17.179
@@ -42,7 +22,7 @@
                 </svg>
                         
             </button>
-            <button class="glide__arrow glide__arrow--right principal" data-glide-dir=">">
+            <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 240.823 240.823" style="enable-background:new 0 0 240.823 240.823;" xml:space="preserve">
                         <g>
                             <path id="Chevron_Right_1_" d="M183.189,111.816L74.892,3.555c-4.752-4.74-12.451-4.74-17.215,0c-4.752,4.74-4.752,12.439,0,17.179
@@ -51,6 +31,12 @@
                         </g>
                 </svg>
             </button>
+        </div>
+
+        <div class="glide__bullets" data-glide-el="controls[nav]">
+            @for ($i = 0; $i < 2; $i++)
+                <button class="glide__bullet" data-glide-dir="={{$i}}"></button>                
+            @endfor
         </div>
     </div>
 </div>

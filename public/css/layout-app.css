@@ -1,83 +1,9 @@
+@import 'nav-bar-layout-app.css';
+@import 'footer-layout-app.css';
 *{
     font-family: 'Red Hat Text', sans-serif;
 }
 body{
     background-color: #383E56;
 }
-/* Navbar*/
-    nav{
-        min-height: 41px;
-        width: 98%;
-        margin: auto;
-        padding: 3px 4.3% 3px 2.44%;
-        font-size: 20px;
-        background: #D5E5E3 0% 0% no-repeat padding-box;
-        box-shadow: 0px 3px 6px #00000080;
-        border-radius: 12px;
-        opacity: 1;
-    }
-        .logo{
-            height: 53px;
-            width: 147px;
-            margin: 1px 0;
-            background: transparent url(../img/logo-celeste.png) 0% 0% no-repeat padding-box;
-            opacity: 1;
-            background-size: cover;
-        }
-        nav .links{
-            margin-left: 75px;
-        }
-        .left-items{
-            font-size:16px;
-            height:38px;
-            padding: 9px 32px; 
-            margin-left:14px; 
-            display:flex; 
-            justify-content: center;  
-            align-items:center; 
-            box-shadow: 0px 3px 6px #00000080; 
-            border: 1px solid #393E46; 
-            border-radius: 4px;
-        }
 
-        a.register{
-            background: #FFFFFF 0% 0% no-repeat padding-box;
-        }
-
-/*  */
-
-/* Footer */
-    footer{
-        width:100%;
-        height:85px;
-        background: #111214 0% 0% no-repeat padding-box;
-        opacity:1;
-        color:white;
-    }
-/*  */
-
-@media (max-width: 1024px){
-    nav{
-        padding: 0;
-    }
-        nav .navbar{
-            padding: 3px 2.44%;
-        }
-        .logo{
-            width: 115px;
-            height: 41px;
-        }
-        nav .links{
-            margin-left: 20px;
-        }
-
-        .left-items{
-            padding: 9px;
-        }
-}
-
-@media (max-width:639px){
-    nav{
-        width: 95%;
-    }
-}

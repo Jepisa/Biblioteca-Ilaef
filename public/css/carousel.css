@@ -1,4 +1,4 @@
-.none-carrousel{
+.none-carousel{
     opacity: 0;
     /* display: none !important; */
 }
@@ -75,3 +75,20 @@
     }
 
 
+.imagen-carousel{
+    width: auto;
+}
+
+.carousel-of-advertisement .image img{
+    object-fit: cover;
+    min-height: 150px;
+}
+
+@media (max-width:639px){
+    .glide__arrows{
+        display: none !important;
+    }
+    .carousel{
+        width: 100%;
+    }
+}

@@ -4,11 +4,11 @@
             width: 49%;
         }
     </style>
-
+@auth
     @programmer
         @include('layouts.navigation')
     @endprogrammer
-
+@endauth
 
     <div class="min-h-screen flex justify-center items-center pt-6 sm:pt-0 bg-gray-100 ">
         <div class="flex flex-col w-full md:w-10/12 lg:w-8/12 my-4">
