@@ -35,7 +35,7 @@
             margin-bottom: 16px;
         }
         .div-slide .title-of-book{
-            height: 35px;
+            height: 41px;
             width: 100%;
         }
         .div-slide .title-of-book p{
@@ -85,7 +85,7 @@
 }
 
 @media (max-width:639px){
-    .glide__arrows{
+    .glide .glide__arrows{
         display: none !important;
     }
     .carousel{
