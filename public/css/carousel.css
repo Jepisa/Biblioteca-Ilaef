@@ -1,6 +1,5 @@
 .none-carousel{
-    opacity: 0;
-    /* display: none !important; */
+    visibility: hidden;
 }
 
 .carousel{
