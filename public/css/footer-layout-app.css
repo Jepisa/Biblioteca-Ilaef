@@ -21,6 +21,9 @@ footer{
 /*  */
 
 @media (max-width:360px){
+    
+}
+@media (max-width:568px){
     footer .foot{
         flex-direction: column;
     }
@@ -41,7 +44,6 @@ footer{
         flex-direction: row;
     }
 }
-
 @media (max-width:639px){
     
 }

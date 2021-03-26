@@ -92,6 +92,7 @@
         padding: 6px;
     }
         .glide .glide__arrow{
+            all:unset;
             position: static;
             display: block;
         }
