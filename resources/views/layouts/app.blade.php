@@ -20,6 +20,7 @@
         <link rel="stylesheet" href="{{ asset('css/layout-app.css') }}">
 
         <!-- Scripts -->
+        <script src="https://kit.fontawesome.com/93ee6606b0.js" crossorigin="anonymous"></script>
         {{ $scripts }}
         
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -28,10 +29,8 @@
     </head>
     <body class="">
         <div class="min-h-screen">
-            <div class="py-2">
-                @include('layouts.navigation')
-            </div>
-
+            @include('layouts.navigation')
+       
             <!-- Page Heading -->
                 {{-- <header class="bg-white shadow mt-20">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -44,22 +43,27 @@
                 {{ $slot }}
             </main>
             <footer class="">
-                {{-- <div class="flex m-auto h-full" style="width:79.5%">
-                    <div class="w-6/12 h-full flex justify-start items-center">
-                        <div class="flex mr-3">
-                            <div class="mr-1">\*/</div><!-- Icono de ubicación -->
-                            <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro.</div>
+                <div class="foot flex m-auto h-full w-full" >
+                    <div class="direction-contact w-6/12 h-full flex justify-center items-center">
+                        <div class="direction flex mr-10">
+                            <div class="mr-1"><i class="fas fa-map-marker-alt"></i></div><!-- Icono de ubicación -->
+                            <div>201 Ahambra Circle Suite 1205 Coral Gables, FL33134</div>
                         </div>
-                        <div class="flex">
-                            <div class="mr-1">\*/</div><!-- Icono de ubicación -->
+                        <div class="telephone flex">
+                            <div class="mr-1"><i class="fas fa-phone-alt"></i></div><!-- Icono de ubicación -->
                             <div>+54 9 11 5745-0850</div>
                         </div>
                     </div>
-                    <div class="w-3/12 h-full flex justify-center items-center">
-                        <a href="{{ route('home') }}"></a>
+                    <div class="logo-footer w-3/12 h-full flex justify-center items-center">
+                        <a style="width: 155px; padding-top: 10px;" href="{{ route('home') }}"><img src="{{ asset('img/logo-letras-blancas.png') }}"></a>
                     </div>
-                    <div class="redes-sociales w-3/12 h-full"></div>
-                </div> --}}
+                    <div class="redes-sociales w-3/12 h-full flex justify-center items-center">
+                        <a href=""><i class="fab fa-facebook-square"></i></a>
+                        <a href=""><i class="fab fa-twitter-square"></i></a>
+                        <a href=""><i class="fab fa-instagram-square"></i></a>
+                        <a href=""><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
             </footer>
         </div>
         {{ $scriptsDown }}

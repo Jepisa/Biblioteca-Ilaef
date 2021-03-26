@@ -1,5 +1,5 @@
-<div class="hidden lg:block searcher w-6/12 m-auto" >
-<form id="form-search" class="w-full flex" action="" method="GET" style="height: 54px; padding:12px;
+<div class="searcher w-11/12 lg:w-8/12 xl:w-6/12 m-auto" >
+<form id="form-search" class="w-full flex" action="{{ route('searcher') }}" method="GET" style="height: 54px; padding:12px;
 background: #91091E 0% 0% no-repeat padding-box;
 box-shadow: 0px 3px 6px #00000080;
 border: 1px solid #C1C1C1;

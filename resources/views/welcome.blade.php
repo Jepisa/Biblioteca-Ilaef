@@ -8,9 +8,9 @@
     <x-carousel-of-advertisement/>
     <x-searcher/>
 
-    <x-carousel :titleOfCarousel="'Nuestros recomendados'" :carousel="'nuestros-recomendados'" :books="$books"/>
-    <x-carousel :titleOfCarousel="'Los más buscados'" :carousel="'los-más-buscados'" :books="$books"/>
-    <x-carousel :titleOfCarousel="'Los últimos cargados'" :carousel="'los-últimos-cargados'" :books="$books"/>
+    <x-carousel :titleOfCarousel="'Nuestros recomendados'" :carousel="'nuestros-recomendados'" />
+    <x-carousel :titleOfCarousel="'Los más buscados'" :carousel="'los-más-buscados'" />
+    <x-carousel :titleOfCarousel="'Los últimos cargados'" :carousel="'los-últimos-cargados'" />
 
 
     <x-slot name="scriptsDown">
@@ -44,7 +44,7 @@
                 //autoplay: 4000,
                 breakpoints: {
                     1024: {
-                        perView: 8
+                        perView: 6.76
                         },
                     768: {
                     perView: 4
