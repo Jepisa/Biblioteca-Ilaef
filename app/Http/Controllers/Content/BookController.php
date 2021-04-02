@@ -325,7 +325,7 @@ class BookController extends Controller
         if($book->title != $datesBook['title'])
         {
             $datesBook['slug'] = Str::slug($datesBook['title']);
-            if ( Storage::rename("public/images/books/$book->title", "public/images/books/".$datesBook['slug']) ) 
+            if ( $book->slug != $datesBook['slug'] and Storage::rename("public/images/books/$book->slug", "public/images/books/".$datesBook['slug']) ) 
             {
                 $datesBook['coverImage'] = Str::replaceFirst($book->title, $datesBook['slug'], $book->coverImage);
                 
