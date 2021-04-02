@@ -49,6 +49,7 @@
                                 required
                             />
                         </div>
+                        {{-- Autores y Temas --}}
                         <div class="mb-4 md:flex md:justify-between">
                             {{-- Autores --}}
                             <div class="w-5/12 mb-2" >
@@ -56,50 +57,14 @@
                                 <span class="text-gray-400 block">Puedes crear varios autores separandolos solo con una ',' (coma).</span>
                                 <input type="text" name="authorsName" value="{{ old('authorsName') ?  old('authorsName') : (Route::is('book.edit') ? $authorsName : '') }}" required>
                             </div>
-                                {{-- <div class="w-5/12 mb-2" >
-                                    <label class="block mb-1 text-sm font-bold text-gray-700" for="select">
-                                        Autore/s
-                                    </label>
-                                    <select id="select" name="authors[]" multiple>
-                                        @foreach ($authors as $author)
-                                            @if(old('authors'))
-                                                @if (in_array( $author->id, old('authors')))
-                                                    <option value="{{ $author->id }}" selected>{{ $author->name }}</option>
-                                                @else
-                                                    <option value="{{ $author->id }}">{{ $author->name }}</option>
-                                                @endif
-                                            @else
-                                                <option value="{{ $author->id }}">{{ $author->name }}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div> --}}
                             {{-- Temas --}}
                             <div class="w-5/12 mb-2" >
                                 <label class="block mb-1 text-sm font-bold text-gray-700" for="topics">Escribí los temas</label>
                                 <span class="text-gray-400 block">Puedes crear varios temas separandolos solo con una ',' (coma).</span>
                                 <input type="text" name="topicsName" value="{{ old('topicsName') ?  old('topicsName') : (Route::is('book.edit') ? $topicsName : '') }}" required>
                             </div>
-                                {{-- <div class="w-5/12 mb-2">
-                                    <label class="block mb-1 text-sm font-bold text-gray-700" for="topics">
-                                        Tema/s
-                                    </label>
-                                    <select  id="topics" name="topics[]" multiple>
-                                        @foreach ($topics as $topic)
-                                        @if(old('topics'))
-                                            @if (in_array( $topic->id, old('topics')))
-                                                <option value="{{ $topic->id }}" selected>{{ $topic->name }}</option>
-                                            @else
-                                                <option value="{{ $topic->id }}">{{ $topic->name }}</option>
-                                            @endif
-                                        @else
-                                            <option value="{{ $topic->id }}">{{ $topic->name }}</option>
-                                        @endif
-                                            
-                                        @endforeach
-                                    </select>
-                                </div> --}}
                         </div>
+                        {{-- Sinopsis, Nota y Año --}}
                         <div class="mb-4 md:flex md:justify-between">
                             {{-- Sinopsis --}}
                             <div class="mb-2 w-4/12">
@@ -147,6 +112,7 @@
                                 />
                             </div>
                         </div>
+                        {{-- Colección, Edición e Idioma --}}
                         <div class="mb-4 md:flex md:justify-between">
                             {{-- Colección --}}
                             <div class="mb-2 w-3/12">
@@ -203,6 +169,7 @@
                                 </select>
                             </div>
                         </div>
+                        {{-- Ciudad, País, Páginas e ISBN --}}
                         <div class="mb-4 md:flex md:justify-between">
                             {{-- Ciudad --}}
                             <div class="mb-2 w-3/12">
@@ -255,7 +222,7 @@
                                     value="{{ old('isbn') ?  old('isbn') : (Route::is('book.edit') ? $book->isbn : '') }}"
                                     type="text"
                                     max="255"
-                                    required
+                                    placeholder="XXX-XX-XXX-XX"
                                 />
                             </div>
                         </div>
@@ -266,6 +233,7 @@
                             </label>
                             <input name="url" id="url" type="url" value="{{ old('url') ?  old('url') : (Route::is('book.edit') ? $book->url : '') }}">
                         </div>
+                        {{-- Archivo descargable, Imagen de Tapa, Imagen de Contratapa, Imagenes extras y Audiolibro --}}
                         <div class="archivos w-10/12">
                             <div class="mb-4 md:flex md:justify-between">
                                 {{-- Archivo descargable --}}

@@ -29,7 +29,7 @@ class CreateBooksTable extends Migration
             $table->unsignedBigInteger('country_id');
             $table->foreign('country_id')->references('id')->on('countries');
             $table->integer('pages')->nullable();
-            $table->string('isbn')->unique();
+            $table->string('isbn')->nullable()->unique();
             $table->string('downloadable')->nullable();
             $table->text('url')->nullable();
             $table->string('coverImage');

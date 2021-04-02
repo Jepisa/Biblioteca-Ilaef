@@ -188,7 +188,7 @@ class BookController extends Controller
             'city' => isset($validated['city']) ? $validated['city'] : null ,
             'country_id' => $validated['country_id'],
             'pages' => isset($validated['pages']) ? $validated['pages'] : null ,
-            'isbn' => $validated['isbn'],
+            'isbn' => isset($validated['isbn']) ? $validated['isbn'] : null,
             'downloadable' => isset($pathDownloadable) ? $pathDownloadable : null,
             'url' => isset($validated['url']) ? $validated['url'] : null ,
             'coverImage' => isset($pathCoverImage) ? $pathCoverImage : 'public/images/books/default',
@@ -311,7 +311,7 @@ class BookController extends Controller
             'city' => 'nullable|string|max:255',
             'country_id' => 'required|integer|exists:countries,id',
             'pages' => 'nullable|integer',
-            'isbn' => ['required','string','max:255', Rule::unique('books')->ignore($book->id)],
+            'isbn' => ['nullable','string','max:255', Rule::unique('books')->ignore($book->id)],
             'downloadable' => 'file|mimes:pdf,doc',
             'url' => 'nullable|url',
             'coverImage' => 'file|mimes:jpg,png,jpeg|dimensions:min_width=600,min_height=800,max_width=1800,max_height=2300',
@@ -548,7 +548,7 @@ class BookController extends Controller
 
         
 
-        $notification = "Actualizado con éxito";
+        $notification = "'$book->title' fue actualizado con éxito";
         $request->session()->flash('notification', $notification);
 
         return redirect()->route('book.edit', ['slug' => $book->slug]);
