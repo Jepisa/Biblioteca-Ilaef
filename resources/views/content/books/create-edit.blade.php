@@ -279,7 +279,7 @@
                                 class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                                 type="submit"
                             >
-                            {{ Route::is('book.create') ? 'Registrar Libro'  : 'Actualizar Libro' }}"
+                            {{ Route::is('book.create') ? 'Registrar Libro'  : 'Actualizar Libro' }}
                             </button>
                         </div>
                         <hr class="mb-6 border-t" />

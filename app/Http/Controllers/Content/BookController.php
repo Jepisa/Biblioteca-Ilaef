@@ -24,7 +24,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::all();
+        $books = Book::all()->sortByDesc('created_at');
 
         return view('content.books.index', compact('books'));
     }
@@ -142,35 +142,32 @@ class BookController extends Controller
 
         if($request->hasFile('coverImage'))
         {
-            $destination_path = 'images/books/'.$validated['title'];
+            $destination_path = 'images/books/'.Str::slug($validated['title']);
             $image = $request->file('coverImage');
-            $image_name = $image->getClientOriginalName();
+            $image_name = Str::slug($image->getClientOriginalName());
             $pathCoverImage = $request->file('coverImage')->storeAs($destination_path, $image_name, 'public');
         }
 
         if($request->hasFile('backCoverImage'))
         {
-            $destination_path = 'images/books/'.$validated['title'];
-            $image = $request->file('backCoverImage');
-            $image_name = $image->getClientOriginalName();
+            $destination_path = 'images/books/'.Str::slug($validated['title']);
+            $image_name = Str::slug($request->file('backCoverImage')->getClientOriginalName());
             $pathBackCoverImage = $request->file('backCoverImage')->storeAs($destination_path, $image_name, 'public');
         }
 
         if($request->hasFile('audioBook'))
         {
-            $destination_path = 'images/books/'.$validated['title'].'/';
-            $audioBook = $request->file('audioBook');
-            $audioBook_name = $audioBook->getClientOriginalName();
-            $pathAudioBook = $audioBook->storeAs($destination_path, $audioBook_name, 'public');
+            $destination_path = 'images/books/'.Str::slug($validated['title']);
+            $audioBook_name = Str::slug($request->file('audioBook')->getClientOriginalName());
+            $pathAudioBook = $request->file('audioBook')->storeAs($destination_path, $audioBook_name, 'public');
 
-            $extension_audioBook = $audioBook->extension();
+            $extension_audioBook = $request->file('audioBook')->extension();
         }
 
         if($request->hasFile('downloadable'))
         {
-            $destination_path = 'images/books/'.$validated['title'];
-            $image = $request->file('downloadable');
-            $image_name = $image->getClientOriginalName();
+            $destination_path = 'images/books/'.Str::slug($validated['title']);
+            $image_name = Str::slug($request->file('downloadable')->getClientOriginalName());
             $pathDownloadable = $request->file('downloadable')->storeAs($destination_path, $image_name, 'public');
         }
 
@@ -324,22 +321,24 @@ class BookController extends Controller
         $request['synopsis'] = $request->originalSynopsis;
 
         
+
         if($book->title != $datesBook['title'])
         {
-            if (Storage::rename( 'public/images/books/'.$book->title,'public/images/books/'.$datesBook['title'],)) 
+            $datesBook['slug'] = Str::slug($datesBook['title']);
+            if ( Storage::rename("public/images/books/$book->title", "public/images/books/".$datesBook['slug']) ) 
             {
-                $datesBook['coverImage'] = Str::replaceFirst($book->title, $datesBook['title'], $book->coverImage);
+                $datesBook['coverImage'] = Str::replaceFirst($book->title, $datesBook['slug'], $book->coverImage);
                 
-                ($book->backCoverImage) ? $datesBook['backCoverImage'] = Str::replaceFirst($book->title, $datesBook['title'], $book->backCoverImage) : '';
-                ($book->downloadable) ? $datesBook['downloadable'] = Str::replaceFirst($book->title, $datesBook['title'], $book->downloadable) : '';
-                ($book->audiobook) ? $datesBook['audiobook'] = Str::replaceFirst($book->title, $datesBook['title'], $book->audiobook) : '';
+                ($book->backCoverImage) ? $datesBook['backCoverImage'] = Str::replaceFirst($book->title, $datesBook['slug'], $book->backCoverImage) : '';
+                ($book->downloadable) ? $datesBook['downloadable'] = Str::replaceFirst($book->title, $datesBook['slug'], $book->downloadable) : '';
+                ($book->audiobook) ? $datesBook['audiobook'] = Str::replaceFirst($book->title, $datesBook['slug'], $book->audiobook) : '';
 
                 if($book->extraImages)
                 {
                     foreach ($book->extraImages as $image) 
                     {
                         $image->update([
-                            'image' => Str::replaceFirst($book->title, $datesBook['title'], $image->image),
+                            'image' => Str::replaceFirst($book->title, $datesBook['slug'], $image->image),
                         ]); 
                     }                
                 }
@@ -482,7 +481,7 @@ class BookController extends Controller
         if($request->hasFile('coverImage'))
         {
             Storage::delete('public/'.$book->coverImage);
-            $destination_path = 'images/books/'.$datesBook['title'];
+            $destination_path = 'images/books/'.$datesBook['slug'];
             $coverImage = $request->file('coverImage');
             $image_name = $coverImage->getClientOriginalName();
             $datesBook['coverImage'] = $coverImage->storeAs($destination_path, $image_name, 'public');
@@ -491,7 +490,7 @@ class BookController extends Controller
         if($request->hasFile('backCoverImage'))
         {
             Storage::delete('public/'.$book->backCoverImage);
-            $destination_path = 'images/books/'.$datesBook['title'];
+            $destination_path = 'images/books/'.$datesBook['slug'];
             $backCoverImage = $request->file('backCoverImage');
             $image_name = $backCoverImage->getClientOriginalName();
             $datesBook['backCoverImage'] = $backCoverImage->storeAs($destination_path, $image_name, 'public');
@@ -500,7 +499,7 @@ class BookController extends Controller
         if($request->hasFile('audioBook'))
         {
             Storage::delete('public/'.$book->audioBook);
-            $destination_path = 'images/books/'.$datesBook['title'].'/';
+            $destination_path = 'images/books/'.$datesBook['slug'].'/';
             $audioBook = $request->file('audioBook');
             $audioBook_name = $audioBook->getClientOriginalName();
             $datesBook['audioBook'] = $audioBook->storeAs($destination_path, $audioBook_name, 'public');
@@ -511,14 +510,14 @@ class BookController extends Controller
         if($request->hasFile('downloadable'))
         {
             Storage::delete('public/'.$book->downloadable);
-            $destination_path = 'images/books/'.$datesBook['title'];
+            $destination_path = 'images/books/'.$datesBook['slug'];
             $image = $request->file('downloadable');
             $image_name = $image->getClientOriginalName();
 
             $datesBook['downloadable'] = $request->file('downloadable')->storeAs($destination_path, $image_name, 'public');
         }
 
-        $datesBook['slug'] = Str::slug($datesBook['title']);
+        
         
         $book->update($datesBook);
 

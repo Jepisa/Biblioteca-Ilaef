@@ -45,7 +45,7 @@ class StoreBookRequest extends FormRequest
             // 'authors.*' => 'required|integer|distinct|exists:authors,id',
             // 'topics' => 'required|array|min:1',
             // 'topics.*' => 'required|integer|distinct|exists:topics,id',
-            'synopsis' => 'required|min:400|max:1200',//Le cambié el min de 400 a 100 porque no sé si van a llegar...
+            'synopsis' => 'required|min:400|max:1200',
             'note' => 'nullable|string|max:600',
             'year' => 'nullable|integer|min:1000|max:3000',
             'collection' => 'nullable|string|max:255',
@@ -55,7 +55,7 @@ class StoreBookRequest extends FormRequest
             'city' => 'nullable|string|max:255',
             'country_id' => 'required|integer|exists:countries,id',
             'pages' => 'nullable|integer',
-            'isbn' => 'required|string|max:255|unique:books,isbn',
+            'isbn' => 'nullable|string|max:255|unique:books,isbn',
             'downloadable' => 'file|mimes:pdf,doc',
             'url' => 'nullable|url',
             'coverImage' => 'required|file|mimes:jpg,png,jpeg|dimensions:min_width=600,min_height=800,max_width=1800,max_height=2300',
