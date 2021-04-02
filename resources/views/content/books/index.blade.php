@@ -11,29 +11,29 @@
             <thead class="bg-gray-50">
               <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Title
+                    Title
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Sinopsis
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Author/s
+                    Author/s
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Topic/s
+                    Topic/s
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Slug
+                    Slug
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Audio Libro
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Extra Images
+                    Archivo descargable
                 </th>
-                {{-- <th scope="col" class="relative px-6 py-3">
-                  <span class="sr-only">Edit</span>
-                </th> --}}
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Imagenes Extra
+                </th>
               </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
@@ -50,10 +50,10 @@
                                     </div>
                                 </div>
                                 <div class="">
-                                    <div class="text-sm text-center font-medium text-gray-900">
+                                    <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width:340px;" class="text-sm text-center font-medium text-gray-900" title="{{ $book->title }}">
                                         {{ $book->title }}
                                     </div>
-                                    <div class="text-sm text-center text-gray-500">
+                                    <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width:340px;" class="text-sm text-center text-gray-500" title="{{ $book->slug }}">
                                         {{ $book->slug }}
                                     </div>
                                 </div>
@@ -68,8 +68,6 @@
                                     <li>{{ $author->name }}</li>
                                 @endforeach
                             </ul>
-                        {{-- <div class="text-sm text-gray-900">Regional Paradigm Technician</div>
-                        <div class="text-sm text-gray-500">Optimization</div> --}}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <ul>
@@ -77,15 +75,20 @@
                                     <li>{{ $topic->name }}</li>
                                 @endforeach
                             </ul>
-                        {{-- <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                            Active
-                        </span> --}}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {{ $book->slug }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             @if(isset($book->audiobook))
+                                <span class="text-gray-500">Sí</span>
+                            @else
+                                <span class="text-gray-500">NO</span>
+                            @endif
+                            
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            @if(isset($book->downloadable))
                                 <span class="text-gray-500">Sí</span>
                             @else
                                 <span class="text-gray-500">NO</span>
