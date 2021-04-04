@@ -92,7 +92,7 @@ Route::get('fix3', function(){
         ($book->audiobook) ? $datesBook['audiobook'] = Str::replaceFirst($book->title, $book->slug, $book->audiobook) : '';
 
         if ($book->slug == "El Protocolo de la Empresa Familiar y prueba") {
-            $datesBook['backCoverImage'] = Str::replaceFirst('el-protocolo-de-la-empresa-familiar-y-prueba-y-mas', $book->slug, $book->backCoverImage);
+            $datesBook['coverImage'] = Str::replaceFirst('el-protocolo-de-la-empresa-familiar-y-prueba-y-mas', $book->slug, $book->coverImage);
         }
 
         if($book->extraImages)
