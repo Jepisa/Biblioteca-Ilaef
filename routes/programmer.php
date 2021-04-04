@@ -85,18 +85,22 @@ Route::get('fix3', function(){
 
     foreach ($books as $book) {
 
-        $datesBook['coverImage'] = Str::replaceFirst('images', 'content', $book->coverImage);
+        $datesBook['coverImage'] = Str::replaceFirst($book->title, $book->slug, $book->coverImage);
         
-        ($book->backCoverImage) ? $datesBook['backCoverImage'] = Str::replaceFirst('images', 'content', $book->backCoverImage) : '';
-        ($book->downloadable) ? $datesBook['downloadable'] = Str::replaceFirst('images', 'content', $book->downloadable) : '';
-        ($book->audiobook) ? $datesBook['audiobook'] = Str::replaceFirst('images', 'content', $book->audiobook) : '';
+        ($book->backCoverImage) ? $datesBook['backCoverImage'] = Str::replaceFirst($book->title, $book->slug, $book->backCoverImage) : '';
+        ($book->downloadable) ? $datesBook['downloadable'] = Str::replaceFirst($book->title, $book->slug, $book->downloadable) : '';
+        ($book->audiobook) ? $datesBook['audiobook'] = Str::replaceFirst($book->title, $book->slug, $book->audiobook) : '';
+
+        if ($book->slug == "El Protocolo de la Empresa Familiar y prueba") {
+            $datesBook['backCoverImage'] = Str::replaceFirst('el-prorocolo-de-la-empresa-familiar-y-prueba-y-mas', $book->slug, $book->backCoverImage);
+        }
 
         if($book->extraImages)
         {
             foreach ($book->extraImages as $extraImage) 
             {
                 $extraImage->update([
-                    'image' => Str::replaceFirst('images', 'content', $extraImage->image),
+                    'image' => Str::replaceFirst($book->title, $book->slug, $extraImage->image),
                 ], ['timestamps' => false]); 
             }         
         }
