@@ -55,7 +55,79 @@ class BookController extends Controller
         
         $validated = $request->validated();
 
-        //Authors
+        //Agunas cosas necesarias
+            $slugOfBook = Str::slug($validated['title']);
+            $destination_path = 'content/books/'.$slugOfBook;
+            $disk = 'public';
+        //
+
+        if($request->hasFile('coverImage'))
+        {
+            $image_name = Str::slug($request->file('coverImage')->getClientOriginalName());
+            $pathCoverImage = $request->file('coverImage')->storeAs($destination_path, $image_name, $disk);
+        }
+
+        if($request->hasFile('backCoverImage'))
+        {
+            $image_name = Str::slug($request->file('backCoverImage')->getClientOriginalName());
+            $pathBackCoverImage = $request->file('backCoverImage')->storeAs($destination_path, $image_name, $disk);
+        }
+
+        if($request->hasFile('audioBook'))
+        {
+            $audioBook_name = Str::slug($request->file('audioBook')->getClientOriginalName());
+            $pathAudioBook = $request->file('audioBook')->storeAs($destination_path, $audioBook_name, $disk);
+
+            $extension_audioBook = $request->file('audioBook')->extension();
+        }
+
+        if($request->hasFile('downloadable'))
+        {
+            $image_name = Str::slug($request->file('downloadable')->getClientOriginalName());
+            $pathDownloadable = $request->file('downloadable')->storeAs($destination_path, $image_name, $disk);
+        }
+
+        //Crea Book en BD
+        $book = Book::create([
+            'title' => $validated['title'],
+            'slug' => $slugOfBook,
+            'synopsis' => $request['synopsis-original'],
+            'note' => isset($validated['note']) ? $validated['note'] : null,
+            'year' => isset($validated['year']) ? $validated['year'] : null,
+            'collection' => isset($validated['collection']) ? $validated['collection'] : null,
+            'edition' => isset($validated['edition']) ? $validated['edition'] : null,
+            'editorial' => $validated['editorial'],
+            'language_id' => $validated['language_id'],
+            'city' => isset($validated['city']) ? $validated['city'] : null ,
+            'country_id' => $validated['country_id'],
+            'pages' => isset($validated['pages']) ? $validated['pages'] : null ,
+            'isbn' => isset($validated['isbn']) ? $validated['isbn'] : null,
+            'downloadable' => isset($pathDownloadable) ? $pathDownloadable : null,
+            'url' => isset($validated['url']) ? $validated['url'] : null ,
+            'coverImage' => isset($pathCoverImage) ? $pathCoverImage : 'public/content/books/default', //Aún no existe una imagen por default
+            'backCoverImage' => isset($pathBackCoverImage) ? $pathBackCoverImage : 'public/content/books/default', //Aún no existe una imagen por default
+            'audiobook' => isset($pathAudioBook) ? $pathAudioBook : null,
+            'format' => isset($extension_audioBook) ? $extension_audioBook : null,
+        ]);
+
+        if (isset($request->extraImages)) {
+            
+            $extraImages = $request->extraImages;
+            
+            foreach ($extraImages as $image) 
+            {
+                //Guardar las imagenes en el servidor                    
+                    $image_name = Str::slug($image->getClientOriginalName());
+                    $path = $image->storeAs($destination_path, $image_name, $disk);
+
+                    $book->extraImages()->create([
+                        'image' => $path,
+                    ]);
+            }
+        } 
+
+        //Después hay que remplazar esta manera de optener y cuardar los Authors and Topics
+        //Guardar y asignar Authors
             $authors = explode(",", $validated['authorsName']);
 
             $existAuthors = [];
@@ -64,7 +136,6 @@ class BookController extends Controller
             $createdAuthors = [];
 
             $authorsOfTheBook = [];
-
         
             foreach ($authors as $authorName) {
                 $savedAuthor = Author::where('name', '=', $authorName)->first();
@@ -96,7 +167,7 @@ class BookController extends Controller
 
             $notificationAuthors = "Estos autores se crearon exitosamente: $newAuthors. \r\n Estos ya estaban en nuestra base de datos: $existAuthors" ;
             $request->session()->flash('notificationAuthors', $notificationAuthors);
-        //Topics
+        //Guardar y asignar Topics
             $topics = explode(",", $validated['topicsName']);
 
             $existTopics = [];
@@ -140,86 +211,14 @@ class BookController extends Controller
             $request->session()->flash('notificationTopics', $notificationTopics);
         // ----
 
-        if($request->hasFile('coverImage'))
-        {
-            $destination_path = 'images/books/'.Str::slug($validated['title']);
-            $image = $request->file('coverImage');
-            $image_name = Str::slug($image->getClientOriginalName());
-            $pathCoverImage = $request->file('coverImage')->storeAs($destination_path, $image_name, 'public');
-        }
-
-        if($request->hasFile('backCoverImage'))
-        {
-            $destination_path = 'images/books/'.Str::slug($validated['title']);
-            $image_name = Str::slug($request->file('backCoverImage')->getClientOriginalName());
-            $pathBackCoverImage = $request->file('backCoverImage')->storeAs($destination_path, $image_name, 'public');
-        }
-
-        if($request->hasFile('audioBook'))
-        {
-            $destination_path = 'images/books/'.Str::slug($validated['title']);
-            $audioBook_name = Str::slug($request->file('audioBook')->getClientOriginalName());
-            $pathAudioBook = $request->file('audioBook')->storeAs($destination_path, $audioBook_name, 'public');
-
-            $extension_audioBook = $request->file('audioBook')->extension();
-        }
-
-        if($request->hasFile('downloadable'))
-        {
-            $destination_path = 'images/books/'.Str::slug($validated['title']);
-            $image_name = Str::slug($request->file('downloadable')->getClientOriginalName());
-            $pathDownloadable = $request->file('downloadable')->storeAs($destination_path, $image_name, 'public');
-        }
-
-
-        $book = Book::create([
-            'title' => $validated['title'],
-            'slug' => Str::slug($validated['title']),
-            'synopsis' => $request['synopsis-original'],
-            'note' => isset($validated['note']) ? $validated['note'] : null,
-            'year' => isset($validated['year']) ? $validated['year'] : null,
-            'collection' => isset($validated['collection']) ? $validated['collection'] : null,
-            'edition' => isset($validated['edition']) ? $validated['edition'] : null,
-            'editorial' => $validated['editorial'],
-            'language_id' => $validated['language_id'],
-            'city' => isset($validated['city']) ? $validated['city'] : null ,
-            'country_id' => $validated['country_id'],
-            'pages' => isset($validated['pages']) ? $validated['pages'] : null ,
-            'isbn' => isset($validated['isbn']) ? $validated['isbn'] : null,
-            'downloadable' => isset($pathDownloadable) ? $pathDownloadable : null,
-            'url' => isset($validated['url']) ? $validated['url'] : null ,
-            'coverImage' => isset($pathCoverImage) ? $pathCoverImage : 'public/images/books/default',
-            'backCoverImage' => isset($pathBackCoverImage) ? $pathBackCoverImage : 'public/images/books/default',
-            'audiobook' => isset($pathAudioBook) ? $pathAudioBook : null,
-            'format' => isset($extension_audioBook) ? $extension_audioBook : null,
-        ]);
-
-        if (isset($request->extraImages)) {
-            
-            $extraImages = $request->extraImages;
-            
-            foreach ($extraImages as $image) 
-            {
-                //Guardar las imagenes en el servidor
-                    $destination_path = 'images/books/'.$book->title;
-                    
-                    $image_name = $image->getClientOriginalName();
-                    $path = $image->storeAs($destination_path, $image_name, 'public');
-
-                    $book->extraImages()->create([
-                        'image' => $path,
-                    ]);
-            }
-        }
+        $book->authors()->sync($authorsOfTheBook);
+        $book->topics()->sync($topicsOfTheBook);
         
-            
-
-        $book->authors()->sync($authorsOfTheBook);//
-        $book->topics()->sync($topicsOfTheBook);//
-        $book->counter()->create(['views' => 0 ]);
-
+        //Se crea el contador de views del Book
+        $book->counter()->create(['views' => 0 ]);//A la table del contador le puedo poner más columnas (a parte de 'views'), como 'favorites', 'downloads'
         
-        $notification = "El libro '$book->title' fue creado con éxito." ;
+        //Notificaciones en después de cargar Book
+        $notification = "El libro \"$book->title\" fue creado con éxito." ;
         $request->session()->flash('notification', $notification);
         return redirect()->back();
     }
@@ -284,12 +283,20 @@ class BookController extends Controller
 
         $book = Book::where('slug', '=', $slug)->firstOrFail();
 
-        // $datesBook = $request->validated()->except('downloadable','coverImage','backCoverImage','extraimages','audiobook');
         $datesBook = $request->except('downloadable','coverImage','backCoverImage','extraimages','audiobook', '_token', '_method');
+        /* $datesBook = $request->validated()->except('downloadable','coverImage','backCoverImage','extraimages','audiobook'); //Esto sería se creo un request aparte para las validaciones */
+
+        //Agunas cosas necesarias para el almacenamiennto de los archivos
+            $datesBook['slug'] = Str::slug($datesBook['title']);
+            $destination_path = 'content/books/'.$datesBook['slug'];
+            $disk = 'public';
+        //
+
         
         $request['originalSynopsis'] = $request->synopsis;
-        $request['synopsis'] = str_replace ("\r\n"," ",$request->synopsis);
+        $request['synopsis'] = str_replace("\r\n"," ",$request->synopsis);
         
+        /** En el caso de que haga las validaciones, hace lo de 'store' para la synopsis */
         $validated = $request->validate([
             'title' => [Rule::unique('books')->ignore($book->id)],
             'authorsName' => 'required|string',
@@ -318,32 +325,31 @@ class BookController extends Controller
             'audioBook' => 'nullable|file|mimes:mp3,wma,aac',
         ]);
 
-        $request['synopsis'] = $request->originalSynopsis;
-
+        $datesBook['slug'] = Str::slug($datesBook['title']);
         
-
-        if($book->title != $datesBook['title'])
+        if($book->title != $datesBook['title'] and $book->slug != $datesBook['slug'])
         {
-            $datesBook['slug'] = Str::slug($datesBook['title']);
-            if ( $book->slug != $datesBook['slug'] and Storage::rename("public/images/books/$book->slug", "public/images/books/".$datesBook['slug']) ) 
+            
+            if ( Storage::rename("public/content/books/$book->slug", "public/content/books/".$datesBook['slug']) ) 
             {
-                $datesBook['coverImage'] = Str::replaceFirst($book->title, $datesBook['slug'], $book->coverImage);
+                $datesBook['coverImage'] = Str::replaceFirst($book->slug, $datesBook['slug'], $book->coverImage);
                 
-                ($book->backCoverImage) ? $datesBook['backCoverImage'] = Str::replaceFirst($book->title, $datesBook['slug'], $book->backCoverImage) : '';
-                ($book->downloadable) ? $datesBook['downloadable'] = Str::replaceFirst($book->title, $datesBook['slug'], $book->downloadable) : '';
-                ($book->audiobook) ? $datesBook['audiobook'] = Str::replaceFirst($book->title, $datesBook['slug'], $book->audiobook) : '';
+                ($book->backCoverImage) ? $datesBook['backCoverImage'] = Str::replaceFirst($book->slug, $datesBook['slug'], $book->backCoverImage) : '';
+                ($book->downloadable) ? $datesBook['downloadable'] = Str::replaceFirst($book->slug, $datesBook['slug'], $book->downloadable) : '';
+                ($book->audiobook) ? $datesBook['audiobook'] = Str::replaceFirst($book->slug, $datesBook['slug'], $book->audiobook) : '';
 
                 if($book->extraImages)
                 {
-                    foreach ($book->extraImages as $image) 
+                    foreach ($book->extraImages as $extraImage)
                     {
-                        $image->update([
-                            'image' => Str::replaceFirst($book->title, $datesBook['slug'], $image->image),
+                        $extraImage->update([
+                            'image' => Str::replaceFirst($book->slug, $datesBook['slug'], $extraImage->image),
                         ]); 
                     }                
                 }
             }
         }
+
         if(isset($datesBook['authorsName']))
         {
             $authorsName = [];
@@ -478,43 +484,49 @@ class BookController extends Controller
             }
         }
 
+        
+
         if($request->hasFile('coverImage'))
         {
-            Storage::delete('public/'.$book->coverImage);
-            $destination_path = 'images/books/'.$datesBook['slug'];
-            $coverImage = $request->file('coverImage');
-            $image_name = $coverImage->getClientOriginalName();
-            $datesBook['coverImage'] = $coverImage->storeAs($destination_path, $image_name, 'public');
+            if(Storage::delete('public/'.$book->coverImage))
+            {
+                $image_name = Str::slug($request->file('coverImage')->getClientOriginalName());
+                $datesBook['coverImage'] = $request->file('coverImage')->storeAs($destination_path, $image_name, $disk);
+                
+                /** Replicar la parte de las notificacione por cada cambio detectado y también ver la posibilidad de que no haga un update si nada a cambiado (si es posibli también hacer que no pueda hacerse un submit si no hubo un cambio y se agrego algo, como nuevos archivos)*/
+                ($datesBook['coverImage']) ? $notifications['coverImage'] = "La nueva imagen de Tapa se a guardado con éxito" : $notifications['coverImage'] = 'No se puedo guardar la nueva Imagen de Tapa';
+            }
+            else
+            {
+                $notifications['coverImage'] = "No se pudo eliminar la antarior Imagen de Tapa"; //Acá puedo mandar un mail con el error al programador
+            }
         }
 
         if($request->hasFile('backCoverImage'))
         {
             Storage::delete('public/'.$book->backCoverImage);
-            $destination_path = 'images/books/'.$datesBook['slug'];
-            $backCoverImage = $request->file('backCoverImage');
-            $image_name = $backCoverImage->getClientOriginalName();
-            $datesBook['backCoverImage'] = $backCoverImage->storeAs($destination_path, $image_name, 'public');
+
+            $image_name = Str::slug($request->file('backCoverImage')->getClientOriginalName());
+            $datesBook['backCoverImage'] = $request->file('backCoverImage')->storeAs($destination_path, $image_name, $disk);
         }
 
         if($request->hasFile('audioBook'))
         {
             Storage::delete('public/'.$book->audioBook);
-            $destination_path = 'images/books/'.$datesBook['slug'].'/';
-            $audioBook = $request->file('audioBook');
-            $audioBook_name = $audioBook->getClientOriginalName();
-            $datesBook['audioBook'] = $audioBook->storeAs($destination_path, $audioBook_name, 'public');
 
-            $datesBook['format'] = $audioBook->extension();
+            $audioBook_name = Str::slug($request->file('audioBook')->getClientOriginalName());
+            $datesBook['audioBook'] = $request->file('audioBook')->storeAs($destination_path, $audioBook_name, $disk);
+
+            $datesBook['format'] = $request->file('audioBook')->extension();
         }
 
         if($request->hasFile('downloadable'))
         {
             Storage::delete('public/'.$book->downloadable);
-            $destination_path = 'images/books/'.$datesBook['slug'];
-            $image = $request->file('downloadable');
-            $image_name = $image->getClientOriginalName();
 
-            $datesBook['downloadable'] = $request->file('downloadable')->storeAs($destination_path, $image_name, 'public');
+            $image_name = Str::slug($request->file('downloadable')->getClientOriginalName());
+
+            $datesBook['downloadable'] = $request->file('downloadable')->storeAs($destination_path, $image_name, $disk);
         }
 
         
@@ -531,11 +543,10 @@ class BookController extends Controller
             
             foreach ($extraImages as $image) 
             {
-                //Guardar las imagenes en el servidor
-                    $destination_path = 'images/books/'.$book->title;
+                //Guardar las nuevas imagenes
                     
-                    $image_name = $image->getClientOriginalName();
-                    $path = $image->storeAs($destination_path, $image_name, 'public');
+                    $image_name = Str::slug($image->getClientOriginalName());
+                    $path = $image->storeAs($destination_path, $image_name, $disk);
 
                     $book->extraImages()->create([
                         'image' => $path,
@@ -571,17 +582,17 @@ class BookController extends Controller
             $book->extraImages()->delete();
 
         //Eliminar Archivo descargable  //Eliminar Imagen de Tapa //Eliminar Imagen de Contratapa 
-        //Eliminar Audiolibro //Eliminar las imagenes extras (todo del servidor) 
-        //Eliminar hasta la carpeta (directorio) del libro
-        Storage::deleteDirectory('public/images/books/'.$book->title);
+        // Y Eliminar Audiolibro //Eliminar las imagenes extras (todo del servidor) 
+        // Y Eliminar hasta la carpeta (directorio) del libro
+            Storage::deleteDirectory('public/content/books/'.$book->slug);
         
-        //Eliminar su Contador (que aún no lo creé)
-        
+        //Eliminar su Contador
+            $book->counter()->delete();
         //
         $titleOfDeletedBook = $book->title;
         $book->delete();
         
-        $notification = "Se ha eliminado '$titleOfDeletedBook' y todo lo que contenía.";
+        $notification = "Se ha eliminado \"$titleOfDeletedBook\" y todo lo que contenía.";
         
         
         $request->session()->flash('notification', $notification);
