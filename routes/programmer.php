@@ -91,7 +91,7 @@ Route::get('fix3', function(){
         ($book->downloadable) ? $datesBook['downloadable'] = Str::replaceFirst($book->title, $book->slug, $book->downloadable) : '';
         ($book->audiobook) ? $datesBook['audiobook'] = Str::replaceFirst($book->title, $book->slug, $book->audiobook) : '';
 
-        if ($book->slug == "El Protocolo de la Empresa Familiar y prueba") {
+        if ($book->title == "El Protocolo de la Empresa Familiar y prueba") {
             $datesBook['coverImage'] = Str::replaceFirst('el-protocolo-de-la-empresa-familiar-y-prueba-y-mas', $book->slug, $book->coverImage);
         }
 
