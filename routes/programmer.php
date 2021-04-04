@@ -17,12 +17,32 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\Framework\Test;
 
+use Illuminate\Support\Facades\Storage;
+
+
 // Temporal Routes
 Route::get('/', function () {
-    $books = Book::all();
-    return view('welcome')->with('books', $books);
-})->name('home')->middleware('auth');
+    // $books = Book::all();
+    return view('welcome');
+})->name('home');
 
+Route::get('/fix',function(){
+    $books = Book::all();
+    $noExists = 0;
+    $exists = 0;
+    foreach ($books as $book) {
+        if(Storage::exists("public/images/books/$book->title"))
+        {
+            Storage::rename("public/images/books/$book->title", "public/images/books/".$book->slug);
+
+            $exists++;
+        }else{
+            $noExists++;
+        }
+    }
+    
+    return "Todos los libro tiene  su carpeta con el nombre como slug -- Libros que no existiand: $noExists \n los que esxistian: $exists";
+});
 // Route::get('storage-link', function(){
 //     if(file_exists(public_path('storage')))
 //     {
@@ -147,11 +167,11 @@ Route::post('impersonate/{id}/start', function ($id) {
     Auth::login($user);
     
     return redirect()->back();
-})->name('impersonate.start');
+})->name('impersonate.start')->middleware('auth');
 
 Route::post('impersonate/{id}/stop', function ($id) {
     //Falta terminar
-})->name('impersonate.stop');
+})->name('impersonate.stop')->middleware('auth');
 
 
 
