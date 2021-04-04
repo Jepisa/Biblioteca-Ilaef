@@ -488,12 +488,12 @@ class BookController extends Controller
 
         if($request->hasFile('coverImage'))
         {
-            if(Storage::delete('public/'.$book->coverImage))
+            /** Replicar la parte de las notificaciones y los 'if' por cada cambio detectado y también ver la posibilidad de que no haga un update si nada a cambiado (si es posibli también hacer que no pueda hacerse un submit si no hubo un cambio y se agrego algo, como nuevos archivos)*/
+            if(!Storage::exists('public/'.$book->coverImage) or Storage::delete('public/'.$book->coverImage))
             {
                 $image_name = Str::slug($request->file('coverImage')->getClientOriginalName());
                 $datesBook['coverImage'] = $request->file('coverImage')->storeAs($destination_path, $image_name, $disk);
                 
-                /** Replicar la parte de las notificacione por cada cambio detectado y también ver la posibilidad de que no haga un update si nada a cambiado (si es posibli también hacer que no pueda hacerse un submit si no hubo un cambio y se agrego algo, como nuevos archivos)*/
                 ($datesBook['coverImage']) ? $notifications['coverImage'] = "La nueva imagen de Tapa se a guardado con éxito" : $notifications['coverImage'] = 'No se puedo guardar la nueva Imagen de Tapa';
             }
             else
