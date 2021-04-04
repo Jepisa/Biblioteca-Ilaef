@@ -120,11 +120,18 @@ Route::get('counter', function(){
     $books = Book::all();
     $cant = $books->count();
     $b = 0;
+    $counters = Counter::all()->count();
     foreach ($books as $book) {
         
         (isset($book->counter)) ? $b++ : '' ;
     }
-    return "De $cant Books, solo $b tiene contador de views";
+    if ($cant == $b) {
+        return "Todos los $cant Books tienen contador de views y hay $counters contadores";
+    } else {
+        return "De $cant Books, solo $b tiene contador de views y hay $counters contadores";
+    }
+    
+    
 });
 
 // Route::get('storage-link', function(){
