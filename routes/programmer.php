@@ -3,6 +3,7 @@
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\City;
+use App\Models\Counter;
 use App\Models\Country;
 use App\Models\Gender;
 use App\Models\Language;
@@ -13,11 +14,13 @@ use App\Models\Role;
 use App\Models\State;
 use App\Models\Topic;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\Framework\Test;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 
 // Temporal Routes
@@ -41,8 +44,89 @@ Route::get('/fix',function(){
         }
     }
     
-    return "Todos los libro tiene  su carpeta con el nombre como slug -- Libros que no existiand: $noExists \n los que esxistian: $exists";
+    return "Todos los libro tienen su carpeta con el nombre como slug -- Libros que no existian: $noExists y los que existian: $exists";
 });
+
+Route::get('fix2', function(){
+    
+    $books = Book::all();
+    $reubi = 0;
+    $noExists = 0;
+
+    foreach ($books as $book) {
+        if(Storage::exists("public/images/books/$book->title"))
+        {
+            Storage::move("public/images/books/$book->title", "public/content/books/".$book->slug);
+
+            $reubi++;
+
+
+        }
+        elseif(Storage::exists("public/images/books/$book->slug"))
+        {
+            Storage::move("public/images/books/$book->slug", "public/content/books/".$book->slug);
+
+            $reubi++;
+        }
+        else{
+            $noExists++;
+        }
+    }
+
+
+    return "Libro reubicados: $reubi  y no existen sus carpetas: $noExists";
+});
+
+
+Route::get('fix3', function(){
+
+    $books = Book::all();
+    $datesBook = [];
+
+    foreach ($books as $book) {
+
+        $datesBook['coverImage'] = Str::replaceFirst('images', 'content', $book->coverImage);
+        
+        ($book->backCoverImage) ? $datesBook['backCoverImage'] = Str::replaceFirst('images', 'content', $book->backCoverImage) : '';
+        ($book->downloadable) ? $datesBook['downloadable'] = Str::replaceFirst('images', 'content', $book->downloadable) : '';
+        ($book->audiobook) ? $datesBook['audiobook'] = Str::replaceFirst('images', 'content', $book->audiobook) : '';
+
+        if($book->extraImages)
+        {
+            foreach ($book->extraImages as $extraImage) 
+            {
+                $extraImage->update([
+                    'image' => Str::replaceFirst('images', 'content', $extraImage->image),
+                ], ['timestamps' => false]); 
+            }         
+        }
+
+        $book->update($datesBook, ['timestamps' => false]);
+    }
+
+    return 'Listo, todos los archivos están con sus nombre como el slug';
+});
+
+Route::get('fix4', function(){
+    if(Storage::deleteDirectory('public/images')){
+        return 'Directorio Images Eliminado';
+    }else{
+        return "Directorio \"Images\" No fue Eliminado";
+    }
+});
+
+Route::get('counter', function(){
+    
+    $books = Book::all();
+    $cant = $books->count();
+    $b = 0;
+    foreach ($books as $book) {
+        
+        (isset($book->counter)) ? $b++ : '' ;
+    }
+    return "De $cant Books, solo $b tiene contador de views";
+});
+
 // Route::get('storage-link', function(){
 //     if(file_exists(public_path('storage')))
 //     {
@@ -165,7 +249,7 @@ Route::post('impersonate/{id}/start', function ($id) {
     $user = User::find($id);
 
     Auth::login($user);
-    
+
     return redirect()->back();
 })->name('impersonate.start')->middleware('auth');
 
