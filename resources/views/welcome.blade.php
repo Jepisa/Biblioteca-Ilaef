@@ -11,13 +11,15 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.dotdotdot/4.1.0/dotdotdot.js" integrity="sha512-y3NiupaD6wK/lVGW0sAoDJ0IR2f3+BWegGT20zcCVB+uPbJOsNO2PVi09pCXEiAj4rMZlEJpCGu6oDz0PvXxeg==" crossorigin="anonymous"></script>
   </x-slot>
 
-  @if ($advertisements->count() > 0)
+  {{-- @if ($advertisements->count() > 0)
     <x-carousel-of-advertisement :advertisements="$advertisements"/>
-  @endif
+  @endif --}}
+  <x-carousel-of-advertisement :advertisements="$advertisements"/>
+
 
   <x-searcher/>
 
-  @if($recommended->count() > 0) <x-carousel :titleOfCarousel="'Nuestros recomendados'" :carousel="'nuestros-recomendados'" :contents="$recommended" /> @endif
+  {{-- @if($recommended->count() > 0) <x-carousel :titleOfCarousel="'Nuestros recomendados'" :carousel="'nuestros-recomendados'" :contents="$recommended" /> @endif --}}
   @if($relevant->count() > 0) <x-carousel :titleOfCarousel="'Los más buscados'" :carousel="'los-mas-buscados'" :contents="$relevant"/> @endif
   @if($recent->count() > 0) <x-carousel :titleOfCarousel="'Los últimos cargados'" :carousel="'los-ultimos-cargados'" :contents="$recent"/> @endif
   

@@ -19,6 +19,6 @@ class HomeController extends Controller
         $relevant = Counter::mostRelevants(20);
         $recent = Recent::recents(20);
         
-        return view('welcome', compact('advertisements', 'recommended', 'relevant', 'recent'));
+        return view('welcome', compact('relevant', 'recent'));
     }
 }
