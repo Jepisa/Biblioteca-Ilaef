@@ -25,7 +25,7 @@ use Illuminate\Support\Str;
 
 
 // Temporal Routes
-Route::get('/', HomeController::class)->name('home');
+Route::get('/', HomeController::class)->name('home')->middleware('auth');
 
 Route::get('/fix',function(){
     $books = Book::all();

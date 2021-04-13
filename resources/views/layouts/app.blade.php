@@ -15,12 +15,12 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/layout-app.css') }}">
 
-        {{ $css }}
+        {{ $css ?? '' }}
 
 
         <!-- Scripts -->
         <script src="https://kit.fontawesome.com/93ee6606b0.js" crossorigin="anonymous"></script>
-        {{ $scripts }}
+        {{ $scripts ?? '' }}
         
         <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -43,6 +43,6 @@
             </main>
             <x-footer-principal />
         </div>
-        {{ $scriptsDown }}
+        {{ $scriptsDown ?? ''}}
     </body>
 </html>
