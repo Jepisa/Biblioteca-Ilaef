@@ -14,7 +14,7 @@
   {{-- @if ($advertisements->count() > 0)
     <x-carousel-of-advertisement :advertisements="$advertisements"/>
   @endif --}}
-  <x-carousel-of-advertisement :advertisements="$advertisements"/>
+  <x-carousel-of-advertisement/>
 
 
   <x-searcher/>
