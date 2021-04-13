@@ -14,8 +14,8 @@ class HomeController extends Controller
 {
     function __invoke()
     {
-        $advertisements = Advertisement::displayable();
-        $recommended = Recommended::all();
+        // $advertisements = Advertisement::displayable();
+        // $recommended = Recommended::all();
         $relevant = Counter::mostRelevants(20);
         $recent = Recent::recents(20);
         
