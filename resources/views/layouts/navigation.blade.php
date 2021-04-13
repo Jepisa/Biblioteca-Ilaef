@@ -1,5 +1,10 @@
 <div class="py-2">
     <nav x-data="{ open: false }" class="">
+        {{-- <picture class="background-navbar">
+            <source class="background-navbar" media="(max-width:100px)" srcset="{{ asset('img/navbar/navbar-mobile.png') }}">
+            <source class="background-navbar" media="(max-width:640px)" srcset="{{ asset('img/navbar/navbar-tablet.png') }}">
+            <img class="background-navbar" src="{{ asset('img/navbar/navbar.png') }}">
+        </picture> --}}
         <!-- Primary Navigation Menu -->
         <div class="navbar w-full h-full">
             <div class="flex justify-between h-full">
@@ -121,24 +126,17 @@
                 </x-responsive-nav-link>
             </div>
             
-                <!-- Responsive Settings Options -->
-                <div class="pt-1 pb-1 border-t border-gray-200">
-                    @guest
-                        <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
-                            {{ __('Registate') }}
-                        </x-responsive-nav-link>
-                        <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                            {{ __('Iniciar sesión') }}
-                        </x-responsive-nav-link>
-                    @endguest
-                    {{-- <div class="flex items-center px-4">
-                        <div class="flex-shrink-0">
-                            <svg class="h-10 w-10 fill-current text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
-
-                    </div> --}}
+            <!-- Responsive Settings Options -->
+            <div class="pt-1 pb-1 border-t border-gray-200">
+                @guest
+                    <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                        {{ __('Registate') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                        {{ __('Iniciar sesión') }}
+                    </x-responsive-nav-link>
+                @endguest
+                
                 @auth
                     @minAdmin
                         <x-responsive-nav-link :href="route('book.create')" :active="request()->routeIs('book.create')">
@@ -167,8 +165,7 @@
                         </form>
                     </div>
                 @endauth
-                </div>
-            
+            </div>
         </div>
     </nav>
 </div>

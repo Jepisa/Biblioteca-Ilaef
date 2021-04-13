@@ -34,11 +34,11 @@
             width: 100%;
             margin-bottom: 16px;
         }
-        .div-slide .title-of-book{
-            height: 45px;
+        .div-slide .title-of-content{
+            height: 50px;
             width: 100%;
         }
-        .div-slide .title-of-book p{
+        .div-slide .title-of-content p{
             width: 100%;
             overflow: hidden;
             font-size: 14px;

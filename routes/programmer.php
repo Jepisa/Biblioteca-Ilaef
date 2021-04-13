@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\City;
@@ -24,10 +25,7 @@ use Illuminate\Support\Str;
 
 
 // Temporal Routes
-Route::get('/', function () {
-    // $books = Book::all();
-    return view('welcome');
-})->name('home');
+Route::get('/', HomeController::class)->name('home');
 
 Route::get('/fix',function(){
     $books = Book::all();
@@ -76,7 +74,6 @@ Route::get('fix2', function(){
 
     return "Libro reubicados: $reubi  y no existen sus carpetas: $noExists";
 });
-
 
 Route::get('fix3', function(){
 
@@ -175,7 +172,7 @@ Route::get('/migrate', function() {
 
 Route::get('crearCuentaDeProgramador', function () {
 
-    if( !Role::firstWhere('name', 'Programador') or !User::firstWhere('email', 'javierjeanpieres@gmail.com'))
+    if( !Role::firstWhere('name', 'Programador')->exists() or !User::firstWhere('email', 'javierjeanpieres@gmail.com')->exists())
     {
 
         //Crear Idiomas

@@ -15,4 +15,14 @@ class Counter extends Model
     {
         return $this->morphTo();
     }
+
+    public static function mostRelevants($limit)
+    {
+        $relevants = Counter::orderBy('views')->limit($limit)->get();
+        $result = collect();
+        foreach ($relevants as $relevant) {
+            $result =  $result->push($relevant->countable);
+        }
+        return  $result->unique();
+    }
 }

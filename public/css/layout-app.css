@@ -7,3 +7,13 @@ body{
     background-color: #383E56;
 }
 
+.content-main{
+    min-height:calc(100vh - 77px - 85px);
+}
+
+@media(max-width:1024px){
+    .content-main{
+        min-height:calc(100vh - 65px - 85px);
+    }
+}
+

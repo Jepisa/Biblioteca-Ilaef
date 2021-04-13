@@ -7,16 +7,18 @@ footer{
     color:white;
 }
 
-.redes-sociales i{
-    font-size: 31px;
+.redes-sociales .img-red-social{
+    width: 31px;
     margin: 0 5px;
+    border-radius: 100%;
 }
+    
 .foot{
     min-height: inherit;
     align-items: center;
 }
 .direction-contact, .logo-footer, .redes-sociales{
-        padding: 18px;
+        padding: 10px;
     }
 /*  */
 

@@ -1,34 +1,22 @@
-<div class="carousel">
+<div class="carousel none-carrousel">
     <div class="title-of-carousel">
         {{ $titleOfCarousel }}
     </div>
     <div class="glide {{ $carousel }}">
         <div class="glide__track" data-glide-el="track">
         <ul  class="glide__slides">
-            {{-- @foreach ($books as $book)                
+            @foreach ($contents as $content)                
                 <li class="glide__slide">
                     <div class="div-slide">
                         <div class="image bg-gray-100">
-                            <img id="" class="imagen-carousel none-carrousel" src="{{ asset('storage/'.$book->coverImage) }}" alt="{{ $book->title }}">
+                            <img id="" class="imagen-carousel " src="{{ asset('storage/'.$content->coverImage) }}" alt="{{ $content->title }}">
                         </div>
-                        <div class="title-of-book">
-                            <p title="{{ $book->title }}">{{ $book->title }}</p>
-                        </div>
-                    </div>
-                </li>
-            @endforeach --}}
-            @for ($i = 0; $i <= 17; $i++)           
-                <li class="glide__slide">
-                    <div class="div-slide">
-                        <div class="image bg-gray-100">
-                            <img id="" class="imagen-carousel none-carrousel" src="{{ asset('img/content/'.$i.'.jpg') }}" alt="{{ 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Et magnam.' }}">
-                        </div>
-                        <div class="title-of-book">
-                            <p title="{{ 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Et magnam.' }}">{{ 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Et magnam.' }}</p>
+                        <div class="title-of-content">
+                            <p title="{{ $content->title }}">{{ $content->title }}</p>
                         </div>
                     </div>
                 </li>
-            @endfor
+            @endforeach
         </ul>
         </div>
         <div class="glide__arrows" data-glide-el="controls">

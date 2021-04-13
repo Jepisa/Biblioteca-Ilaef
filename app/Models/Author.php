@@ -18,7 +18,7 @@ class Author extends Model
 
     public function podcasts()
     {
-        return $this->morphedByMany(Podcast::class, 'podcastable');
+        return $this->morphedByMany(Podcast::class, 'authorable');
     }
     
 }

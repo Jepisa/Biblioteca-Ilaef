@@ -19,7 +19,7 @@ class MinAdmin
     {
         if ( Auth::check()) 
         {
-            if (Auth::user()->isAdminPrincipalAdminOrProgrammer) 
+            if (Auth::user()->isAdminPrincipalAdminOrProgrammer()) 
             {
                 return $next($request);
             }
