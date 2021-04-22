@@ -15,10 +15,18 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
-            // CountrySeeder::class,
-            // UserSeeder::class,
+            CountrySeeder::class,
+            GenderSeeder::class,
+            RoleSeeder::class,
+            OccupationSeeder::class,
+            ReferrerSeeder::class,
+            UserSeeder::class,
+            
             AuthorSeeder::class,
-            // TopicSeeder::class,
+            TopicSeeder::class,
+            LanguageSeeder::class,
+            BookSeeder::class,
+            // PodcastSeeder::class,
         ]);
     }
 }

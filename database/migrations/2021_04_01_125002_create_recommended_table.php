@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExtraimagesTable extends Migration
+class CreateRecommendedTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateExtraimagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('extraimages', function (Blueprint $table) {
+        Schema::create('recommended', function (Blueprint $table) {
             $table->id();
-            $table->text('image');// de 'string' a 'text' Este cambio tengo que hacerlo tambien en la bd de production
-            $table->morphs('extraimageable');
+            $table->morphs('recommendable');
+            $table->boolean('status')->nullable()->default(true);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateExtraimagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('extraimages');
+        Schema::dropIfExists('recommended');
     }
 }

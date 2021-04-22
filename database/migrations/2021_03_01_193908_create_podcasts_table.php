@@ -22,7 +22,7 @@ class CreatePodcastsTable extends Migration
             $table->text('note')->nullable();
             $table->integer('year');
             $table->string('platform')->nullable();
-            $table->string('oganization')->nullable();
+            $table->string('organization')->nullable();
             $table->string('editorial');
             $table->unsignedBigInteger('language_id');
             $table->foreign('language_id')->references('id')->on('languages');
