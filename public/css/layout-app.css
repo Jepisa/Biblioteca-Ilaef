@@ -11,6 +11,20 @@ body{
     min-height:calc(100vh - 77px - 85px);
 }
 
+.pagination{
+    margin: 10px 24px;
+}
+
+.pagination p.text-gray-700{
+    color: white;
+}
+@media(max-width:1024px)
+{
+    .pagination nav div.hidden{
+        flex-direction: column;
+    }
+}
+
 @media(max-width:1024px){
     .content-main{
         min-height:calc(100vh - 65px - 85px);

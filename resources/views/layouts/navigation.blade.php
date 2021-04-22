@@ -1,5 +1,5 @@
 <div class="py-2">
-    <nav x-data="{ open: false }" class="">
+    <nav class="nav-principal" x-data="{ open: false }" class="">
         {{-- <picture class="background-navbar">
             <source class="background-navbar" media="(max-width:100px)" srcset="{{ asset('img/navbar/navbar-mobile.png') }}">
             <source class="background-navbar" media="(max-width:640px)" srcset="{{ asset('img/navbar/navbar-tablet.png') }}">
