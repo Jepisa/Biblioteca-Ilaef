@@ -9,7 +9,7 @@
                 </div>
                 <div class="telephone flex">
                     <div class="mr-1"><i class="fas fa-phone-alt"></i></div><!-- Icono de ubicación -->
-                    <div>+54 9 11 5745-0859</div>
+                    <div> <a href="+54 9 11 5745-0859"></a> </div>
                 </div>
             </div>
             <div class="logo-footer w-3/12 h-full flex justify-center items-center">
