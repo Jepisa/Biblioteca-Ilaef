@@ -192,7 +192,7 @@
                                 </label>
                                 <select name="country_id" id="country_id" class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" required>
                                     @foreach ($countries as $country)
-                                            <option value="{{ $country->id }}" {{( (old('country_id') ?  old('country_id') : (Route::is('book.edit') ? $book->country_id : '')) == $language->id) ? 'selected' : ''}}>{{ $country->name }}</option>
+                                            <option value="{{ $country->id }}" {{( (old('country_id') ?  old('country_id') : (Route::is('book.edit') ? $book->country_id : '')) == $country->id) ? 'selected' : ''}}>{{ $country->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -264,7 +264,7 @@
                                 {{-- Audiolibro --}}
                                 <div class="mb-2 w-2/12">
                                     <label class="block mb-1 text-sm font-bold text-gray-700" for="audioBook">Audiolibro</label>
-                                    <input id="audioBook" name="audioBook" type="file" accept=".mp3,.wma,.aac">
+                                    <input id="audioBook" name="audioBook" type="file" accept=".mp3,.wma,.aac,.ogg">
                                 </div>
                             </div>
                         </div>

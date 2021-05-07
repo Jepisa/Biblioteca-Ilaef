@@ -58,7 +58,7 @@ class StoreBookRequest extends FormRequest
             'isbn' => 'nullable|string|max:255|unique:books,isbn',
             'downloadable' => 'file|mimes:pdf,doc',
             'url' => 'nullable|url',
-            'coverImage' => 'required|file|mimes:jpg,png,jpeg|dimensions:min_width=600,min_height=800,max_width=1800,max_height=2300',
+            'coverImage' => 'required|file|mimes:jpg,png,jpeg', //|dimensions:min_width=600,min_height=800,max_width=1800,max_height=2300',
             'extraimages' => 'array',
             'extraimages.*' => 'file|mimes:jpg,png,jpeg|between:40,3000',
             'backCoverImage' => 'file|mimes:jpg,png,jpeg|between:40,4000',

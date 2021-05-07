@@ -24,7 +24,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::orderBy('created_at')->paginate(10);
+        $books = Book::orderBy('created_at', 'desc')->paginate(10);
 
         return view('content.books.index', compact('books'));
     }
@@ -64,7 +64,7 @@ class BookController extends Controller
         if($request->hasFile('coverImage'))
         {
             $image_name = Str::slug($request->file('coverImage')->getClientOriginalName());
-            $extension = $request->file('')->extension();
+            $extension = $request->file('coverImage')->extension();
             $new_image_name = $image_name.'.'.$extension;
             $pathCoverImage = $request->file('coverImage')->storeAs($destination_path, $new_image_name, $disk);
         }
@@ -72,7 +72,7 @@ class BookController extends Controller
         if($request->hasFile('backCoverImage'))
         {
             $image_name = Str::slug($request->file('backCoverImage')->getClientOriginalName());
-            $extension = $request->file('')->extension();
+            $extension = $request->file('backCoverImage')->extension();
             $new_image_name = $image_name.'.'.$extension;
             $pathBackCoverImage = $request->file('backCoverImage')->storeAs($destination_path, $new_image_name, $disk);
         }
@@ -80,7 +80,7 @@ class BookController extends Controller
         if($request->hasFile('audioBook'))
         {
             $audioBook_name = Str::slug($request->file('audioBook')->getClientOriginalName());
-            $extension = $request->file('')->extension();
+            $extension = $request->file('audioBook')->extension();
             $new_image_name = $image_name.'.'.$extension;
             $pathAudioBook = $request->file('audioBook')->storeAs($destination_path, $audioBook_name, $disk);
 
@@ -90,7 +90,7 @@ class BookController extends Controller
         if($request->hasFile('downloadable'))
         {
             $image_name = Str::slug($request->file('downloadable')->getClientOriginalName());
-            $extension = $request->file('')->extension();
+            $extension = $request->file('downloadable')->extension();
             $new_image_name = $image_name.'.'.$extension;
             $pathDownloadable = $request->file('downloadable')->storeAs($destination_path, $new_image_name, $disk);
         }
@@ -126,7 +126,7 @@ class BookController extends Controller
             {
                 //Guardar las imagenes en el servidor                    
                     $image_name = Str::slug($image->getClientOriginalName());
-                    $extension = $request->file('')->extension();
+                    $extension = $image->extension();
                     $new_image_name = $image_name.'.'.$extension;
                     $path = $image->storeAs($destination_path, $new_image_name, $disk);
 
@@ -510,7 +510,7 @@ class BookController extends Controller
             if(!Storage::exists('public/'.$book->coverImage) or Storage::delete('public/'.$book->coverImage))
             {
                 $image_name = Str::slug($request->file('coverImage')->getClientOriginalName());
-                $extension = $request->file('')->extension();
+                $extension = $request->file('coverImage')->extension();
                 $new_image_name = $image_name.'.'.$extension;
                 $datesBook['coverImage'] = $request->file('coverImage')->storeAs($destination_path, $new_image_name, $disk);
                 
@@ -527,7 +527,7 @@ class BookController extends Controller
             Storage::delete('public/'.$book->backCoverImage);
 
             $image_name = Str::slug($request->file('backCoverImage')->getClientOriginalName());
-            $extension = $request->file('')->extension();
+            $extension = $request->file('backCoverImage')->extension();
             $new_image_name = $image_name.'.'.$extension;
             $datesBook['backCoverImage'] = $request->file('backCoverImage')->storeAs($destination_path, $new_image_name, $disk);
         }
@@ -537,7 +537,7 @@ class BookController extends Controller
             Storage::delete('public/'.$book->audioBook);
 
             $audioBook_name = Str::slug($request->file('audioBook')->getClientOriginalName());
-            $extension = $request->file('')->extension();
+            $extension = $request->file('audioBook')->extension();
             $new_image_name = $image_name.'.'.$extension;
             $datesBook['audioBook'] = $request->file('audioBook')->storeAs($destination_path, $audioBook_name, $disk);
 
@@ -549,7 +549,7 @@ class BookController extends Controller
             Storage::delete('public/'.$book->downloadable);
 
             $image_name = Str::slug($request->file('downloadable')->getClientOriginalName());
-            $extension = $request->file('')->extension();
+            $extension = $request->file('downloadable')->extension();
             $new_image_name = $image_name.'.'.$extension;
             $datesBook['downloadable'] = $request->file('downloadable')->storeAs($destination_path, $new_image_name, $disk);
         }
@@ -571,7 +571,7 @@ class BookController extends Controller
                 //Guardar las nuevas imagenes
                     
                     $image_name = Str::slug($image->getClientOriginalName());
-                    $extension = $request->file('')->extension();
+                    $extension = $image->extension();
                     $new_image_name = $image_name.'.'.$extension;
                     $path = $image->storeAs($destination_path, $new_image_name, $disk);
 
