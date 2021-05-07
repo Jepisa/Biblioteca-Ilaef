@@ -346,8 +346,7 @@ class BookController extends Controller
         $datesBook['slug'] = Str::slug($datesBook['title']);
         
         if($book->title != $datesBook['title'] and $book->slug != $datesBook['slug'])
-        {
-            
+        { 
             if ( Storage::rename("public/content/books/$book->slug", "public/content/books/".$datesBook['slug']) ) 
             {
                 $datesBook['coverImage'] = Str::replaceFirst($book->slug, $datesBook['slug'], $book->coverImage);
