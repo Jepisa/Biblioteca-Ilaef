@@ -262,10 +262,10 @@
                                     <input id="extraImages" name="extraImages[]" type="file" accept=".jpg,.png,.jpeg" multiple>
                                 </div>
                                 {{-- Audiolibro --}}
-                                <div class="mb-2 w-2/12">
+                                {{-- <div class="mb-2 w-2/12">
                                     <label class="block mb-1 text-sm font-bold text-gray-700" for="audioBook">Audiolibro</label>
-                                    <input id="audioBook" name="audioBook" type="file" accept=".mp3,.wma,.aac,.ogg">
-                                </div>
+                                    <input id="audioBook" name="audioBook" type="file" accept=".mp3,.wma,.aac">
+                                </div> --}}
                             </div>
                         </div>
                         
