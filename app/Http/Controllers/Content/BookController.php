@@ -537,7 +537,7 @@ class BookController extends Controller
 
             $audioBook_name = Str::slug($request->file('audioBook')->getClientOriginalName());
             $extension = $request->file('audioBook')->extension();
-            $new_image_name = $image_name.'.'.$extension;
+            $new_image_name = $audioBook_name.'.'.$extension;
             $datesBook['audioBook'] = $request->file('audioBook')->storeAs($destination_path, $audioBook_name, $disk);
 
             $datesBook['format'] = $request->file('audioBook')->extension();
