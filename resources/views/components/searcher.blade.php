@@ -4,8 +4,7 @@ background: #91091E 0% 0% no-repeat padding-box;
 box-shadow: 0px 3px 6px #00000080;
 border: 1px solid #C1C1C1;
 border-radius: 4px;">
-    <div class="w-2/12" style="background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 1px 1px #00000066;
+    <div id="select-search" class="w-2/12" style="box-shadow: 0px 1px 1px #00000066;
     border: 1px solid #383E56;">
         <select name="searchType" style="width: 100%; height: -webkit-fill-available; padding: 0px 0 0 15px; border:0;">
             <option value="Todo" selected>Todo</option>
@@ -19,7 +18,7 @@ border-radius: 4px;">
     <div class="input-search" style="position: relative; margin: 0 8px; width: 55%; background: #FFFFFF 0% 0% no-repeat padding-box;
     border: 1px solid #383E56;
     border-radius: 4px;">
-        <svg onclick="document.getElementById('form-search').submit();" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        <svg onclick="document.getElementById('form-search').submit();" version="1.1" class="Capa_1" id='capa-4'  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
         viewBox="0 0 512.005 512.005" style="position:absolute; left:5px; top:6px; enable-background:new 0 0 512.005 512.005;" xml:space="preserve" width="14px" height="14px">
             <g>
                 <path d="M505.749,475.587l-145.6-145.6c28.203-34.837,45.184-79.104,45.184-127.317c0-111.744-90.923-202.667-202.667-202.667
@@ -28,12 +27,12 @@ border-radius: 4px;">
                         M202.667,362.669c-88.235,0-160-71.765-160-160s71.765-160,160-160s160,71.765,160,160S290.901,362.669,202.667,362.669z"/>
             </g>
         </svg>
-        <input type="search" id="search" name="search" placeholder="Buscar por título o autor o editorial o..." style=" padding-left:24px; width: 100%; border:0; height: -webkit-fill-available;">
+        <input type="search" id="search" name="search" placeholder="Buscar por título o autor o editorial o...">
     </div>
-    <div class="" style="width: 28.3%; background: #91091E; color:white; text-align: center; box-shadow: 0px 1px 1px #00000066;
+    <div class="advance-search" style="width: 28.3%; background: #91091E; color:white; text-align: center; box-shadow: 0px 1px 1px #00000066;
     border: 1px solid #FFFFFF;">
         <span>Búsqueda avanzada </span>
-        <svg style="margin: 0 4px; display: inline-block; fill: white;" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        <svg style="margin: 0 4px; display: inline-block; fill: white;" version="1.1" class="Capa_1" id='capa-5' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="12px" height="12px" viewBox="0 0 451.847 451.847" style="enable-background:new 0 0 451.847 451.847;"
 	 xml:space="preserve">
             <g>

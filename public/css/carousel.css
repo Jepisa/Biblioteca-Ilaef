@@ -10,7 +10,7 @@
 }
     .title-of-carousel{
         width: max-content;
-        border: 2px solid #D5E5E3;
+        border: 1px solid #D5E5E3;
         border-radius: 5px;
         box-shadow: 0px 3px 6px #00000080;
         text-align: center;
@@ -62,8 +62,10 @@
     box-shadow: none !important;
 }
     .glide__arrow svg{
-        width: 21px;
+        width: 15px;
         fill: #D5E5E3;
+        font-weight: bold;
+        margin: 15px;
     }
 
     .glide .glide__arrow--left{
@@ -77,11 +79,19 @@
 
 .imagen-carousel{
     width: auto;
+    height: 175px;
 }
 
 .carousel-of-advertisement .image img{
     object-fit: cover;
     min-height: 150px;
+}
+
+select {
+    background-color: #91091F;
+    color: white;
+    border-radius: 5px;
+    border-color: white;
 }
 
 @media (max-width:1024px){
@@ -103,4 +113,19 @@
         width: 100%;
         margin: 15px auto;
     }
+}
+
+@media (max-width: 330px) {
+    .carousel {
+        width: 100%;
+        padding-top: 20px;
+    }
+
+    .div-slide .image{
+        width: 88px;
+        margin-bottom: 16px;
+        margin-right: 10px;
+        height: 175px;
+    }
+
 }

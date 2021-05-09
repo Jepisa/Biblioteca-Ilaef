@@ -22,8 +22,15 @@ footer{
     }
 /*  */
 
-@media (max-width:360px){
-    
+@media (max-width:330px){
+    footer .foot {
+        flex-direction: row !important;
+        align-items: flex-end;
+    }
+
+    .direction-contact {
+        align-items: flex-start !important;
+    }
 }
 @media (max-width:568px){
     footer .foot{
@@ -40,7 +47,7 @@ footer{
     }
     .direction-contact{
         width: 100%;
-        align-items: center !important;
+        /* align-items: center !important; */
     }
     .direction-contact div{
         flex-direction: row;
