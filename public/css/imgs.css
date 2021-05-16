@@ -1,0 +1,11 @@
+#imgs {
+    margin: 15px 15px 15px 15px auto;
+    display: flex;
+    flex-direction: row;
+}
+
+#images {
+    margin: 5px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}

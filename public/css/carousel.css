@@ -129,3 +129,11 @@ select {
     }
 
 }
+
+@media (max-width: 600px) {
+
+    .glide__slide {
+        width: 100px !important;
+    }
+
+}

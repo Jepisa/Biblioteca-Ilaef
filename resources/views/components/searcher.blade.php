@@ -4,8 +4,7 @@ background: #91091E 0% 0% no-repeat padding-box;
 box-shadow: 0px 3px 6px #00000080;
 border: 1px solid #C1C1C1;
 border-radius: 4px;">
-    <div id="select-search" class="w-2/12" style="box-shadow: 0px 1px 1px #00000066;
-    border: 1px solid #383E56;">
+    <div id="select-search" class="w-2/12" style="">
         <select name="searchType" style="width: 100%; height: -webkit-fill-available; padding: 0px 0 0 15px; border:0;">
             <option value="Todo" selected>Todo</option>
             <option value="Autor">Autor</option>
@@ -29,8 +28,7 @@ border-radius: 4px;">
         </svg>
         <input type="search" id="search" name="search" placeholder="Buscar por título o autor o editorial o...">
     </div>
-    <div class="advance-search" style="width: 28.3%; background: #91091E; color:white; text-align: center; box-shadow: 0px 1px 1px #00000066;
-    border: 1px solid #FFFFFF;">
+    <div class="advance-search" style="">
         <span>Búsqueda avanzada </span>
         <svg style="margin: 0 4px; display: inline-block; fill: white;" version="1.1" class="Capa_1" id='capa-5' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="12px" height="12px" viewBox="0 0 451.847 451.847" style="enable-background:new 0 0 451.847 451.847;"

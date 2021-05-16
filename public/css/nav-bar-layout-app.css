@@ -49,6 +49,18 @@ nav.nav-principal{
         background: #FFFFFF 0% 0% no-repeat padding-box;
     }
 
+    select {
+        background: #91091E;
+        color: white;
+        fill: white;
+    }
+
+    #select-search {
+        box-shadow: 0px 1px 1px #00000066;
+        border: 1px solid white;
+        border-radius: 3px;
+    }
+
     
 
 /*  */
@@ -126,24 +138,30 @@ nav.nav-principal{
     }
 
     #capa-1 {
-        left: -75px;
+        left: -4.2rem !important;
     }
 
     #capa-2 {
-        right: -75px;
+        right: -4.2rem !important;
+    }
+
+    #capa-4 {
+        left: 1em;
     }
 
     #search {
-        width: 100%;
+        width: 101%;
         font-size: 10px;
         fill: white;
         height: 28px;
-        border-radius: 5px;
+        border-radius: 3px;
+        padding-left: 18px;
     }
 
     #select-search {
         width: 40%;
         font-size: 12px;
+        border-color: white;
     }
     
     .input-search input #search{
@@ -153,14 +171,162 @@ nav.nav-principal{
 
     .advance-search {
         width: 28.3%;
+        height: 30px;
         background: #91091E;
         text-align: center;
         box-shadow: 0px 1px 1px #00000066;
         border: 1px solid #FFFFFF;
         color: white;
         font-size: 10px;
+        display: flex;
+        border-radius: 5px;
     }
     
+    #form-search {
+        border-radius: 6px;
+    }
+
+    /* Carrousel */
+
+     .image.bg-gray-100 {
+        width: 88px;
+    }
+}
+
+@media (max-width:400px) {
+
+    #capa-1 {
+        left: -4.2em !important;
+    }
+
+    #capa-2 {
+        right: -7.2em;
+    }
+
+    #capa-4 {
+        left: -7.2em;
+    }
+
+
+}
+
+@media (max-width:500px) {
+
+    #capa-1 {
+        left: -8em;
+    }
+
+    #capa-2 {
+        right: -8.2em;
+    }
+
+    #capa-4 {
+        left: -8.2em;
+    }
+
+    .advance-search {
+        font-size: 11px !important;
+        height: 30px;
+    }
+    .advance-search span{
+        margin-left: 3px;
+    }    
+}
+
+@media (min-width:510px) {
+    .advance-search {
+        padding-top: 5px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    /* Nav-Bar */
+
+        .py-2 {
+            margin-bottom: 15px;
+            border-radius: 7px;
+        }
+
+        nav.nav-principal {
+            border-radius: 14px;
+        }
+
+        .h-6.w-6 {
+            color: rgba(0, 0, 0, 0.527)
+            }
+        
+            .w-6 {
+                width: 2em;
+            }
+            
+            .-mr-2 {
+                margin-right: 7.5px;
+                border-color: rgba(0, 0, 0, 0.527);
+                border-width: thin;
+                border-radius: 10px;
+            }
+
+    /* Search */
+
+    #chevron-01, #chevron-02 {
+        display: none;
+    }
+
+    #capa-1, #capa-2 {
+        position: relative;
+        top: -165px;
+    }
+
+    #capa-1 {
+        left: -9em !important;
+    }
+
+    #capa-2 {
+        right: -7.2em;
+    }
+
+    #capa-4 {
+        left: -7.2em;
+    }
+
+    #search {
+        width: 101%;
+        font-size: 10px;
+        fill: white;
+        height: 100%;
+        border-radius: 3px;
+        padding-left: 30px;
+    }
+
+    #select-search {
+        font-size: 12px;
+        border-color: white;
+    }
+    
+    .input-search input #search{
+        font-size: 10px;
+        padding-left: 0px;
+        width: 120px;
+    }
+
+    .advance-search {
+        width: 28%;
+        background: #91091E;
+        text-align: center;
+        box-shadow: 0px 1px 1px #00000066;
+        border: 1px solid #FFFFFF;
+        color: white;
+        font-size: 10.2px;
+        display: flex;
+        border-radius: 5px;
+        padding-left: 10px;
+
+    }
+    
+    #form-search {
+        border-radius: 6px;
+    }
 
     /* Carrousel */
 

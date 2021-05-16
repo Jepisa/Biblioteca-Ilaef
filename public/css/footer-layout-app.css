@@ -8,7 +8,7 @@ footer{
 }
 
 .redes-sociales .img-red-social{
-    width: 31px;
+    width: 29px;
     margin: 0 5px;
     border-radius: 100%;
 }
@@ -26,6 +26,8 @@ footer{
     footer .foot {
         flex-direction: row !important;
         align-items: flex-end;
+        font-size: 12px;
+
     }
 
     .direction-contact {
@@ -51,6 +53,10 @@ footer{
     }
     .direction-contact div{
         flex-direction: row;
+    }
+
+    #footer, .logo-footer {
+        margin-left: 8px;
     }
 }
 @media (max-width:639px){

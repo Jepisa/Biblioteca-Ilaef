@@ -1,5 +1,8 @@
 @import 'nav-bar-layout-app.css';
 @import 'footer-layout-app.css';
+@import './imgs.css';
+@import './tags.css';
+
 *{
     font-family: 'Red Hat Text', sans-serif;
 }
