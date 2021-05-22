@@ -64,6 +64,12 @@
                                     <x-dropdown-link :href="route('books.index')">
                                         {{ __('Listar Libros') }}
                                     </x-dropdown-link>
+                                    <x-dropdown-link :href="route('podcast.create')">
+                                        {{ __('Crear Podcast') }}
+                                    </x-dropdown-link>
+                                    <x-dropdown-link :href="route('podcasts.index')">
+                                        {{ __('Listar Podcast') }}
+                                    </x-dropdown-link>
                                     @if (Auth::user()->isPrincipalAdminOrProgrammer())
                                         <x-dropdown-link :href="route('register')">
                                             {{ __('Registar un usuario') }}

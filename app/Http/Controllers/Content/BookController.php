@@ -41,7 +41,7 @@ class BookController extends Controller
         $languages = Language::all();
         $countries = Country::all();
 
-        return view('content.books.create-edit', compact('authors', 'topics', 'languages', 'countries'));
+        return view('content.books.create', compact('authors', 'topics', 'languages', 'countries'));
     }
 
     /**
@@ -286,7 +286,7 @@ class BookController extends Controller
         $languages = Language::all();
         $countries = Country::all();
 
-        return view('content.books.create-edit', compact('book','authorsName', 'topicsName', 'languages', 'countries', 'authors'));
+        return view('content.books.edit', compact('book','authorsName', 'topicsName', 'languages', 'countries', 'authors'));
     }
 
     /**
@@ -618,7 +618,7 @@ class BookController extends Controller
         $titleOfDeletedBook = $book->title;
         $book->delete();
         
-        $notification = "Se ha eliminado \"$titleOfDeletedBook\" y todo lo que contenía.";
+        $notification = __('general.notification.body.delete',[ 'title' => $titleOfDeletedBook]);
         
         
         $request->session()->flash('notification', $notification);
