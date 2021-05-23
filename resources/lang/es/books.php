@@ -125,29 +125,13 @@ return [
         'buttons' => [
             'submit' => 'Crear libro',
         ],
+        'notification' => [
+            'title' => 'Felicidades',
+            'body' => 'El libro ":title" fue creado con éxito.'
+        ],
     ],
 
     // Edit
     'edit' => [
     ],
 ];
-
-{{ __('books.create.fields.topics.label') }}
-{{ __('books.create.fields.synopsis.label') }}
-{{ __('books.create.fields.notes.label') }}
-{{ __('books.create.fields.year.label') }}
-{{ __('books.create.fields.collection.label') }}
-{{ __('books.create.fields.edition.label') }}
-{{ __('books.create.fields.editorial.label') }}
-{{ __('books.create.fields.language.label') }}
-{{ __('books.create.fields.city.label') }}
-{{ __('books.create.fields.country.label') }}
-{{ __('books.create.fields.pages.label') }}
-{{ __('books.create.fields.isbn.label') }}
-{{ __('books.create.fields.isbn.placeholder') }}
-{{ __('books.create.fields.url.label') }}
-{{ __('books.create.fields.downloadable.label') }}
-{{ __('books.create.fields.cover.label') }}
-{{ __('books.create.fields.backcover.label') }}
-{{ __('books.create.fields.extraimages.label') }}
-{{ __('books.create.fields.audiobook.label') }}

@@ -13,7 +13,7 @@
         </div>
         <div class="w-auto text-gray-500 items-center p-4">
             <span class="text-lg font-bold pb-4">
-                {{ __('general.notification.title') }}
+                {{ Session()->get('titleNotification') }}
             </span>
             <p class="leading-tight">
                 {{ Session()->get('notification') }}

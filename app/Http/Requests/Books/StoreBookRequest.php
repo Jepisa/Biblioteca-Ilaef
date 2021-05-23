@@ -5,6 +5,8 @@ use Illuminate\Support\Str;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use App\Models\Author;
+use App\Models\Topic;
 
 class StoreBookRequest extends FormRequest
 {
@@ -21,11 +23,32 @@ class StoreBookRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        
+        $existAuthors = array();
+        $newAuthors = array();
+
+        if (!empty($this->authors)) {
+            foreach ($this->authors as $author) {
+                (is_numeric($author) and Author::where('id', '=', $author)->exists()) ? ($existAuthors[] = $author) : ($newAuthors[] = $author);
+            }
+        }
+
+        $existTopics = array();
+        $newTopics = array();
+
+        if (!empty($this->topics)) {
+            foreach ($this->topics as $topic) {
+                (is_numeric($topic) and Topic::where('id', '=', $topic)->exists()) ? ($existTopics[] = $topic) : ($newTopics[] = $topic);
+            }
+        }
+
         //Esto es solo un ejemplo, pero no funca
         $this->merge([
             'synopsis-original' => $this->synopsis,
             'synopsis' => str_replace ("\r\n"," ",$this->synopsis),
+            'existAuthors' => $existAuthors,
+            'newAuthors' => $newAuthors,
+            'existTopics' => $existTopics,
+            'newTopics' => $newTopics,
         ]);
     }
 
@@ -39,13 +62,13 @@ class StoreBookRequest extends FormRequest
     {
         return [
             'title' => 'required|string|unique:books|max:255',
-            'authorsName' => 'required|string',
-            'topicsName' => 'required|string',
-            // 'authors' => 'required|array|min:1',
-            // 'authors.*' => 'required|integer|distinct|exists:authors,id',
-            // 'topics' => 'required|array|min:1',
-            // 'topics.*' => 'required|integer|distinct|exists:topics,id',
-            'synopsis' => 'required|min:400|max:1200',
+            'authors' => 'required|array|min:1',
+            'newAuthors.*' => 'nullable|string|distinct|unique:authors,name',
+            'existAuthors.*' => 'integer|distinct|exists:authors,id',
+            'topics' => 'required|array|min:1',
+            'newTopics.*' => 'nullable|string|distinct|unique:topics,name',
+            'existTopics.*' => 'integer|distinct|exists:topics,id',
+            'synopsis' => 'nullable|string|max:1200',
             'note' => 'nullable|string|max:600',
             'year' => 'nullable|integer|min:1000|max:3000',
             'collection' => 'nullable|string|max:255',
