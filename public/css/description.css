@@ -1,0 +1,191 @@
+#description {
+    color: white;
+    margin: 25px ;
+    padding: 20px;
+    border: outset; 
+    border-color: white;
+    border-radius: 7px;
+    
+}
+
+#title {
+    width: 50%;
+}
+
+#description h6, h5 {
+    font-size: 8px;
+}
+
+#description h4 {
+    padding-bottom: 10px;
+    font-size: 14px;
+}
+
+#description h3 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#description h3, h4 {
+    width: 50%;
+}
+
+#description img {
+    float: right;
+    position: relative;
+    top: -220px;
+    width: 120px;
+    height: 180px;
+    border-radius: 5px;
+}
+
+.title p {
+    font-size: 11px !important;
+    width: 50%;
+}
+
+#description p {
+    font-size: 10px;
+}
+
+.grid-container span {
+    width: 100%;
+    font-size: 14px;
+    display: flex;
+    position: relative;
+    top: -135px;
+}
+
+#shared {
+    display: none;
+}
+
+.grey-arrow {
+    width: 73.93px;
+    height: 58.8px;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.icons-description img {
+    margin-right: 10px;
+    width: 34px !important;
+    height: 34px !important;
+    border: inset;
+    border-color: white;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+.icons-description {
+    position: relative;
+    top: 135px;
+}
+
+@media (min-width:332px) {
+
+    .grid-container img {
+        position: relative;
+        top: -222px !important;
+    }
+
+    footer .foot {
+        flex-direction: row !important;
+        align-items: flex-end;
+        font-size: 12px;
+
+    }
+
+    .direction-contact {
+        align-items: flex-start !important;
+    }
+
+}
+
+@media (min-width:339px) {
+
+    .grid-container img {
+        position: relative;
+        top: -204px !important;
+    }
+}
+
+@media (min-width:342px) {
+
+    .grid-container img {
+        position: relative;
+        top: -185px !important;
+    }
+}
+
+@media (min-width:353px) {
+
+    .grid-container img {
+        position: relative;
+        top: -163px !important;
+    }
+}
+
+@media (min-width: 375px) {
+    .title p, .title h3, .title h4 {
+        width: 50%;
+    }
+
+   .grid-container img{ 
+       width: 50% !important;
+       max-width: 287px;
+       max-height: 201px;
+}
+}
+
+@media (min-width:568){
+
+    #redes-sociales {
+        margin: auto !important;
+    }
+
+    footer .foot{
+        flex-direction: row;
+    }
+
+    .redes-sociales{
+        flex-direction: row;
+    }
+
+    .redes-sociales img {
+        margin-right: 5px;
+    }
+}
+
+
+@media (min-width: 600px) {
+ 
+    .title {
+        margin-bottom: 40px;
+    }
+
+    .grid-container span {
+        display: contents;
+        width: 51%;
+    }
+
+    .grid-container img{ 
+        width: 50% !important;
+        max-height: 800px;
+        height: 422px !important;
+        
+ }
+
+    .icons-description {
+        display: block;
+        height: 50px;
+        top: 250px;
+        margin-bottom: 20px;
+        left: -20px;
+    }
+
+    .grey-arrow {
+        margin-left: 45%;
+    }
+
+}

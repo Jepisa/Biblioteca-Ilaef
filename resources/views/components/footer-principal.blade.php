@@ -16,7 +16,7 @@
                         <div> <a href="+54 9 11 5745-0859">11 5745-0859</a> </div>
                     </div>
                 </div>
-                <div class="redes-sociales w-3/12 h-full flex justify-center items-center">
+                <div id='redes-sociales' class="redes-sociales w-3/12 h-full flex justify-center items-center">
                     <a href=""><img class="img-red-social" src="{{ asset('img/redes-sociales/icono-facebook.png') }}"></a>
                     <a href=""><img class="img-red-social" src="{{ asset('img/redes-sociales/icono-twitter.png') }}"></a>
                     <a href=""><img class="img-red-social" src="{{ asset('img/redes-sociales/icono-instagram.png') }}"></a>

@@ -2,6 +2,7 @@
 @import 'footer-layout-app.css';
 @import './imgs.css';
 @import './tags.css';
+@import './description.css';
 
 *{
     font-family: 'Red Hat Text', sans-serif;

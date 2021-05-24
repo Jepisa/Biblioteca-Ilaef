@@ -128,26 +128,6 @@ nav.nav-principal{
 
     /* Search */
 
-    #chevron-01, #chevron-02 {
-        display: none;
-    }
-
-    #capa-1, #capa-2 {
-        position: relative;
-        top: -165px;
-    }
-
-    #capa-1 {
-        left: -4.2rem !important;
-    }
-
-    #capa-2 {
-        right: -4.2rem !important;
-    }
-
-    #capa-4 {
-        left: 1em;
-    }
 
     #search {
         width: 101%;
@@ -193,36 +173,8 @@ nav.nav-principal{
     }
 }
 
-@media (max-width:400px) {
-
-    #capa-1 {
-        left: -4.2em !important;
-    }
-
-    #capa-2 {
-        right: -7.2em;
-    }
-
-    #capa-4 {
-        left: -7.2em;
-    }
-
-
-}
 
 @media (max-width:500px) {
-
-    #capa-1 {
-        left: -8em;
-    }
-
-    #capa-2 {
-        right: -8.2em;
-    }
-
-    #capa-4 {
-        left: -8.2em;
-    }
 
     .advance-search {
         font-size: 11px !important;
@@ -273,22 +225,6 @@ nav.nav-principal{
         display: none;
     }
 
-    #capa-1, #capa-2 {
-        position: relative;
-        top: -165px;
-    }
-
-    #capa-1 {
-        left: -9em !important;
-    }
-
-    #capa-2 {
-        right: -7.2em;
-    }
-
-    #capa-4 {
-        left: -7.2em;
-    }
 
     #search {
         width: 101%;
