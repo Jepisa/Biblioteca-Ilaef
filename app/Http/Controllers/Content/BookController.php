@@ -164,9 +164,9 @@ class BookController extends Controller
                 'views' => $book->counter->views + 1,
             ],[
                 'timestamps' => false
-            ]);//Chequear que ['timestamps' => false] este haciendo de que no se actualice el campo updated_at
-
-        return view('books.show', compact('book'));
+            ]);
+        $book->counter->views++;
+        return view('content.books.show', compact('book'));
     }
 
     /**
@@ -537,9 +537,9 @@ class BookController extends Controller
         $titleOfDeletedBook = $book->title;
         $book->delete();
         
-        $notification = __('general.notification.body.delete',[ 'title' => $titleOfDeletedBook]);
-        
-        
+        $titleNotification = __('books.delete.notification.title');
+        $notification = __('books.delete.notification.body', ['title' => $titleOfDeletedBook]);
+        $request->session()->flash('titleNotification', $titleNotification);
         $request->session()->flash('notification', $notification);
 
         return redirect()->back();

@@ -131,7 +131,41 @@ return [
         ],
     ],
 
+    // Show
+    'show' => [
+        'fields' => [
+            'title' => 'Título',
+            'authors' => 'Autores',
+            'topics' => 'Temas',
+            'synopsis' => 'Sinopsis',
+            'notes' => 'Notas',
+            'year' => 'Año',
+            'collection' => 'Colección',
+            'edition' => 'Edición',
+            'editorial' => 'Editorial',
+            'language' => 'Idioma',
+            'city' => 'Ciudad',
+            'country' => 'País',
+            'pages' => 'Páginas',
+            'isbn' => 'ISBN',
+            'url' => 'URL',
+            'downloadable' => 'Archivo descargable',
+            'cover' => 'Imagen de tapa',
+            'backcover' => 'Imagen de contratapa',
+            'extraimages' => 'Imágenes extras',
+            'audiobook' => 'Audiolibro',
+        ],
+    ],
+
     // Edit
     'edit' => [
+    ],
+
+    // Delete
+    'delete' => [
+        'notification' => [
+            'title' => 'Atención!',
+            'body' => 'El libro ":title" fue eliminado con éxito.'
+        ],
     ],
 ];

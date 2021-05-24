@@ -1,7 +1,7 @@
 <x-app-layout>
     <h1 class="text-center block my-5 text-2xl text-white">{{ __('books.index.title').'('.$books->total().')' }}</h1>
     <div class="pagination">
-        {{ $books }}
+        {{ $books->links() }}
     </div>
     <div class="flex flex-col w-11/12 m-auto mb-5">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -62,7 +62,7 @@
                                                 <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width:340px;"
                                                     class="text-sm text-center font-medium text-gray-900"
                                                     title="{{ $book->title }}">
-                                                    {{ $book->title }}
+                                                    <a href="{{ route('book.show', ['slug' => $book->slug]) }}">{{ $book->title }}</a>
                                                 </div>
                                                 <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width:340px;"
                                                     class="text-sm text-center text-gray-500"
