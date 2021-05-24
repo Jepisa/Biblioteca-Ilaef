@@ -60,48 +60,39 @@ class BookController extends Controller
             $destination_path = 'content/books/'.$slugOfBook;
             $disk = 'public';
         //
-        if($request->hasFile('coverImage'))
-        {
-            $pathCoverImage = $request->file('coverImage')->store($destination_path, $disk);
-        }
+        if($request->hasFile('coverImage')) $pathCoverImage = $request->file('coverImage')->store($destination_path, $disk);
 
-        if($request->hasFile('backCoverImage'))
-        {
-            $pathBackCoverImage = $request->file('backCoverImage')->store($destination_path, $disk);
-        }
+        if($request->hasFile('backCoverImage')) $pathBackCoverImage = $request->file('backCoverImage')->store($destination_path, $disk);
 
+        if($request->hasFile('downloadable')) $pathDownloadable = $request->file('downloadable')->store($destination_path, $disk);
+        
         if($request->hasFile('audioBook'))
         {
             $pathAudioBook = $request->file('audioBook')->store($destination_path, $disk);
             $extension_audioBook = $request->file('audioBook')->extension();
         }
 
-        if($request->hasFile('downloadable'))
-        {
-            $pathDownloadable = $request->file('downloadable')->store($destination_path, $disk);
-        }
-
         //Crea Book en BD
         $book = Book::create([
-            'title' => $validated['title'],
-            'slug' => $slugOfBook,
-            'synopsis' => $request['synopsis-original'],
-            'note' => isset($validated['note']) ? $validated['note'] : null,
-            'year' => isset($validated['year']) ? $validated['year'] : null,
-            'collection' => isset($validated['collection']) ? $validated['collection'] : null,
-            'edition' => isset($validated['edition']) ? $validated['edition'] : null,
-            'editorial' => $validated['editorial'],
-            'language_id' => $validated['language_id'],
-            'city' => isset($validated['city']) ? $validated['city'] : null,
-            'country_id' => $validated['country_id'],
-            'pages' => isset($validated['pages']) ? $validated['pages'] : null,
-            'isbn' => isset($validated['isbn']) ? $validated['isbn'] : null,
-            'downloadable' => isset($pathDownloadable) ? $pathDownloadable : null,
-            'url' => isset($validated['url']) ? $validated['url'] : null,
-            'coverImage' => isset($pathCoverImage) ? $pathCoverImage : 'public/content/books/default',
-            'backCoverImage' => isset($pathBackCoverImage) ? $pathBackCoverImage : null,
-            'audiobook' => isset($pathAudioBook) ? $pathAudioBook : null,
-            'format' => isset($extension_audioBook) ? $extension_audioBook : null,
+            'title'             => $validated['title'],
+            'slug'              => $slugOfBook,
+            'synopsis'          => $request['synopsis-original'],
+            'note'              => isset($validated['note']) ? $validated['note'] : null,
+            'year'              => isset($validated['year']) ? $validated['year'] : null,
+            'collection'        => isset($validated['collection']) ? $validated['collection'] : null,
+            'edition'           => isset($validated['edition']) ? $validated['edition'] : null,
+            'editorial'         => $validated['editorial'],
+            'language_id'       => $validated['language_id'],
+            'city'              => isset($validated['city']) ? $validated['city'] : null,
+            'country_id'        => $validated['country_id'],
+            'pages'             => isset($validated['pages']) ? $validated['pages'] : null,
+            'isbn'              => isset($validated['isbn']) ? $validated['isbn'] : null,
+            'downloadable'      => isset($pathDownloadable) ? $pathDownloadable : null,
+            'url'               => isset($validated['url']) ? $validated['url'] : null,
+            'coverImage'        => isset($pathCoverImage) ? $pathCoverImage : 'public/content/books/default',
+            'backCoverImage'    => isset($pathBackCoverImage) ? $pathBackCoverImage : null,
+            'audiobook'         => isset($pathAudioBook) ? $pathAudioBook : null,
+            'format'            => isset($extension_audioBook) ? $extension_audioBook : null,
         ]);
 
         if (isset($request->extraImages)) {
@@ -151,7 +142,7 @@ class BookController extends Controller
         //Se crea el contador de views del Book
         $book->counter()->create(['views' => 0 ]);//A la table del contador le puedo poner más columnas (a parte de 'views'), como 'favorites', 'downloads'
         
-        //Notificaciones en después de cargar Book
+        //Notificaciones después de crear un Book
         $titleNotification = __('books.create.notification.title');
         $notification = __('books.create.notification.body', ['title' => $book->title]);
         $request->session()->flash('titleNotification', $titleNotification);
@@ -171,8 +162,9 @@ class BookController extends Controller
         //Contar las visitas a cada libro
         $book->counter()->update([
                 'views' => $book->counter->views + 1,
-            ],
-            ['timestamps' => false]);
+            ],[
+                'timestamps' => false
+            ]);//Chequear que ['timestamps' => false] este haciendo de que no se actualice el campo updated_at
 
         return view('books.show', compact('book'));
     }
