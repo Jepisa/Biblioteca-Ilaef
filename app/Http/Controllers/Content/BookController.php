@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Books\StoreBookRequest;
-use App\Http\Requests\Books\UpdateBookRequest;
+use App\Http\Requests\Content\Books\StoreBookRequest;
+use App\Http\Requests\Content\Books\UpdateBookRequest;
 use Illuminate\Support\Str;
 use App\Models\Author;
 use App\Models\Book;
