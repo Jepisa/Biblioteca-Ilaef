@@ -230,7 +230,7 @@ nav.nav-principal{
         width: 101%;
         font-size: 10px;
         fill: white;
-        height: 100%;
+        height: 101%;
         border-radius: 3px;
         padding-left: 30px;
     }
@@ -262,6 +262,7 @@ nav.nav-principal{
     
     #form-search {
         border-radius: 6px;
+        max-width: 650px;
     }
 
     /* Carrousel */
@@ -269,4 +270,34 @@ nav.nav-principal{
     .image.bg-gray-100 {
         width: 88px;
     }
+}
+
+@media (max-width:2560px) {
+    #search {
+        width: 101%;
+        font-size: 10px;
+        fill: white;
+        height: 101%;
+        border-radius: 3px;
+        padding-left: 30px;
+    }
+
+    .advance-search {
+        width: 28%;
+        background: #91091E;
+        text-align: center;
+        box-shadow: 0px 1px 1px #00000066;
+        border: 1px solid #FFFFFF;
+        color: white;
+        font-size: 10.2px;
+        display: flex;
+        border-radius: 5px;
+        padding-left: 10px;
+        max-width: 130px;
+    }
+
+    #select-search {
+        max-width: 105px;
+    }
+
 }
