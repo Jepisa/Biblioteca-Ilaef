@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Requests\Books;
-use Illuminate\Support\Str;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use App\Models\Book;
 use App\Models\Author;
 use App\Models\Topic;
 
-class StoreBookRequest extends FormRequest
+class UpdateBookRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,7 +18,6 @@ class StoreBookRequest extends FormRequest
     public function authorize()
     {
         return true;
-        // return auth()->user()->role->name == "Administrador" or auth()->user()->role->name == "Administrador Principal" or auth()->user()->role->name == "Programador" ;
     }
 
     protected function prepareForValidation()
@@ -63,7 +62,6 @@ class StoreBookRequest extends FormRequest
         ]);
     }
 
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -71,15 +69,16 @@ class StoreBookRequest extends FormRequest
      */
     public function rules()
     {
+        $book = Book::where('slug', '=', $this->slug)->firstOrFail();
+        /** En el caso de que haga las validaciones, hace lo de 'store' para la synopsis */
         return [
-            'title' => 'required|string|unique:books|max:255',
+            'title' => [Rule::unique('books')->ignore($book->id), 'required'],
             'authors' => 'required|array|min:1',
             'newAuthors.*' => 'nullable|string|distinct|unique:authors,name',
             'existAuthors.*' => 'integer|distinct|exists:authors,id',
             'topics' => 'required|array|min:1',
             'newTopics.*' => 'nullable|string|distinct|unique:topics,name',
-            'existTopics.*' => 'integer|distinct|exists:topics,id',
-            'synopsis' => 'nullable|string|max:1200',
+            'synopsis' => 'max:1200',
             'note' => 'nullable|string|max:600',
             'year' => 'nullable|integer|min:1000|max:3000',
             'collection' => 'nullable|string|max:255',
@@ -89,49 +88,14 @@ class StoreBookRequest extends FormRequest
             'city' => 'nullable|string|max:255',
             'country_id' => 'required|integer|exists:countries,id',
             'pages' => 'nullable|integer',
-            'isbn' => 'nullable|string|max:255|unique:books,isbn',
+            'isbn' => ['nullable','string','max:255', Rule::unique('books')->ignore($book->id)],
             'downloadable' => 'file|mimes:pdf,doc',
             'url' => 'nullable|url',
-            'coverImage' => 'required|file|mimes:jpg,png,jpeg', //|dimensions:min_width=600,min_height=800,max_width=1800,max_height=2300',
+            'coverImage' => 'file|mimes:jpg,png,jpeg',
             'extraimages' => 'array',
-            'extraimages.*' => 'file|mimes:jpg,png,jpeg|between:40,3000',
-            'backCoverImage' => 'file|mimes:jpg,png,jpeg|between:40,4000',
+            'extraimages.*' => 'file|mimes:jpg,png,jpeg',
+            'backCoverImage' => 'file|mimes:jpg,png,jpeg',
             'audioBook' => 'nullable|file|mimes:mp3,wma,aac',
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'title.required' => 'A title is required',
-            'country_id.required' => 'El :attribute es requerido',
-        ];
-    }
-
-    public function attributes()
-    {
-        return [
-            'authors' => 'Autor/es',
-            'topics' => 'Tema/s',
-            'topics.*' => 'Tema/s',
-            'synopsis' => 'Sinópsis',
-            'note' => 'Nota',
-            'year' => 'Año',
-            'collection' => 'Colección',
-            'edition' => 'Edición',
-            'editorial' => 'Editorial',
-            'language_id' => 'Idioma',
-            'city' => 'Ciudad',
-            'country_id' => 'País',
-            'pages' => 'Páginas',
-            'isbn' => 'ISBN',
-            'downloadable' => 'Archivo descargable',
-            'url' => 'URL',
-            'coverImage' => 'Imagen de tapa',
-            'extraimages' => 'Imagenes extras',
-            'backCoverImage' => 'Imagen de contratapa',
-            'audioBook' => 'Audio Libro',
-            'format' => 'Formato del Audio Libro',
         ];
     }
 }

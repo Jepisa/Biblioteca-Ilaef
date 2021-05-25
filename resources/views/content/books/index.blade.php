@@ -45,14 +45,14 @@
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center flex-col">
-                                            <div class="mb-3">
-                                                <div class="flex-shrink-0 w-20 mr-1">
-                                                    <img class="w-full" src="{{ asset("storage/$book->coverImage") }}"
+                                            <div class="mb-3 flex h-40">
+                                                <div class="flex-shrink-0 h-full mr-1">
+                                                    <img class="h-full" src="{{ asset("storage/$book->coverImage") }}"
                                                         alt="">
                                                 </div>
                                                 @if (!empty($book->backCoverImage))
-                                                    <div class="flex-shrink-0 w-20">
-                                                        <img class="w-full"
+                                                    <div class="flex-shrink-0 h-full">
+                                                        <img class="h-full"
                                                             src="{{ asset("storage/$book->backCoverImage") }}"
                                                             alt="">
                                                     </div>
@@ -74,8 +74,9 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <p
-                                            style="white-space: break-spaces; height: 175px; width:340px; overflow: auto;">
+                                            style="white-space: pre-line; height: 175px; width:340px; overflow: auto;">
                                             {{ $book->synopsis }}</p>
+                                            {{-- @dd($book->synopsis ) --}}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <ul>
