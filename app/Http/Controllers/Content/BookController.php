@@ -65,13 +65,13 @@ class BookController extends Controller
 
         if($request->hasFile('backCoverImage')) $pathBackCoverImage = $request->file('backCoverImage')->store($destination_path, $disk);
 
-        if($request->hasFile('downloadable')) $pathDownloadable = $request->file('downloadable')->store($destination_path, $disk);
-        
-        if($request->hasFile('audioBook'))
+        if($request->hasFile('downloadable'))
         {
-            $pathAudioBook = $request->file('audioBook')->store($destination_path, $disk);
-            $extension_audioBook = $request->file('audioBook')->extension();
+             $pathDownloadable = $request->file('downloadable')->store($destination_path, $disk);
+             $extension_downloadable = $request->file('downloadable')->extension();    
         }
+
+        if($request->hasFile('audioBook')) $pathAudioBook = $request->file('audioBook')->store($destination_path, $disk);
 
         //Crea Book en BD
         $book = Book::create([
@@ -93,7 +93,7 @@ class BookController extends Controller
             'coverImage'        => isset($pathCoverImage) ? $pathCoverImage : 'public/content/books/default',
             'backCoverImage'    => isset($pathBackCoverImage) ? $pathBackCoverImage : null,
             'audiobook'         => isset($pathAudioBook) ? $pathAudioBook : null,
-            'format'            => isset($extension_audioBook) ? $extension_audioBook : null,
+            'format'            => isset($extension_downloadable) ? $extension_downloadable : null,
         ]);
 
         // if(!$book) Log::channel('slack')->critical("Problm!\n We have a problem for save a book!!!\nSaludos, Jean Piere");//This is for to send a message to Slack
