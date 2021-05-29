@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\Content\BookController;
 use App\Http\Controllers\Content\PodcastController;
@@ -8,11 +9,11 @@ use Illuminate\Support\Facades\Storage;
 
 require __DIR__.'/auth.php';
 require __DIR__.'/programmer.php';
+require __DIR__.'/admin.php';
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('home');
+
+Route::get('/', HomeController::class)->name('home')->middleware('auth');
 
 Route::get('aboutUs', function () {
     return 'Proximamente';

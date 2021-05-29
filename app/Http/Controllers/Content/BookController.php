@@ -73,7 +73,6 @@ class BookController extends Controller
             $extension_audioBook = $request->file('audioBook')->extension();
         }
 
-        // dd($validated);
         //Crea Book en BD
         $book = Book::create([
             'title'             => $validated['title'],
@@ -97,7 +96,7 @@ class BookController extends Controller
             'format'            => isset($extension_audioBook) ? $extension_audioBook : null,
         ]);
 
-        if($book) Log::channel('slack')->critical("Problm!\n We have a problem for save a book!!!\nSaludos, Jean Piere");//This is for to send a message to Slack
+        // if(!$book) Log::channel('slack')->critical("Problm!\n We have a problem for save a book!!!\nSaludos, Jean Piere");//This is for to send a message to Slack
 
         if (isset($request->extraImages)) {
             
