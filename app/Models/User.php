@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -96,5 +97,20 @@ class User extends Authenticatable implements MustVerifyEmail
     public function referrer()
     {
         return $this->belongsTo(Referrer::class);
+    }
+
+    public function adminlte_image()
+    {
+        return 'https://picsum.photos/300/300';
+    }
+
+    public function adminlte_desc()
+    {
+        return Auth::user()->role->name;
+    }
+
+    public function adminlte_profile_url()
+    {
+        return 'profile/username';
     }
 }

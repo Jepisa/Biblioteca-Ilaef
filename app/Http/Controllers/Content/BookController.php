@@ -73,28 +73,31 @@ class BookController extends Controller
             $extension_audioBook = $request->file('audioBook')->extension();
         }
 
+        // dd($validated);
         //Crea Book en BD
         $book = Book::create([
             'title'             => $validated['title'],
             'slug'              => $slugOfBook,
             'synopsis'          => $request['synopsis-original'],
-            'note'              => isset($validated['note']) ? $validated['note'] : null,
-            'year'              => isset($validated['year']) ? $validated['year'] : null,
-            'collection'        => isset($validated['collection']) ? $validated['collection'] : null,
-            'edition'           => isset($validated['edition']) ? $validated['edition'] : null,
+            'note'              => !empty($validated['note']) ? $validated['note'] : null,
+            'year'              => !empty($validated['year']) ? $validated['year'] : null,
+            'collection'        => !empty($validated['collection']) ? $validated['collection'] : null,
+            'edition'           => !empty($validated['edition']) ? $validated['edition'] : null,
             'editorial'         => $validated['editorial'],
             'language_id'       => $validated['language_id'],
-            'city'              => isset($validated['city']) ? $validated['city'] : null,
+            'city'              => !empty($validated['city']) ? $validated['city'] : null,
             'country_id'        => $validated['country_id'],
-            'pages'             => isset($validated['pages']) ? $validated['pages'] : null,
-            'isbn'              => isset($validated['isbn']) ? $validated['isbn'] : null,
+            'pages'             => !empty($validated['pages']) ? $validated['pages'] : null,
+            'isbn'              => !empty($validated['isbn']) ? $validated['isbn'] : null,
             'downloadable'      => isset($pathDownloadable) ? $pathDownloadable : null,
-            'url'               => isset($validated['url']) ? $validated['url'] : null,
+            'url'               => !empty($validated['url']) ? $validated['url'] : null,
             'coverImage'        => isset($pathCoverImage) ? $pathCoverImage : 'public/content/books/default',
             'backCoverImage'    => isset($pathBackCoverImage) ? $pathBackCoverImage : null,
             'audiobook'         => isset($pathAudioBook) ? $pathAudioBook : null,
             'format'            => isset($extension_audioBook) ? $extension_audioBook : null,
         ]);
+
+        if($book) Log::channel('slack')->critical("Problm!\n We have a problem for save a book!!!\nSaludos, Jean Piere");//This is for to send a message to Slack
 
         if (isset($request->extraImages)) {
             
