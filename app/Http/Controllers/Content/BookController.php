@@ -316,13 +316,10 @@ class BookController extends Controller
             if( $book->title != $datesBook['title'] and ($book->audioBook == null or Storage::delete('public/'.$datesBook['audioBook'])) )
             {
                 $datesBook['audioBook'] = $request->file('audioBook')->store($destination_path, $disk);
-                $datesBook['format'] = $request->file('audioBook')->extension();
             }
             elseif($book->audioBook == null or Storage::delete('public/'.$book->audioBook))
             {
-                $datesBook['audioBook'] = $request->file('audioBook')->store($destination_path, $disk);
-                $datesBook['format'] = $request->file('audioBook')->extension();
-                
+                $datesBook['audioBook'] = $request->file('audioBook')->store($destination_path, $disk);                
             }else{
                 Log::error("No se pudo eliminar la anterior Imagen de Contra Tapa");
             }
@@ -335,13 +332,14 @@ class BookController extends Controller
             if( $book->title != $datesBook['title'] and ($book->downloadable == null or Storage::delete('public/'.$datesBook['downloadable'])) )
             {
                 $datesBook['downloadable'] = $request->file('downloadable')->store($destination_path, $disk);
+                $datesBook['format'] = $request->file('downloadable')->extension();
             }
             elseif($book->downloadable == null or Storage::delete('public/'.$book->downloadable))
             {
                 $datesBook['downloadable'] = $request->file('downloadable')->store($destination_path, $disk);
-                
+                $datesBook['format'] = $request->file('downloadable')->extension();
             }else{
-                Log::error("No se pudo eliminar la anterior Imagen de Contra Tapa");
+                Log::error("No se pudo eliminar el downloadable anterior");
             }
         }
 
