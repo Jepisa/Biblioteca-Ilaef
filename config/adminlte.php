@@ -302,6 +302,23 @@ return [
 
             ]
         ],
+        [
+            'text' => 'E-Books',
+            'icon' => 'fas fa-tablet-alt',
+            'submenu' => [
+                [
+                    'text' => 'Index',
+                    'route' => 'ebooks.index',
+                    'icon' => 'fa fa-list',
+                ],
+                [
+                    'text' => 'Create',
+                    'route' => 'ebook.create',
+                    'icon' => 'fa fa-plus-square'
+                ]
+
+            ]
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\Content\BookController;
 use App\Http\Controllers\Content\PodcastController;
+use App\Http\Controllers\Content\EbookController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -45,6 +46,15 @@ Route::post('podcast',[PodcastController::class, 'store'])->name('podcast.store'
 Route::get('podcast/{slug}/edit', [PodcastController::class, 'edit'])->name('podcast.edit');
 Route::put('podcast/{slug}', [PodcastController::class, 'update'])->name('podcast.update');
 Route::delete('podcast/{slug}', [PodcastController::class, 'destroy'])->name('podcast.destroy');
+
+//E-Books
+Route::get('ebooks', [EbookController::class, 'index'])->name('ebooks.index')->middleware('auth');
+Route::get('ebook/create', [EbookController::class, 'create'])->name('ebook.create')->middleware(['auth']);
+Route::get('ebook/{slug}', [EbookController::class, 'show'])->name('ebook.show');
+Route::post('ebook',[EbookController::class, 'store'])->name('ebook.store')->middleware('auth');
+Route::get('ebook/{slug}/edit', [EbookController::class, 'edit'])->name('ebook.edit');
+Route::put('ebook/{slug}', [EbookController::class, 'update'])->name('ebook.update');
+Route::delete('ebook/{slug}', [EbookController::class, 'destroy'])->name('ebook.destroy');
 
 
 
