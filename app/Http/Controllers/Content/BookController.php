@@ -52,6 +52,7 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {   
+
         
         $validated = $request->validated();
 
@@ -67,11 +68,22 @@ class BookController extends Controller
 
         if($request->hasFile('downloadable'))
         {
-             $pathDownloadable = $request->file('downloadable')->store($destination_path, $disk);
-             $extension_downloadable = $request->file('downloadable')->extension();    
+            $pathDownloadable = $request->file('downloadable')->store($destination_path, $disk);
+            if($pathDownloadable) $extension_downloadable = $request->file('downloadable')->extension();    
         }
 
         if($request->hasFile('audioBook')) $pathAudioBook = $request->file('audioBook')->store($destination_path, $disk);
+
+        if( (isset($pathCoverImage) and !$pathCoverImage) or (isset($pathBackCoverImage) and !$pathBackCoverImage) or (isset($pathDownloadable) and !$pathDownloadable) or (isset($pathAudioBook) and !$pathAudioBook) ){
+            
+            Storage::deleteDirectory($disk . '/' . $destination_path);
+            //Notificaciones después de error al guardar achivos en el servidor
+            $titleNotification = __('general.error.notification.saveFiles.title');
+            $notification = __('general.error.notification.saveFiles.body', ['content' => __('general.content.book')]);
+            $request->session()->flash('titleNotification', $titleNotification);
+            $request->session()->flash('notification', $notification);
+            return redirect()->back();
+        }
 
         //Crea Book en BD
         $book = Book::create([
@@ -101,15 +113,22 @@ class BookController extends Controller
         if (isset($request->extraImages)) {
             
             $extraImages = $request->extraImages;
-            
+            $errorImages = 0;
             foreach ($extraImages as $image) 
             {
                 //Guardar las imagenes en el servidor                    
                 $path = $image->store($destination_path, $disk);
 
+                if(!$path){
+                    $errorImages++;
+                    continue;
+                }
                 $book->extraImages()->create([
                     'image' => $path,
                 ]);
+            }
+            if($errorImages > 0){
+                $request->session()->flash('errorExtraImages', __('general.error.notification.saveFiles.errorExtraImages', ['qty' => $errorImages]));
             }
         } 
 
@@ -311,6 +330,21 @@ class BookController extends Controller
             }
         }
 
+        if($request->hasFile('downloadable'))
+        {
+            if( $book->title != $datesBook['title'] and ($book->downloadable == null or Storage::delete('public/'.$datesBook['downloadable'])) )
+            {
+                $datesBook['downloadable'] = $request->file('downloadable')->store($destination_path, $disk);
+            }
+            elseif($book->downloadable == null or Storage::delete('public/'.$book->downloadable))
+            {
+                $datesBook['downloadable'] = $request->file('downloadable')->store($destination_path, $disk);
+            }else{
+                Log::error("No se pudo eliminar el downloadable anterior");
+            }
+            if($datesBook['downloadable']) $datesBook['format'] = $request->file('downloadable')->extension();
+        }
+
         if($request->hasFile('audioBook'))
         {
             if( $book->title != $datesBook['title'] and ($book->audioBook == null or Storage::delete('public/'.$datesBook['audioBook'])) )
@@ -321,29 +355,23 @@ class BookController extends Controller
             {
                 $datesBook['audioBook'] = $request->file('audioBook')->store($destination_path, $disk);                
             }else{
-                Log::error("No se pudo eliminar la anterior Imagen de Contra Tapa");
+                Log::error("No se pudo eliminar el anterior audiobook");
             }
 
-            $datesBook['format'] = $request->file('audioBook')->extension();
-        }
-
-        if($request->hasFile('downloadable'))
-        {
-            if( $book->title != $datesBook['title'] and ($book->downloadable == null or Storage::delete('public/'.$datesBook['downloadable'])) )
-            {
-                $datesBook['downloadable'] = $request->file('downloadable')->store($destination_path, $disk);
-                $datesBook['format'] = $request->file('downloadable')->extension();
-            }
-            elseif($book->downloadable == null or Storage::delete('public/'.$book->downloadable))
-            {
-                $datesBook['downloadable'] = $request->file('downloadable')->store($destination_path, $disk);
-                $datesBook['format'] = $request->file('downloadable')->extension();
-            }else{
-                Log::error("No se pudo eliminar el downloadable anterior");
-            }
         }
 
         
+
+        if( (isset($datesBook['coverImage']) and !$datesBook['coverImage']) or (isset($$datesBook['backCoverImage']) and !$$datesBook['backCoverImage']) or (isset($datesBook['downloadable']) and !$datesBook['downloadable']) or (isset($datesBook['audioBook']) and !$datesBook['audioBook']) ){
+            
+            Storage::deleteDirectory($disk . '/' . $destination_path);
+            //Notificaciones después de error al guardar achivos en el servidor
+            $titleNotification = __('general.error.notification.saveFiles.title');
+            $notification = __('general.error.notification.saveFiles.body', ['content' => __('general.content.book')]);
+            $request->session()->flash('titleNotification', $titleNotification);
+            $request->session()->flash('notification', $notification);
+            return redirect()->back();
+        }
         
         $book->update($datesBook);
 
@@ -353,7 +381,7 @@ class BookController extends Controller
                 Storage::delete('public/'.$previousImage->image);
             }
             $book->extraImages()->delete();
-            
+            $errorImages = 0;
             $extraImages = $request->extraImages;
             
             foreach ($extraImages as $image) 
@@ -362,9 +390,18 @@ class BookController extends Controller
                     
                     $path = $image->store($destination_path, $disk);
 
+                    if(!$path){
+                        $errorImages++;
+                        continue;
+                    }
+                    
                     $book->extraImages()->create([
                         'image' => $path,
                     ]);
+            }
+
+            if($errorImages > 0){
+                $request->session()->flash('errorExtraImages', __('general.error.notification.saveFiles.errorExtraImages', ['qty' => $errorImages]));
             }
         }
 

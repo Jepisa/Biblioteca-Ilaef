@@ -78,6 +78,7 @@ class UpdateBookRequest extends FormRequest
             'existAuthors.*' => 'integer|distinct|exists:authors,id',
             'topics' => 'required|array|min:1',
             'newTopics.*' => 'nullable|string|distinct|unique:topics,name',
+            'existTopics.*' => 'integer|distinct|exists:topics,id',
             'synopsis' => 'max:1200',
             'note' => 'nullable|string|max:600',
             'year' => 'nullable|integer|min:1000|max:3000',

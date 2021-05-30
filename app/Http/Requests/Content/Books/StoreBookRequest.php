@@ -94,8 +94,8 @@ class StoreBookRequest extends FormRequest
             'url' => 'nullable|url',
             'coverImage' => 'required|file|mimes:jpg,png,jpeg', //|dimensions:min_width=600,min_height=800,max_width=1800,max_height=2300',
             'extraimages' => 'array',
-            'extraimages.*' => 'file|mimes:jpg,png,jpeg|between:40,3000',
-            'backCoverImage' => 'file|mimes:jpg,png,jpeg|between:40,4000',
+            'extraimages.*' => 'file|mimes:jpg,png,jpeg',
+            'backCoverImage' => 'file|mimes:jpg,png,jpeg',
             'audioBook' => 'nullable|file|mimes:mp3,wma,aac',
         ];
     }
@@ -131,7 +131,7 @@ class StoreBookRequest extends FormRequest
             'extraimages' => 'Imagenes extras',
             'backCoverImage' => 'Imagen de contratapa',
             'audioBook' => 'Audio Libro',
-            'format' => 'Formato del Audio Libro',
+            'format' => 'Formato del descargable',
         ];
     }
 }
