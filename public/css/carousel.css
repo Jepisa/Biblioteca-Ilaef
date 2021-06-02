@@ -81,7 +81,7 @@
 
 .carousel-of-advertisement .image img{
     object-fit: cover;
-    min-height: 150px;
+    /* min-height: 150px; */
 }
 
 @media (max-width:1024px){
