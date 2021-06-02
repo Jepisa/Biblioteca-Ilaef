@@ -15,7 +15,7 @@
             <span class="text-lg font-bold pb-4">
                 {{ Session()->get('titleNotification') }}
             </span>
-            <p class="leading-tight">
+            <p id="message-notification" class="leading-tight">
                 {{ Session()->get('notification') }}
             </p>
         </div>
@@ -23,8 +23,8 @@
 
     <script>
         window.addEventListener('DOMContentLoaded', (event) => {
-            var notification = document.querySelector('#notification');
-
+            let notification = document.querySelector('#notification');
+            let lengt = document.querySelector('#message-notification').innerText.length;
             if (notification) {
 
                 notification.style.display = "flex";
@@ -39,7 +39,7 @@
 
                 setTimeout(() => {
                     sacarLaNotificacion();
-                }, 5000);
+                }, ((lengt/200) * 1000 * 60 + 2000));
 
                 notification.addEventListener('click', (event) => {
                     sacarLaNotificacion();
