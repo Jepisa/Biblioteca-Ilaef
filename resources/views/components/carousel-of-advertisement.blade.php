@@ -2,13 +2,18 @@
     <div class="carousel-of-advertisement" style="position: relative;">
         <div class="glide__track" data-glide-el="track">
         <ul id="imagenes-carousel" class="glide__slides">
-            @for ($i = 0; $i < 2; $i++)             
+            {{-- @for ($i = 0; $i < 2; $i++)              --}}
                 <li class="glide__slide">
                     <div class="image">
-                        <img src="{{ asset('img/advertisement/'.$i.'.png') }}" alt="{{ $i }}">
+                        <img src="{{ asset('img/advertisement/'.'Banner-Biblioteca Empresa Familiar-01.jpg') }}" alt="{{ 'Banner Biblioteca Empresa Familiar' }}">
                     </div>
                 </li>
-            @endfor
+            {{-- @endfor --}}
+                <li class="glide__slide">
+                    <div class="image">
+                        <img src="{{ asset('img/advertisement/'.'Banner-Biblioteca Empresa Familiar-02.jpg') }}" alt="{{ 'Banner Biblioteca Empresa Familiar' }}">
+                    </div>
+                </li>
         </ul>
         </div>
         <div class="glide__arrows" data-glide-el="controls">
