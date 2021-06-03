@@ -43,23 +43,24 @@ class StoreEbookRequest extends FormRequest
 
         //Esto es solo un ejemplo, pero no funca
         $this->merge([
-            'synopsis-original' => trim($this->synopsis),
+            'synopsis-original' => is_null($this->synopsis) ? $this->synopsis : trim($this->synopsis),
             'synopsis'          => str_replace ("\r\n"," ",$this->synopsis),
             'existAuthors'      => $existAuthors,
             'newAuthors'        => $newAuthors,
             'existTopics'       => $existTopics,
             'newTopics'         => $newTopics,
 
-            'title'             => trim($this->title),
-            'note'              => trim($this->note),
-            'year'              => trim($this->year),
-            'collection'        => trim($this->collection),
-            'edition'           => trim($this->edition),
-            'editorial'         => trim($this->editorial),
-            'city'              => trim($this->city),
-            'pages'             => trim($this->pages),
-            'isbn'              => trim($this->isbn),
-            'url'               => trim($this->url),
+
+            'title'             => is_null($this->title) ? $this->title : trim($this->title),
+            'note'              => is_null($this->note) ? $this->note : trim($this->note),
+            'year'              => is_null($this->year) ? $this->year : trim($this->year),
+            'collection'        => is_null($this->collection) ? $this->collection : trim($this->collection),
+            'edition'           => is_null($this->edition) ? $this->edition : trim($this->edition),
+            'editorial'         => is_null($this->editorial) ? $this->editorial : trim($this->editorial),
+            'city'              => is_null($this->city) ? $this->city : trim($this->city),
+            'pages'             => is_null($this->pages) ? $this->pages : trim($this->pages),
+            'isbn'              => is_null($this->isbn) ? $this->isbn : trim($this->isbn),
+            'url'               => is_null($this->url) ? $this->url : trim($this->url),
         ]);
     }
 
@@ -92,7 +93,7 @@ class StoreEbookRequest extends FormRequest
             'isbn' => 'nullable|string|max:255|unique:ebooks,isbn',
             'downloadable' => 'file|mimes:epub,mobi,azw3,bbeb',
             'url' => 'nullable|url',
-            'coverImage' => 'required|file|mimes:jpg,png,jpeg', //|dimensions:min_width=600,min_height=800,max_width=1800,max_height=2300',
+            'coverImage' => 'required|file|mimes:jpg,png,jpeg',
             'extraimages' => 'array',
             'extraimages.*' => 'file|mimes:jpg,png,jpeg',
             'backCoverImage' => 'file|mimes:jpg,png,jpeg',
@@ -102,8 +103,8 @@ class StoreEbookRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'A title is required',
-            'country_id.required' => 'El :attribute es requerido',
+            'title.required' => 'El titulo es requerido',
+            'country_id.required' => 'El país es requerido',
         ];
     }
 

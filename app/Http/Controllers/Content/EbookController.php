@@ -100,7 +100,7 @@ class EbookController extends Controller
             'isbn'              => !empty($validated['isbn']) ? $validated['isbn'] : null,
             'downloadable'      => isset($pathDownloadable) ? $pathDownloadable : null,
             'url'               => !empty($validated['url']) ? $validated['url'] : null,
-            'coverImage'        => isset($pathCoverImage) ? $pathCoverImage : 'public/content/ebooks/default',
+            'coverImage'        => isset($pathCoverImage) ? $pathCoverImage : 'content/ebooks/default',
             'backCoverImage'    => isset($pathBackCoverImage) ? $pathBackCoverImage : null,
             'format'            => isset($extension_downloadable) ? $extension_downloadable : null,
         ]);

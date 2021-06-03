@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Advertisement;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreAdvertisement extends FormRequest
@@ -31,7 +32,7 @@ class StoreAdvertisement extends FormRequest
             'launching' => 'required|date|after:yesterday',
             'expiration' => 'required|date|after_or_equal:today',
             'position' => 'nullable|integer|min:1', //Cambiar el mensaje de error de position cuando manda el form vacio 
-            'status' => 'required|boolean',
+            'status' => [ Rule::in([null, 'true']),],
         ];
     }
 }
