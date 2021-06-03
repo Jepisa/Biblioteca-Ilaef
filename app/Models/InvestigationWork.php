@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ebook extends Model
+class InvestigationWork extends Model
 {
     use HasFactory;
-    protected $table = 'ebooks';
+    protected $table = 'investigation_works';
     protected $guarded = ['id'];
 
     public function authors()

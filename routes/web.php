@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\Content\BookController;
 use App\Http\Controllers\Content\PodcastController;
 use App\Http\Controllers\Content\EbookController;
+use App\Http\Controllers\Content\InvestigationWorkController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -55,6 +56,15 @@ Route::post('ebook',[EbookController::class, 'store'])->name('ebook.store')->mid
 Route::get('ebook/{slug}/edit', [EbookController::class, 'edit'])->name('ebook.edit');
 Route::put('ebook/{slug}', [EbookController::class, 'update'])->name('ebook.update');
 Route::delete('ebook/{slug}', [EbookController::class, 'destroy'])->name('ebook.destroy');
+
+//Investigation Work
+Route::get('investigation-works', [InvestigationWorkController::class, 'index'])->name('investigationworks.index')->middleware('auth');
+Route::get('investigation-work/create', [InvestigationWorkController::class, 'create'])->name('investigationwork.create')->middleware(['auth']);
+Route::get('investigation-work/{slug}', [InvestigationWorkController::class, 'show'])->name('investigationwork.show');
+Route::post('investigation-work',[InvestigationWorkController::class, 'store'])->name('investigationwork.store')->middleware('auth');
+Route::get('investigation-work/{slug}/edit', [InvestigationWorkController::class, 'edit'])->name('investigationwork.edit');
+Route::put('investigation-work/{slug}', [InvestigationWorkController::class, 'update'])->name('investigationwork.update');
+Route::delete('investigation-work/{slug}', [InvestigationWorkController::class, 'destroy'])->name('investigationwork.destroy');
 
 
 

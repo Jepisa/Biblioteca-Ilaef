@@ -16,7 +16,8 @@ return [
     ],
     'content' => [
         'book' => 'Libro',
-        'ebook' => 'E-Book'
+        'ebook' => 'E-Book',
+        'investigationwork' => 'Trabajo de Investigación'
 
     ]
 

@@ -319,6 +319,23 @@ return [
 
             ]
         ],
+        [
+            'text' => 'Investigation Works',
+            'icon' => 'fas fa-book',
+            'submenu' => [
+                [
+                    'text' => 'Index',
+                    'route' => 'investigationworks.index',
+                    'icon' => 'fa fa-list',
+                ],
+                [
+                    'text' => 'Create',
+                    'route' => 'investigationwork.create',
+                    'icon' => 'fa fa-plus-square'
+                ]
+
+            ]
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

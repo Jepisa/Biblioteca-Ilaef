@@ -149,7 +149,7 @@ class EbookController extends Controller
             $ebook->authors()->syncWithoutDetaching($newAuthors);
         }
 
-        if (!empty($newAuthorsvalidated['newTopics'])) {
+        if (!empty($validated['newTopics'])) {
             $newTopics = [];
 
             foreach ($validated['newTopics'] as $newTopic) {
