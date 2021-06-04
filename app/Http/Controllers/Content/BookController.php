@@ -102,7 +102,7 @@ class BookController extends Controller
             'isbn'              => !empty($validated['isbn']) ? $validated['isbn'] : null,
             'downloadable'      => isset($pathDownloadable) ? $pathDownloadable : null,
             'url'               => !empty($validated['url']) ? $validated['url'] : null,
-            'coverImage'        => isset($pathCoverImage) ? $pathCoverImage : 'public/content/books/default',
+            'coverImage'        => isset($pathCoverImage) ? $pathCoverImage : 'content/books/default.jpg',
             'backCoverImage'    => isset($pathBackCoverImage) ? $pathBackCoverImage : null,
             'audiobook'         => isset($pathAudioBook) ? $pathAudioBook : null,
             'format'            => isset($extension_downloadable) ? $extension_downloadable : null,
@@ -149,7 +149,7 @@ class BookController extends Controller
             $book->authors()->syncWithoutDetaching($newAuthors);
         }
 
-        if (!empty($newAuthorsvalidated['newTopics'])) {
+        if (!empty($validated['newTopics'])) {
             $newTopics = [];
 
             foreach ($validated['newTopics'] as $newTopic) {
@@ -362,7 +362,7 @@ class BookController extends Controller
 
         
 
-        if( (isset($datesBook['coverImage']) and !$datesBook['coverImage']) or (isset($$datesBook['backCoverImage']) and !$$datesBook['backCoverImage']) or (isset($datesBook['downloadable']) and !$datesBook['downloadable']) or (isset($datesBook['audioBook']) and !$datesBook['audioBook']) ){
+        if( (isset($datesBook['coverImage']) and !$datesBook['coverImage']) or (isset($datesBook['backCoverImage']) and !$datesBook['backCoverImage']) or (isset($datesBook['downloadable']) and !$datesBook['downloadable']) or (isset($datesBook['audioBook']) and !$datesBook['audioBook']) ){
             
             Storage::deleteDirectory($disk . '/' . $destination_path);
             //Notificaciones después de error al guardar achivos en el servidor

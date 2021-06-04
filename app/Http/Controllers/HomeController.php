@@ -14,11 +14,11 @@ class HomeController extends Controller
 {
     function __invoke()
     {
-        // $advertisements = Advertisement::displayable();
+        $advertisements = Advertisement::displayable();
         // $recommended = Recommended::all();
         $relevant = Counter::mostRelevants(20);
         $recent = Recent::recents(20);
         
-        return view('welcome', compact('relevant', 'recent'));
+        return view('welcome', compact('relevant', 'recent', 'advertisements'));
     }
 }

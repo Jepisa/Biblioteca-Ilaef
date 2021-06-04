@@ -225,14 +225,30 @@ return [
     */
 
     'menu' => [
+        //Notifications
+        // [
+        //     'type'         => 'navbar-notification',
+        //     'id'           => 'my-notification',
+        //     'icon'         => 'fas fa-bell',
+        //     'url'          => 'notifications/show',
+        //     'topnav_right' => true,
+        //     'dropdown_mode'   => true,
+        //     'dropdown_flabel' => 'All notifications',
+        //     'update_cfg'   => [
+        //         'url' => 'admin/notifications/get',
+        //         'period' => 30,
+        //     ],
+        // ],
+        
         // Navbar items:
-        [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
-            'url'  => 'ur-buscador',
-            'method' => 'post',
-        ],
+
+        // [
+        //     'type'         => 'navbar-search',
+        //     'text'         => 'search',
+        //     'topnav_right' => true,
+        //     'url'  => 'admin/navbar/search',
+        //     'method' => 'post',
+        // ],
         [
             'text' => 'Link 1',
             'route' => 'books.index',
@@ -244,10 +260,11 @@ return [
         ],
 
         // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
+        // [
+        //     'type' => 'sidebar-menu-search',
+        //     'text' => 'search',
+        //     'id'   => 'sidebarMenuSearch'
+        // ],
         [
             'text' => 'Home',
             'route' => 'home',
@@ -264,8 +281,26 @@ return [
             'text'        => 'pages',
             'url'         => 'admin/pages',
             'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
+            'label'       => rand(0, 20),
             'label_color' => 'success',
+        ],
+        // ['header' => 'Advertisement'],
+        [
+            'text' => 'Advertisements',
+            'icon'    => 'fas fa-book',
+            
+            'submenu' => [
+                [
+                    'text' => 'Index',
+                    'route' => 'advertisements.index',
+                    'icon' => 'fa fa-list',
+                ],
+                [
+                    'text' => 'Create',
+                    'route' => 'advertisement.create',
+                    'icon' => 'fa fa-plus-square'
+                ]
+            ]
         ],
         ['header' => 'CONTENTS'],
         [
