@@ -34,12 +34,9 @@ const configCarousel =
     }
 };
   
-if(document.getElementsByClassName('nuestros-recomendados').length > 0)
-    new Glide('.nuestros-recomendados', configCarousel).mount();
-if(document.getElementsByClassName('los-mas-buscados').length > 0)
-    new Glide('.los-mas-buscados', configCarousel).mount();
-if(document.getElementsByClassName('los-ultimos-cargados').length > 0)
-    new Glide('.los-ultimos-cargados', configCarousel).mount();
+if(document.getElementsByClassName('nuestros-recomendados').length > 0) new Glide('.nuestros-recomendados', configCarousel).mount();
+if(document.getElementsByClassName('los-mas-buscados').length > 0)      new Glide('.los-mas-buscados', configCarousel).mount();
+if(document.getElementsByClassName('los-ultimos-cargados').length > 0)  new Glide('.los-ultimos-cargados', configCarousel).mount();
     
 document.addEventListener("DOMContentLoaded", function(event) 
 {
