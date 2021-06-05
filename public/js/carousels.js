@@ -22,15 +22,27 @@ const configCarousel =
         1024: 
         {
             perView: 6.76
-            },
+        },
+        834:
+        {
+            perView: 5.5
+        },
+        800:
+        {
+            perView: 5.25
+        },
         768: 
         {
-            perView: 4
+            perView: 5
         },
-        480: 
+        650: 
         {
             perView: 3.5
         },
+        428:
+        {
+            perView: 3.25
+        }
     }
 };
   
