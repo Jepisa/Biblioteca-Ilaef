@@ -13,6 +13,7 @@
                 <p>{{ __('ebooks.show.fields.language').': '.$ebook->lenguage }}</p>
                 <p>{{ __('ebooks.show.fields.city').': '.$ebook->city }}</p>
                 <p>{{ __('ebooks.show.fields.url').': '.$ebook->url }}</p>
+                <p>{{ __('ebooks.show.fields.compatibility').': '.$ebook->compatibility }}</p>
                 <p>{{ __('ebooks.show.fields.pages').': '.$ebook->pages }}</p>
             </div>
         </div>

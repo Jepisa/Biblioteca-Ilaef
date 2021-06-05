@@ -36,6 +36,7 @@ class CreateEbooksTable extends Migration
             $table->string('backCoverImage')->nullable();
 
             $table->string('format')->nullable();
+            $table->string('compatibility');
             $table->timestamps();
         });
     }

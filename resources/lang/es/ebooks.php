@@ -95,6 +95,11 @@ return [
                 'placeholder' => '',
                 'description' => '',
             ],
+            // 'compatibility' => [
+            //     'label' => 'Compatibilidad',
+            //     'placeholder' => '',
+            //     'description' => '',
+            // ],
             'downloadable' => [
                 'label' => 'Archivo descargable',
                 'placeholder' => '',
@@ -143,6 +148,7 @@ return [
             'pages' => 'Páginas',
             'isbn' => 'ISBN',
             'url' => 'URL',
+            'compatibility' => 'Compatibilidad',
             'downloadable' => 'Archivo descargable',
             'cover' => 'Imagen de tapa',
             'backcover' => 'Imagen de contratapa',
@@ -229,6 +235,11 @@ return [
                 'placeholder' => '',
                 'description' => '',
             ],
+            // 'compatibility' => [
+            //     'label' => 'Compatibilidad',
+            //     'placeholder' => '',
+            //     'description' => '',
+            // ],
             'downloadable' => [
                 'label' => 'Archivo descargable',
                 'placeholder' => '',

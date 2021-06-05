@@ -59,6 +59,7 @@ class UpdateEbookRequest extends FormRequest
             'pages'             => is_null($this->pages) ? $this->pages : trim($this->pages),
             'isbn'              => is_null($this->isbn) ? $this->isbn : trim($this->isbn),
             'url'               => is_null($this->url) ? $this->url : trim($this->url),
+            // 'compatibility'     => is_null($this->compatibility) ? $this->compatibility : trim($this->compatibility),
         ]);
     }
 
@@ -96,6 +97,7 @@ class UpdateEbookRequest extends FormRequest
             'extraimages' => 'array',
             'extraimages.*' => 'file|mimes:jpg,png,jpeg',
             'backCoverImage' => 'file|mimes:jpg,png,jpeg',
+            // 'compatibility' => 'required|string|max:255',
         ];
     }
 }

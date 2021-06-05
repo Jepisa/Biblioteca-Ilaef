@@ -103,6 +103,7 @@ class EbookController extends Controller
             'coverImage'        => isset($pathCoverImage) ? $pathCoverImage : 'content/ebooks/default',
             'backCoverImage'    => isset($pathBackCoverImage) ? $pathBackCoverImage : null,
             'format'            => isset($extension_downloadable) ? $extension_downloadable : null,
+            'compatibility'     => 'Windows | Mac | IOS | Android | Reeders', // $validated['compatibility']
         ]);
 
         // if(!$ebook) Log::channel('slack')->critical("Problm!\n We have a problem for save a ebook!!!\nSaludos, Jean Piere");//This is for to send a message to Slack

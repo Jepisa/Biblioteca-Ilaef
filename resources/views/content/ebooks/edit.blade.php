@@ -260,6 +260,13 @@
                                 </label>
                                 <input name="url" id="url" type="url" value="{{ old('url') ? old('url') : $ebook->url }}">
                             </div>
+                            {{-- Compatibilidad --}}
+                            {{-- <div class="mb-2">
+                                <label class="block mb-1 text-sm font-bold text-gray-700" for="compatibility">
+                                    {{ __('ebooks.edit.fields.compatibility.label') }}
+                                </label>
+                                <input name="compatibility" id="compatibility" type="text" value="{{ old('compatibility') ? old('compatibility') : $ebook->compatibility }}" max="255" required>
+                            </div> --}}
                             {{-- Archivo descargable, Imagen de Tapa, Imagen de Contratapa, Imagenes extras --}}
                             <div class="archivos w-10/12">
                                 <div class="mb-4 md:flex md:justify-between">

@@ -61,6 +61,7 @@ class StoreEbookRequest extends FormRequest
             'pages'             => is_null($this->pages) ? $this->pages : trim($this->pages),
             'isbn'              => is_null($this->isbn) ? $this->isbn : trim($this->isbn),
             'url'               => is_null($this->url) ? $this->url : trim($this->url),
+            // 'compatibility'     => is_null($this->compatibility) ? $this->compatibility : trim($this->compatibility),
         ]);
     }
 
@@ -97,6 +98,7 @@ class StoreEbookRequest extends FormRequest
             'extraimages' => 'array',
             'extraimages.*' => 'file|mimes:jpg,png,jpeg',
             'backCoverImage' => 'file|mimes:jpg,png,jpeg',
+            // 'compatibility' => 'required|string|max:255',
         ];
     }
 
@@ -105,6 +107,7 @@ class StoreEbookRequest extends FormRequest
         return [
             'title.required' => 'El titulo es requerido',
             'country_id.required' => 'El país es requerido',
+            // 'compatibility.required' => 'La compatibilidad es requerida',
         ];
     }
 
@@ -131,6 +134,7 @@ class StoreEbookRequest extends FormRequest
             'extraimages' => 'Imagenes extras',
             'backCoverImage' => 'Imagen de contratapa',
             'format' => 'Formato del Archivo descargable',
+            // 'compatibility' => 'Compatibilidad',
         ];
     }
 }
