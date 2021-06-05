@@ -6,6 +6,7 @@ use App\Http\Requests\Advertisement\StoreAdvertisement;
 use App\Models\Advertisement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class AdvertisementController extends Controller
 {
@@ -17,7 +18,7 @@ class AdvertisementController extends Controller
     public function index()
     {
         // $advertisements = Advertisement::all()->sortBy('position');
-        $advertisements = Advertisement::where('position', '>=', 1)->orderBy('position', 'asc')->get();
+        $advertisements = Advertisement::orderBy('position', 'asc')->paginate(10);
         return view('advertisement.index', compact('advertisements'));
     }
 
@@ -39,17 +40,22 @@ class AdvertisementController extends Controller
      */
     public function store(StoreAdvertisement $request)
     {
+        //Agunas cosas necesarias
+            // $code = Str::random(8);
+            // $slugOfPodcast = Str::slug($validated['title']).'-'.$code;
+            // $destination_path = 'content/podcasts/'.$slugOfPodcast;
+            // $disk = 'public';
+
+
+            $destination_path = 'Advertisement/'.$request->owner.'/'.$request->name;
+            $disk = 'public';
+            
+        //
         // $validated = $request->validated();
 
         if($request->hasFile('image'))
         {
-            $destination_path = 'Advertisement/'.$request->owner.'/'.$request->name;
-            $image = $request->file('image');
-            $image_name = $image->getClientOriginalName();
-            $extension = $request->file('')->extension();
-            $new_image_name = $image_name.$extension;
-            
-            $pathImage = $request->file('image')->storeAs($destination_path, $new_image_name, 'public');
+            $pathImage = $request->file('image')->store($destination_path, $disk);   
         }
         $newAdvertisement = new Advertisement;
             $newAdvertisement->name = $request->name;
@@ -58,7 +64,8 @@ class AdvertisementController extends Controller
             $newAdvertisement->url = $request->url;
             $newAdvertisement->launching = $request->launching;
             $newAdvertisement->expiration = $request->expiration;
-            $newAdvertisement->status = $request->status;
+            $newAdvertisement->information = $request->information;
+            $newAdvertisement->status = $request->status == 'true' ? true : false;
 
             if ( isset($request->position) ) {
                 $advertisements = Advertisement::where('position', '>=', $request->position)->get();
@@ -102,9 +109,9 @@ class AdvertisementController extends Controller
      * @param  \App\Models\Advertisement  $advertisement
      * @return \Illuminate\Http\Response
      */
-    public function edit($name)
+    public function edit($advertisementId)
     {
-        $advertisement = Advertisement::where('name', '=', $name)->firstOrFail();
+        $advertisement = Advertisement::where('id', '=', $advertisementId)->firstOrFail();
         return view('advertisement.edit', compact('advertisement'));
     }
 
@@ -112,13 +119,15 @@ class AdvertisementController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Advertisement  $advertisement
+     * @param  \App\Models\Advertisement  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Advertisement $advertisement)
+    public function update(Request $request, $id)
     {
+        $advertisement = Advertisement::findOrFail($id);
+
         $request->validate([
-            'name' => 'required|string|unique:advertisements|max:255',// Este tirará la validacion porque no se está exceptuando a sí mismo ¡ARREGLAR!
+            'name' => ['required','string','max:255',Rule::unique('advertisements')->ignore($advertisement->id), 'required'],// Este tirará la validacion porque no se está exceptuando a sí mismo ¡ARREGLAR!
             'owner' => 'required|string|max:255',
             'image' => 'file|mimes:jpg,png,jpeg',//Preguntar a Valeria las dimensiones // |dimensions:min_width=600,min_height=800,max_width=1800,max_height=2300
             'url' => 'nullable|url',
@@ -130,19 +139,19 @@ class AdvertisementController extends Controller
 
         $cambios = 0;
 
-        $newAdvertisement = Advertisement::where('name', '=', $request->name)->firstOrFail();
-            ($newAdvertisement->name === $request->name) ? $newAdvertisement->name = $request->name : $cambios++;
-            ($newAdvertisement->owner === $request->owner) ? $newAdvertisement->owner = $request->owner : $cambios++;
+        $advertisement = Advertisement::where('name', '=', $request->name)->firstOrFail();
+            ($advertisement->name === $request->name) ? $advertisement->name = $request->name : $cambios++;
+            ($advertisement->owner === $request->owner) ? $advertisement->owner = $request->owner : $cambios++;
 
         if($request->hasFile('image'))
         {
-            Storage::delete($newAdvertisement->image);
+            Storage::delete($advertisement->image);
             $destination_path = 'Advertisement/'.$request->owner.'/'.$request->name;
             $image = $request->file('image');
             $image_name = $image->getClientOriginalName();
             $pathImage = $request->file('image')->storeAs($destination_path, $image_name, 'public');
 
-            $newAdvertisement->image = $pathImage;
+            $advertisement->image = $pathImage;
 
             //Se supone que si entro el admin mando una imagen y lo tomo como un cambio
             $cambios++;
@@ -150,22 +159,24 @@ class AdvertisementController extends Controller
 
         
             
-            ($newAdvertisement->url === $request->url) ? $newAdvertisement->url = $request->url : $cambios++;
-            ($newAdvertisement->launching === $request->launching) ? $newAdvertisement->launching = $request->launching : $cambios++;
-            ($newAdvertisement->expiration === $request->expiration) ? $newAdvertisement->expiration = $request->expiration : $cambios++;
-            ($newAdvertisement->status === $request->status) ? $newAdvertisement->status = $request->status : $cambios++;
+            ($advertisement->url === $request->url) ? $advertisement->url = $request->url : $cambios++;
+            ($advertisement->launching === $request->launching) ? $advertisement->launching = $request->launching : $cambios++;
+            ($advertisement->expiration === $request->expiration) ? $advertisement->expiration = $request->expiration : $cambios++;
+            ($advertisement->status === $request->status) ? $advertisement->status = $request->status : $cambios++;
+            ($advertisement->information === $request->information) ? $advertisement->information = $request->information : $cambios++;
 
-            if ( $request->position != $newAdvertisement->position ) {
+            if ( $request->position != $advertisement->position ) {
                 $advertisements = Advertisement::where('position', '>=', $request->position)->orderBy('position', 'asc')->get();
                 foreach ($advertisements as $advertisement) {
                     $advertisement->position++;
                     $advertisement->saveQuietly();
                 }
-                ($newAdvertisement->position === $request->position) ? $newAdvertisement->position = $request->position : $cambios++;
+                ($advertisement->position === $request->position) ? $advertisement->position = $request->position : $cambios++;
             }
             
-        ($cambios > 0) ? $newAdvertisement->save() : $notification = 'No hubo ningun cambio';
+        ($cambios > 0) ? $advertisement->save() : $notification = 'No hubo ningun cambio';
 
+        
         return redirect()->route('advertisement.index');
     }
 
@@ -175,10 +186,12 @@ class AdvertisementController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function destroy($name)
+    public function destroy($id)
     {
-        $advertisement = Advertisement::where('name', '=', $name)->firstOrFail();
-        Storage::delete([$advertisement->image]);
+        $advertisement = Advertisement::where('id', '=', $id)->firstOrFail();
+        $disk = 'public/';
+        Storage::delete([$disk . $advertisement->image]);
+        Storage::deleteDirectory($disk . 'Advertisement/' . $advertisement->owner . '/' . $advertisement->name);
         $advertisement->delete();
         return redirect()->back();
     }
