@@ -11,6 +11,8 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.dotdotdot/4.1.0/dotdotdot.js" integrity="sha512-y3NiupaD6wK/lVGW0sAoDJ0IR2f3+BWegGT20zcCVB+uPbJOsNO2PVi09pCXEiAj4rMZlEJpCGu6oDz0PvXxeg==" crossorigin="anonymous"></script>
   </x-slot>
 
+  <x-banner/>
+
   {{-- @if ($advertisements->count() > 0)
     <x-carousel-of-advertisement :advertisements="$advertisements"/>
   @endif --}}

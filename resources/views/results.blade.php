@@ -7,8 +7,6 @@
     
   </x-slot>
 
-<x-banner/>
-
 <x-description/>
 
 </x-app-layout>

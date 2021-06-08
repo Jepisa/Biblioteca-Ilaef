@@ -91,6 +91,7 @@ svg {
     border-radius: 10px;
     border: 1px solid #97AFAC;
     opacity: 1;
+    padding: 2.5px;
 }
 
 .garrow svg {
