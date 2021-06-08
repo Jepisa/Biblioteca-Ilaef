@@ -8,42 +8,48 @@
     margin: 19px auto;
     min-height: 200px;
 }
-    .title-of-carousel{
-        width: max-content;
-        border: 1px solid #D5E5E3;
-        border-radius: 5px;
-        box-shadow: 0px 3px 6px #00000080;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 9px 16px;
-        margin-left: 28px;
-    }
 
-    .glide ul.glide__slides{
-        position:relative;
-        padding-top: 13px;
-        margin: 0px;
-    }
-    .div-slide{
-        width: 100%;
-    }
-        
-        .div-slide .image{
-            width: 100%;
-            margin-bottom: 16px;
-        }
-        .div-slide .title-of-content{
-            height: 50px;
-            width: 100%;
-        }
-        .div-slide .title-of-content p{
-            width: 100%;
-            overflow: hidden;
-            font-size: 14px;
-        }
-        
+.title-of-carousel{
+    width: max-content;
+    border: 1px solid #D5E5E3;
+    border-radius: 5px;
+    box-shadow: 0px 3px 6px #00000080;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 16px;
+    margin-left: 4.5%;
+    margin-top: 6%;
+}
+
+.glide ul.glide__slides{
+    position:relative;
+    padding-top: 13px;
+    margin: 0px;
+}
+
+
+.div-slide{
+    width: 100%;
+}
+    
+.div-slide .image{
+    width: 6.4em;
+    margin-bottom: 16px;
+}
+
+.div-slide .title-of-content{
+    height: 50px;
+    width: 100%;
+}
+
+.div-slide .title-of-content p{
+    width: 100%;
+    overflow: hidden;
+    font-size: 14px;
+}
+    
 
 
 .glide .glide__slide img{
@@ -78,8 +84,8 @@
 
 
 .imagen-carousel{
-    width: auto;
-    height: 175px;
+    width: 151px;
+    height: 200px;
 }
 
 .carousel-of-advertisement .image img{
@@ -92,6 +98,9 @@ select {
     color: white;
     border-radius: 5px;
     border-color: white;
+    height: 2em;
+    padding: unset;
+    max-width: 4em;
 }
 
 @media (max-width:1024px){
@@ -130,7 +139,7 @@ select {
 
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1440px) {
 
     .glide__slide {
         width: 100px !important;

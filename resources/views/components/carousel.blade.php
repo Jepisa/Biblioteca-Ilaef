@@ -9,13 +9,13 @@
                 <li class="glide__slide">
                     <div class="div-slide">
                         <div class="image bg-gray-100">
-                            <img id="" class="imagen-carousel " src="{{ asset('storage/'.$content->coverImage) }}"<!--alt="{{ $content->title }}"-->
+                            <img id="" class="imagen-carousel " src="{{ asset('img/content/0.jpg') }}"><!--alt="{{ $content->title }}"-->
                         </div>
                         <div class="title-of-content">
                             <p title="{{ $content->title }}">{{ $content->title }}</p>
                         </div>
                     </div>
-                </li>
+                </li> 
             @endforeach
         </ul>
         </div>
