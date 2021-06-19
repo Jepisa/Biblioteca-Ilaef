@@ -75,3 +75,6 @@ Route::get('author/{name}/edit', [AuthorController::class, 'edit'])->name('autho
 Route::put('author{name}', [AuthorController::class, 'update'])->name('author.update');
 Route::delete('author{name}', [AuthorController::class, 'destroy'])->name('author.destroy');
 
+
+
+Route::view('results', 'results');
