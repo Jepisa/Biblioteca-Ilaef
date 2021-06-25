@@ -4,6 +4,9 @@
 @import './tags.css';
 @import './description.css';
 @import './banner.css';
+@import './shared.css';
+@import './max-results.css';
+@import './pagination.css';
 
 *{
     font-family: 'Red Hat Text', sans-serif;

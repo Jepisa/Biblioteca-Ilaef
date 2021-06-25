@@ -46,3 +46,4 @@ Route::delete('author{name}', [AuthorController::class, 'destroy'])->name('autho
 
 
 Route::view('results', 'results');
+Route::view('max-results', 'max-results');

@@ -1,0 +1,30 @@
+.favorites, .smile-register, .sell, .download {
+    background-color: white;
+    position: absolute;
+    bottom: -4.5em;
+    margin-left: 0.5em;
+    width: 12em;
+    height: 7em;
+    padding: 1em;
+    border: 1px dashed #6C757D;
+    font-weight: bold;
+    color: black;
+    border-radius: 8px;
+    opacity: 1;
+    box-shadow: 10px 18px 18px #00000080;
+    display: none;
+    text-align: center;
+}
+
+.download p, .favorites p, .smile-register p, .sell p {
+    width: 100% !important;
+}
+
+.download svg, .favorites svg, .smile-register svg, .sell svg {
+    border: 0 !important;
+}
+
+.shared-icons {
+    display: none;
+}
+

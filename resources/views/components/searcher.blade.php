@@ -1,9 +1,5 @@
 <div class="searcher w-11/12 lg:w-8/12 xl:w-6/12 m-auto" >
-<form id="form-search" class="w-full flex" action="" method="GET" style="padding:0.8em;
-background: #91091E 0% 0% no-repeat padding-box;
-box-shadow: 0px 3px 6px #00000080;
-border: 1px solid #C1C1C1;
-border-radius: 4px;">
+<form id="form-search" class="w-full flex" action="" method="GET" >
     <div id="select-search" class="w-2/12" style="">
         <select name="searchType" style=" padding: 0px; border:0;">
             <option value="Todo" selected>Todo</option>
@@ -14,9 +10,7 @@ border-radius: 4px;">
             <option value="ISBN">ISBN</option>
         </select>
     </div>
-    <div class="input-search" style="position: relative; margin: 0 8px; width: 55%; background: #FFFFFF 0% 0% no-repeat padding-box;
-    border: 1px solid #383E56;
-    border-radius: 4px;">
+    <div class="input-search">
         <svg onclick="document.getElementById('form-search').submit();" version="1.1" class="Capa_1" id='capa-4'  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
         viewBox="0 0 512.005 512.005" style="position:absolute; left:5px; top:10px; enable-background:new 0 0 512.005 512.005;" xml:space="preserve" width="14px" height="14px">
             <g>
