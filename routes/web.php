@@ -6,6 +6,7 @@ use App\Http\Controllers\Content\BookController;
 use App\Http\Controllers\Content\PodcastController;
 use App\Http\Controllers\Content\EbookController;
 use App\Http\Controllers\Content\InvestigationWorkController;
+use App\Http\Controllers\SearchContentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,7 +25,7 @@ Route::get('contact', function () {
     return 'Proximamente';
 })->name('contact')->middleware('auth');
 
-
+Route::get('search', [SearchContentController::class, 'search'])->name('searchContent');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
