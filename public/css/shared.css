@@ -1,8 +1,7 @@
-.favorites, .smile-register, .sell, .download {
+.favorites, .smile-register, .sell, .download, .shared-icons {
     background-color: white;
     position: absolute;
-    bottom: -4.5em;
-    margin-left: 0.5em;
+    bottom: -7em;
     width: 12em;
     height: 7em;
     padding: 1em;
@@ -24,7 +23,77 @@
     border: 0 !important;
 }
 
-.shared-icons {
-    display: none;
+#all-icons p {
+    display: inline-flex;
+    text-align: center;
 }
 
+#all-icons ul {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: -10.0em;
+
+}
+
+#all-icons ul li img {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 1em;
+}
+
+
+.icon-1, .icon-2, .icon-3, .icon-4 {
+    position: relative;
+    bottom: -9em;
+}
+
+.icon-2 {
+    left: 2em;
+}
+
+.icon-3 {
+    left: 4em;
+}
+
+.icon-4 {
+    left: 6em;
+}
+
+@media (min-width:360px) {
+    .favorites, .smile-register, .sell, .download, .shared-icons {
+        margin-left: 0.8em;
+        bottom: -6.5em;
+    }   
+}
+@media (min-width:410px) {
+    .favorites, .smile-register, .sell, .download, .shared-icons {
+        margin-left: 0.8em;
+        bottom: -11.5em;
+    }   
+}
+@media (min-width:460px) {
+    .favorites, .smile-register, .sell, .download, .shared-icons {
+        margin-left: 0.8em;
+        bottom: -10em;
+    }   
+}
+@media (min-width:550px) {
+    .favorites, .smile-register, .sell, .download, .shared-icons {
+        margin-left: 0.8em;
+        bottom: -9.5em;
+    }   
+}
+
+@media (min-width:768px) {
+    .favorites, .smile-register, .sell, .download, .shared-icons {
+        margin-left: 0.8em;
+        bottom: -10.5em;
+    }   
+}
+@media (min-width:1025px) {
+    .favorites, .smile-register, .sell, .download, .shared-icons {
+        bottom: -8.5em;
+        left: 43em;
+    }   
+}

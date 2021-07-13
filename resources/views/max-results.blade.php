@@ -15,11 +15,35 @@
   <x-searcher/>
 
   <x-all-results/>
+  
 
   <x-slot name="scriptsDown">
       <script src="{{ asset('js/carousels.js') }}"></script>
       <script>
           $('.title-of-content').dotdotdot();
+      </script>
+      
+        <script>
+        window.addEventListener("load", function(event) {
+        
+        var desplegable = document.getElementById("sort2");
+        let expand = document.getElementById("sort-expand");
+
+        console.log(desplegable);
+
+        desplegable.addEventListener("click", function () {
+
+          if (expand.style.display === "none") {
+            expand.style.display = "block";
+            expand.style.background = 'white';
+            expand.style.color = 'black';
+            expand.style.position ='absolute';
+          } else  {
+            expand.style.display = "none";
+          }
+        });
+    });
+
       </script>
   </x-slot>
 </x-app-layout>

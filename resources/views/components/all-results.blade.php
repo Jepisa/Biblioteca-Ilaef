@@ -4,6 +4,21 @@
             <h3>De <strong>Bermejo</strong>&nbsp</h3>
             <h3>se encontraron 21 resultados.</h3>
         </div>
+
+        <div id='sort2'><button>Ordenar por</button>
+        <div class="sort-expand" id="sort-expand">
+            <ul>
+                <li>Fecha (el más reciente)</li>
+                <li>Fecha (el más antiguo)</li>
+                <li>Título (de la A a la Z)</li>
+                <li>Fecha Autor (de la A a la Z)</li>
+                <li>Por relevancia</li>
+                <li>Por formato</li>
+            </ul>
+        </div>
+        </div>
+
+
         <div class="tags">
             <svg xmlns="http://www.w3.org/2000/svg" id="tag-svg" data-name="Capa 1" viewBox="0 0 134 29"><defs><style>.cls-1{fill:#191919;}.cls-2,.cls-3{isolation:isolate;}.cls-3{font-size:14px;fill:#fff;font-family:RedHatText-Regular, Red Hat Text;}.cls-4{letter-spacing:-0.03em;}</style></defs><path id="Combined_Shape" data-name="Combined Shape" class="cls-1" d="M235,435.57a4,4,0,0,1-4-4v-21a4,4,0,0,1,4-4H355a4,4,0,0,1,4,4v21a4,4,0,0,1-4,4Zm124-20.5,5.63,5.61a1.26,1.26,0,0,1,0,1.77h0L359,428.07Z" transform="translate(-231.04 -406.57)"/><g id="Label" class="cls-2"><text class="cls-3" transform="translate(41.85 20)">2 libros<tspan class="cls-4" x="25.34" y="0">r</tspan><tspan x="29.83" y="0"></tspan></text></g></svg>
             <svg xmlns="http://www.w3.org/2000/svg" id="tag-svg" data-name="Capa 1" viewBox="0 0 134 29"><defs><style>.cls-1{fill:#191919;}.cls-2,.cls-3{isolation:isolate;}.cls-3{font-size:14px;fill:#fff;font-family:RedHatText-Regular, Red Hat Text;}.cls-4{letter-spacing:-0.03em;}</style></defs><path id="Combined_Shape" data-name="Combined Shape" class="cls-1" d="M235,435.57a4,4,0,0,1-4-4v-21a4,4,0,0,1,4-4H355a4,4,0,0,1,4,4v21a4,4,0,0,1-4,4Zm124-20.5,5.63,5.61a1.26,1.26,0,0,1,0,1.77h0L359,428.07Z" transform="translate(-231.04 -406.57)"/><g id="Label" class="cls-2"><text class="cls-3" transform="translate(41.85 20)">2 libros<tspan class="cls-4" x="25.34" y="0">r</tspan><tspan x="29.83" y="0"></tspan></text></g></svg>
@@ -120,6 +135,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="pagination">
     <div class='number-pag'>

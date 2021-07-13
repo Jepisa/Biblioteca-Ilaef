@@ -112,7 +112,8 @@ nav.nav-principal a {
     }
 
     .searcher {
-        z-index: 1;
+        z-index: 11111;
+        position: relative;
     }
 
     @media (max-width: 1024px){
