@@ -45,7 +45,7 @@ Te tendría que quedar algo así.
 ## Comandos para llenar la base de datos y levantar el servidor
 ```
 php artisan migrate
-php aretisan db:seed
+php artisan db:seed
 ```
 
 ## Levantar el servidor e iniciar con un usuario admin
