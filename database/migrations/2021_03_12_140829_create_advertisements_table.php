@@ -18,10 +18,11 @@ class CreateAdvertisementsTable extends Migration
             $table->string('name');
             $table->string('owner');
             $table->string('image');
-            $table->string('url');
-            $table->date('launching');
-            $table->date('expiration');
+            $table->string('url')->nullable()->default(null);
+            $table->date('launching');//LANZAMIENTO
+            $table->date('expiration');//VENCIMENTO
             $table->integer('position');
+            $table->text('information')->nullable()->default(null);
             $table->boolean('status')->nullable();
             $table->timestamps();
         });

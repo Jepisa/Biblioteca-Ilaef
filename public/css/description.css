@@ -1,0 +1,201 @@
+
+#description {
+    color: white;
+    margin: 20px ;
+    padding-right: 25px;
+    padding-left: 15px;
+    padding-top: 15px;
+    border: outset; 
+    border-color: white;
+    border-radius: 7px;
+    border-width: 2px;
+    border-color: #97afac;
+    height: 504px;
+    left: -0.5em;
+}
+
+#title {
+    width: 50%;
+}
+
+#description h6, h5 {
+    font-size: 8px;
+}
+
+#description h4 {
+    padding-bottom: 10px;
+    font-size: 14px;
+}
+
+#description h3 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#description h3, #description h4, #description p {
+    width: 50%;
+}
+
+#description img {
+    float: right;
+    position: relative;
+    top: -9.7em;
+    width: 6.5em;
+    height: 9.65em;
+    max-width: 213px;
+}
+
+.title p {
+    font-size: 10px !important;
+    width: 55%;
+}
+
+#description p {
+    font-size: 10px;
+}
+
+.span span {
+    display: inline-block;
+    margin-top: 10px;
+    position: relative;
+    bottom: 9.5em;
+    font-size: 14px;
+}
+
+#shared {
+    display: none;
+}
+
+
+.icons-description {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 32.47px;
+    position: relative;
+    bottom: 7em;
+}
+
+.grid-container {
+    margin: auto;
+}
+
+svg {
+    margin: auto;
+}
+
+#description svg {
+    width: 37.38px;
+    height: 32.81px;
+    margin: auto;
+    border-radius: 10px;
+    border: 1px solid #97AFAC;
+    opacity: 1;
+    padding: 2.5px;
+}
+
+.garrow svg {
+    margin-bottom: 7%;
+    height: 5em;
+    width: 4em;
+}
+
+@media (min-width:415px) {
+    #description {
+        padding-top: 12%;
+        padding-left: 8%;
+        padding-bottom: 5%;
+        padding-right: 10%;
+        bottom: -6.5em;
+        height: 34em;
+    }
+
+    .text-title p {
+        font-size: 0.8em !important;
+    }
+
+    .img img {
+        height: 11.5em !important;
+        width: 40% !important;
+        max-width: none !important;
+    }
+
+    .garrow svg {
+        width: 5em;
+        height: 6em;
+    }
+
+    .grid-container img {
+        position: relative;
+        top: -11.5em !important;
+    }
+}
+
+@media (min-width:769px) {
+    #description {
+        height: 36em ;
+    }
+    .img img {
+        height: 25.2em !important;
+        width: 14.5em !important;
+    }
+    .span span {
+        width: 50%;
+        bottom: -1.5em;
+    }
+    .icons-description {
+        bottom: -3em;
+        width: 50%;
+        left: -1em;
+    }
+    .garrow svg {
+        margin-left: 45%;
+    }
+}
+
+@media (min-width: 1025px) {
+    .grid-container {
+        display: block;
+    }
+
+    .h4 {
+        position: absolute;
+        left: 41.5em !important;
+        
+    }
+
+    .h4 h4 {
+        width: 100% !important;
+    }
+
+    #description {
+        margin-top: 3.5em;
+        margin-left: 3.5em;
+        margin-right: 3.5em;
+    }
+
+    .img img {
+        left: -19em;
+        width: 16.5em !important;
+
+    }
+
+    .span span {
+        left: 37em;
+        width: 40%;
+        bottom: 6em;
+    }
+
+    .icons-description {
+        bottom: 2.5em;
+        width: 45%;
+        left: 31.5em;
+    }
+
+    .grid-container .img img {
+        position: absolute !important;
+        left: 22em;
+        top: 13.7em !important;
+    }
+
+}

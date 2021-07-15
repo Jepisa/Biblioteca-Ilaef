@@ -17,7 +17,7 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug');
-            $table->text('synopsis');
+            $table->text('synopsis')->nullable();
             $table->text('note')->nullable();
             $table->integer('year')->nullable();
             $table->string('collection')->nullable();

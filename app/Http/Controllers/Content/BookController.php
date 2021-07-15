@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Books\StoreBookRequest;
+use App\Http\Requests\Content\Books\StoreBookRequest;
+use App\Http\Requests\Content\Books\UpdateBookRequest;
 use Illuminate\Support\Str;
 use App\Models\Author;
 use App\Models\Book;
@@ -11,9 +12,8 @@ use App\Models\Country;
 use App\Models\Language;
 use App\Models\Topic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 class BookController extends Controller
 {
@@ -41,7 +41,7 @@ class BookController extends Controller
         $languages = Language::all();
         $countries = Country::all();
 
-        return view('content.books.create-edit', compact('authors', 'topics', 'languages', 'countries'));
+        return view('content.books.create', compact('authors', 'topics', 'languages', 'countries'));
     }
 
     /**
@@ -52,183 +52,122 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {   
+
         
         $validated = $request->validated();
 
         //Agunas cosas necesarias
-            $slugOfBook = Str::slug($validated['title']);
+            $code = Str::random(8);
+            $slugOfBook = Str::slug($validated['title']).'-'.$code;
             $destination_path = 'content/books/'.$slugOfBook;
             $disk = 'public';
         //
+        if($request->hasFile('coverImage')) $pathCoverImage = $request->file('coverImage')->store($destination_path, $disk);
 
-        if($request->hasFile('coverImage'))
-        {
-            $image_name = Str::slug($request->file('coverImage')->getClientOriginalName());
-            $extension = $request->file('coverImage')->extension();
-            $new_image_name = $image_name.'.'.$extension;
-            $pathCoverImage = $request->file('coverImage')->storeAs($destination_path, $new_image_name, $disk);
-        }
-
-        if($request->hasFile('backCoverImage'))
-        {
-            $image_name = Str::slug($request->file('backCoverImage')->getClientOriginalName());
-            $extension = $request->file('backCoverImage')->extension();
-            $new_image_name = $image_name.'.'.$extension;
-            $pathBackCoverImage = $request->file('backCoverImage')->storeAs($destination_path, $new_image_name, $disk);
-        }
-
-        if($request->hasFile('audioBook'))
-        {
-            $audioBook_name = Str::slug($request->file('audioBook')->getClientOriginalName());
-            $extension = $request->file('audioBook')->extension();
-            $new_image_name = $image_name.'.'.$extension;
-            $pathAudioBook = $request->file('audioBook')->storeAs($destination_path, $audioBook_name, $disk);
-
-            $extension_audioBook = $request->file('audioBook')->extension();
-        }
+        if($request->hasFile('backCoverImage')) $pathBackCoverImage = $request->file('backCoverImage')->store($destination_path, $disk);
 
         if($request->hasFile('downloadable'))
         {
-            $image_name = Str::slug($request->file('downloadable')->getClientOriginalName());
-            $extension = $request->file('downloadable')->extension();
-            $new_image_name = $image_name.'.'.$extension;
-            $pathDownloadable = $request->file('downloadable')->storeAs($destination_path, $new_image_name, $disk);
+            $pathDownloadable = $request->file('downloadable')->store($destination_path, $disk);
+            if($pathDownloadable) $extension_downloadable = $request->file('downloadable')->extension();    
+        }
+
+        if($request->hasFile('audioBook')) $pathAudioBook = $request->file('audioBook')->store($destination_path, $disk);
+
+        if( (isset($pathCoverImage) and !$pathCoverImage) or (isset($pathBackCoverImage) and !$pathBackCoverImage) or (isset($pathDownloadable) and !$pathDownloadable) or (isset($pathAudioBook) and !$pathAudioBook) ){
+            
+            Storage::deleteDirectory($disk . '/' . $destination_path);
+            //Notificaciones después de error al guardar achivos en el servidor
+            $titleNotification = __('general.error.notification.saveFiles.title');
+            $notification = __('general.error.notification.saveFiles.body', ['content' => __('general.content.book')]);
+            $request->session()->flash('titleNotification', $titleNotification);
+            $request->session()->flash('notification', $notification);
+            return redirect()->back();
         }
 
         //Crea Book en BD
         $book = Book::create([
-            'title' => $validated['title'],
-            'slug' => $slugOfBook,
-            'synopsis' => $request['synopsis-original'],
-            'note' => isset($validated['note']) ? $validated['note'] : null,
-            'year' => isset($validated['year']) ? $validated['year'] : null,
-            'collection' => isset($validated['collection']) ? $validated['collection'] : null,
-            'edition' => isset($validated['edition']) ? $validated['edition'] : null,
-            'editorial' => $validated['editorial'],
-            'language_id' => $validated['language_id'],
-            'city' => isset($validated['city']) ? $validated['city'] : null ,
-            'country_id' => $validated['country_id'],
-            'pages' => isset($validated['pages']) ? $validated['pages'] : null ,
-            'isbn' => isset($validated['isbn']) ? $validated['isbn'] : null,
-            'downloadable' => isset($pathDownloadable) ? $pathDownloadable : null,
-            'url' => isset($validated['url']) ? $validated['url'] : null ,
-            'coverImage' => isset($pathCoverImage) ? $pathCoverImage : 'public/content/books/default', //Aún no existe una imagen por default
-            'backCoverImage' => isset($pathBackCoverImage) ? $pathBackCoverImage : 'public/content/books/default', //Aún no existe una imagen por default
-            'audiobook' => isset($pathAudioBook) ? $pathAudioBook : null,
-            'format' => isset($extension_audioBook) ? $extension_audioBook : null,
+            'title'             => $validated['title'],
+            'slug'              => $slugOfBook,
+            'synopsis'          => $request['synopsis-original'],
+            'note'              => !empty($validated['note']) ? $validated['note'] : null,
+            'year'              => !empty($validated['year']) ? $validated['year'] : null,
+            'collection'        => !empty($validated['collection']) ? $validated['collection'] : null,
+            'edition'           => !empty($validated['edition']) ? $validated['edition'] : null,
+            'editorial'         => $validated['editorial'],
+            'language_id'       => $validated['language_id'],
+            'city'              => !empty($validated['city']) ? $validated['city'] : null,
+            'country_id'        => $validated['country_id'],
+            'pages'             => !empty($validated['pages']) ? $validated['pages'] : null,
+            'isbn'              => !empty($validated['isbn']) ? $validated['isbn'] : null,
+            'downloadable'      => isset($pathDownloadable) ? $pathDownloadable : null,
+            'url'               => !empty($validated['url']) ? $validated['url'] : null,
+            'coverImage'        => isset($pathCoverImage) ? $pathCoverImage : 'content/books/default.jpg',
+            'backCoverImage'    => isset($pathBackCoverImage) ? $pathBackCoverImage : null,
+            'audiobook'         => isset($pathAudioBook) ? $pathAudioBook : null,
+            'format'            => isset($extension_downloadable) ? $extension_downloadable : null,
         ]);
+
+        // if(!$book) Log::channel('slack')->critical("Problm!\n We have a problem for save a book!!!\nSaludos, Jean Piere");//This is for to send a message to Slack
 
         if (isset($request->extraImages)) {
             
             $extraImages = $request->extraImages;
-            
+            $errorImages = 0;
             foreach ($extraImages as $image) 
             {
                 //Guardar las imagenes en el servidor                    
-                    $image_name = Str::slug($image->getClientOriginalName());
-                    $extension = $image->extension();
-                    $new_image_name = $image_name.'.'.$extension;
-                    $path = $image->storeAs($destination_path, $new_image_name, $disk);
+                $path = $image->store($destination_path, $disk);
 
-                    $book->extraImages()->create([
-                        'image' => $path,
-                    ]);
+                if(!$path){
+                    $errorImages++;
+                    continue;
+                }
+                $book->extraImages()->create([
+                    'image' => $path,
+                ]);
+            }
+            if($errorImages > 0){
+                $request->session()->flash('errorExtraImages', __('general.error.notification.saveFiles.errorExtraImages', ['qty' => $errorImages]));
             }
         } 
 
-        //Después hay que remplazar esta manera de optener y cuardar los Authors and Topics
-        //Guardar y asignar Authors
-            $authors = explode(",", $validated['authorsName']);
+        //Guardar y asignar Authors - Topics existentes
+        $book->authors()->sync($validated['existAuthors']);
+        $book->topics()->sync($validated['existTopics']);
 
-            $existAuthors = [];
+        //Guardar nuevos Authors - Topics
+        if (!empty($validated['newAuthors'])) {
             $newAuthors = [];
 
-            $createdAuthors = [];
-
-            $authorsOfTheBook = [];
-        
-            foreach ($authors as $authorName) {
-                $savedAuthor = Author::where('name', '=', $authorName)->first();
-                if($savedAuthor){
-                    if($savedAuthor->name == $authorName)
-                    {
-                        $existAuthors[] = $authorName;
-
-                        $authorsOfTheBook[] = $savedAuthor->id;
-                    }
-                }
-                else 
-                {
-                    $createdAuthor = Author::create([
-                        'name' => trim($authorName),
-                    ]);
-
-                    $newAuthors[] = $createdAuthor->name;
-
-                    $createdAuthors[] = $createdAuthor->name;
-
-                    $authorsOfTheBook[] = $createdAuthor->id;
-
-                }
+            foreach ($validated['newAuthors'] as $newAuthor) {
+                $newAuthors[] = Author::firstOrCreate([
+                    'name' => $newAuthor,
+                ])->id;
             }
 
-            $existAuthors = implode(", ", $existAuthors);
-            $newAuthors = implode(", ", $newAuthors);
+            $book->authors()->syncWithoutDetaching($newAuthors);
+        }
 
-            $notificationAuthors = "Estos autores se crearon exitosamente: $newAuthors. \r\n Estos ya estaban en nuestra base de datos: $existAuthors" ;
-            $request->session()->flash('notificationAuthors', $notificationAuthors);
-        //Guardar y asignar Topics
-            $topics = explode(",", $validated['topicsName']);
-
-            $existTopics = [];
+        if (!empty($validated['newTopics'])) {
             $newTopics = [];
 
-            $createdTopics = [];
-
-            $topicsOfTheBook = [];
-
-        
-            foreach ($topics as $topicName) {
-                $savedTopic = Topic::where('name', '=', $topicName)->first();
-                
-                if($savedTopic)
-                {
-                    if($savedTopic->name == $topicName)
-                    {
-                        $existTopics[] = $topicName;
-                        $topicsOfTheBook[] = $savedTopic->id;
-                    }
-                }
-                else 
-                {
-                    $createdTopic = Topic::create([
-                        'name' => $topicName,
-                    ]);
-
-                    $newTopics[] = $createdTopic->name;
-
-                    $createdTopics[] = $createdTopic->name;
-
-                    $topicsOfTheBook[] = $createdTopic->id;
-
-                }
+            foreach ($validated['newTopics'] as $newTopic) {
+                $newTopics[] = Topic::firstOrCreate([
+                    'name' => $newTopic,
+                ])->id;
             }
 
-            $existTopics = implode(", ", $existTopics);
-            $newTopics = implode(", ", $newTopics);
+            $book->topics()->syncWithoutDetaching($newTopics);
+        }
 
-            $notificationTopics = "Estos autores se crearon exitosamente: $newTopics. \r\n Estos ya estaban en nuestra base de datos: $existTopics" ;
-            $request->session()->flash('notificationTopics', $notificationTopics);
-        // ----
-
-        $book->authors()->sync($authorsOfTheBook);
-        $book->topics()->sync($topicsOfTheBook);
-        
         //Se crea el contador de views del Book
         $book->counter()->create(['views' => 0 ]);//A la table del contador le puedo poner más columnas (a parte de 'views'), como 'favorites', 'downloads'
         
-        //Notificaciones en después de cargar Book
-        $notification = "El libro \"$book->title\" fue creado con éxito." ;
+        //Notificaciones después de crear un Book
+        $titleNotification = __('books.create.notification.title');
+        $notification = __('books.create.notification.body', ['title' => $book->title]);
+        $request->session()->flash('titleNotification', $titleNotification);
         $request->session()->flash('notification', $notification);
         return redirect()->back();
     }
@@ -244,10 +183,12 @@ class BookController extends Controller
         $book = Book::where('slug', '=', $slug)->firstOrFail();
         //Contar las visitas a cada libro
         $book->counter()->update([
-            'views' => $book->counter->views + 1,
+                'views' => $book->counter->views + 1,
+            ],[
+                'timestamps' => false
             ]);
-        
-        return view('books.show', compact('book'));
+        $book->counter->views++;
+        return view('content.books.show', compact('book'));
     }
 
     /**
@@ -260,92 +201,42 @@ class BookController extends Controller
     {
         $book = Book::where('slug', '=', $slug)->firstOrFail();
         $authors = Author::all();
-        
-        $authorsArray = $book->authors->toArray();
-        $authorsArray = array_map(function($a)
-        {
-            return $a['name'];
-        }, $authorsArray);
-        $book->authorsArray = $authorsArray;
-
-        $authorsName = [];
-
-        foreach ($book->authors as $author) {
-            $authorsName[] = $author->name;
-        }
-        $authorsName = implode(", ", $authorsName);
-
-
-        $topicsName = [];
-        foreach ($book->topics as $topic) {
-            $topicsName[] = $topic->name;
-        }
-        $topicsName = implode(", ", $topicsName);
-
         $topics = Topic::all();
         $languages = Language::all();
         $countries = Country::all();
+        
+        $book->authors_id = array_column($book->authors->toArray(), 'id');
+        $book->topics_id = array_column($book->topics->toArray(), 'id');
 
-        return view('content.books.create-edit', compact('book','authorsName', 'topicsName', 'languages', 'countries', 'authors'));
+
+        return view('content.books.edit', compact('book', 'authors', 'topics', 'languages', 'countries'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Requests\Books\UpdateBookRequest  $request
      * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $slug)
+    public function update(UpdateBookRequest $request, $slug)
     {
-
         $book = Book::where('slug', '=', $slug)->firstOrFail();
 
         $datesBook = $request->except('downloadable','coverImage','backCoverImage','extraimages','audiobook', '_token', '_method');
+        $datesBook['synopsis'] = $datesBook['synopsis-original'];
+
         /* $datesBook = $request->validated()->except('downloadable','coverImage','backCoverImage','extraimages','audiobook'); //Esto sería se creo un request aparte para las validaciones */
 
         //Agunas cosas necesarias para el almacenamiennto de los archivos
-            $datesBook['slug'] = Str::slug($datesBook['title']);
+            $code = Str::random(8);
+            $datesBook['slug'] =  ($book->title != $datesBook['title']) ? Str::slug($datesBook['title']).'-'.$code : $book->slug;
             $destination_path = 'content/books/'.$datesBook['slug'];
             $disk = 'public';
         //
 
         
-        $request['originalSynopsis'] = $request->synopsis;
-        $request['synopsis'] = str_replace("\r\n"," ",$request->synopsis);
-        
-        /** En el caso de que haga las validaciones, hace lo de 'store' para la synopsis */
-        $validated = $request->validate([
-            'title' => [Rule::unique('books')->ignore($book->id)],
-            'authorsName' => 'required|string',
-            'topicsName' => 'required|string',
-            // 'authors' => 'required|array|min:1',
-            // 'authors.*' => 'required|integer|distinct|exists:authors,id',
-            // 'topics' => 'required|array|min:1',
-            // 'topics.*' => 'required|integer|distinct|exists:topics,id',
-            'synopsis' => 'required|min:400|max:1200',
-            'note' => 'nullable|string|max:600',
-            'year' => 'nullable|integer|min:1000|max:3000',
-            'collection' => 'nullable|string|max:255',
-            'edition' => 'nullable|string|max:255',
-            'editorial' => 'required|string|max:255',
-            'language_id' => 'required|integer|exists:languages,id',
-            'city' => 'nullable|string|max:255',
-            'country_id' => 'required|integer|exists:countries,id',
-            'pages' => 'nullable|integer',
-            'isbn' => ['nullable','string','max:255', Rule::unique('books')->ignore($book->id)],
-            'downloadable' => 'file|mimes:pdf,doc',
-            'url' => 'nullable|url',
-            'coverImage' => 'file|mimes:jpg,png,jpeg|dimensions:min_width=600,min_height=800,max_width=1800,max_height=2300',
-            'extraimages' => 'array',
-            'extraimages.*' => 'file|mimes:jpg,png,jpeg|between:40,3000',
-            'backCoverImage' => 'file|mimes:jpg,png,jpeg|between:40,4000',
-            'audioBook' => 'nullable|file|mimes:mp3,wma,aac',
-        ]);
-
-        $datesBook['slug'] = Str::slug($datesBook['title']);
-        
-        if($book->title != $datesBook['title'] and $book->slug != $datesBook['slug'])
+        if($book->title != $datesBook['title'])
         { 
             if ( Storage::rename("public/content/books/$book->slug", "public/content/books/".$datesBook['slug']) ) 
             {
@@ -367,193 +258,120 @@ class BookController extends Controller
             }
         }
 
-        if(isset($datesBook['authorsName']))
+        $a = $datesBook['existAuthors'];
+        sort($a);
+        $b = array_column($book->authors->toArray(), 'id');
+        sort($b);
+
+        if(!empty($datesBook['existAuthors']) and $a != $b)
         {
-            $authorsName = [];
-            foreach ($book->authors as $author) {
-                $authorsName[] = $author->name;
+            $book->authors()->sync($datesBook['existAuthors']);
+        }
+        if(!empty($datesBook['newAuthors']))
+        {
+            $newAuthors = [];
+
+            foreach ($datesBook['newAuthors'] as $newAuthor) {
+                $newAuthors[] = Author::firstOrCreate([
+                    'name' => $newAuthor,
+                ])->id;
             }
-            $authorsName = implode(", ", $authorsName);
 
-            $arrayAuthorsName = explode(',', $datesBook['authorsName']);
-
-            $datesBook['authorsName'] = [];
-            foreach ($arrayAuthorsName as $authorName) {
-                $datesBook['authorsName'][] = trim($authorName);
-            }
-
-            $datesBook['authorsName'] = implode(", ", $datesBook['authorsName']);
-
-            if($authorsName != $datesBook['authorsName'])
-            {
-            //Authors
-                $authors = explode(",", $datesBook['authorsName']);
-
-                $existAuthors = [];
-                $newAuthors = [];
-
-                $createdAuthors = [];
-
-                $authorsOfTheBook = [];
-
-            
-                foreach ($authors as $authorName) {
-                    $savedAuthor = Author::where('name', '=', trim($authorName))->first();
-                    if($savedAuthor){
-                        if(Str::lower($savedAuthor->name) == Str::lower(trim($authorName)))
-                        {
-                            $existAuthors[] = $authorName;
-
-                            $authorsOfTheBook[] = $savedAuthor->id;
-                        }
-                    }
-                    else 
-                    {
-                        $createdAuthor = Author::create([
-                            'name' => trim($authorName),
-                        ]);
-
-                        $newAuthors[] = $createdAuthor->name;
-
-                        $createdAuthors[] = $createdAuthor->name;
-
-                        $authorsOfTheBook[] = $createdAuthor->id;
-
-                    }
-                }
-
-                $existAuthors = implode(", ", $existAuthors);
-                $newAuthors = implode(", ", $newAuthors);
-
-                $book->authors()->sync($authorsOfTheBook);
-
-                $notificationAuthors = "Estos autores se crearon exitosamente: $newAuthors. \r\n Estos ya estaban en nuestra base de datos: $existAuthors" ;
-                $request->session()->flash('notificationAuthors', $notificationAuthors);
-            //
-            }
+            $book->authors()->syncWithoutDetaching($newAuthors);
         }
         
-        if(isset($datesBook['topicsName']))
+        
+        if(!empty($datesBook['existTopics']))
         {
-            $topicsName = [];
-            foreach ($book->topics as $topic) {
-                $topicsName[] = $topic->name;
+            $book->topics()->sync($datesBook['existTopics']);
+        }
+        if(!empty($datesBook['newTopics']))
+        {
+            $newTopics = [];
+
+            foreach ($datesBook['newTopics'] as $newTopic) {
+                $newTopics[] = Topic::firstOrCreate([
+                    'name' => $newTopic,
+                ])->id;
             }
-            $topicsName = implode(", ", $topicsName);
 
-            $arrayTopicsName = explode(',', $datesBook['topicsName']);
-
-            $datesBook['topicsName'] = [];
-            foreach ($arrayTopicsName as $topicName) {
-                $datesBook['topicsName'][] = trim($topicName);
-            }
-
-            $datesBook['topicsName'] = implode(", ", $datesBook['topicsName']);
-
-            if($topicsName != $datesBook['topicsName'])
-            {
-                //Topics
-                    $topics = explode(",", $datesBook['topicsName']);
-
-                    $existTopics = [];
-                    $newTopics = [];
-
-                    $createdTopics = [];
-
-                    $topicsOfTheBook = [];
-
-                
-                    foreach ($topics as $topicName) {
-                        $savedTopic = Topic::where('name', '=', trim($topicName))->first();
-                        
-                        if($savedTopic)
-                        {
-                            if(Str::lower($savedTopic->name) == Str::lower(trim($topicName)))
-                            {
-                                $existTopics[] = $topicName;
-                                $topicsOfTheBook[] = $savedTopic->id;
-                            }
-                        }
-                        else 
-                        {
-                            $createdTopic = Topic::create([
-                                'name' => trim($topicName),
-                            ]);
-
-                            $newTopics[] = $createdTopic->name;
-
-                            $createdTopics[] = $createdTopic->name;
-
-                            $topicsOfTheBook[] = $createdTopic->id;
-
-                        }
-                    }
-
-                    $existTopics = implode(", ", $existTopics);
-                    $newTopics = implode(", ", $newTopics);
-
-                    $book->topics()->sync($topicsOfTheBook);
-
-
-                    $notificationTopics = "Estos autores se crearon exitosamente: $newTopics. \r\n Estos ya estaban en nuestra base de datos: $existTopics" ;
-                    $request->session()->flash('notificationTopics', $notificationTopics);
-                // ----
-            }
+            $book->topics()->syncWithoutDetaching($newTopics);
         }
 
         
 
         if($request->hasFile('coverImage'))
         {
-            /** Replicar la parte de las notificaciones y los 'if' por cada cambio detectado y también ver la posibilidad de que no haga un update si nada a cambiado (si es posibli también hacer que no pueda hacerse un submit si no hubo un cambio y se agrego algo, como nuevos archivos)*/
-            if(!Storage::exists('public/'.$book->coverImage) or Storage::delete('public/'.$book->coverImage))
+            if( $book->title != $datesBook['title'] and Storage::delete('public/'.$datesBook['coverImage']))
             {
-                $image_name = Str::slug($request->file('coverImage')->getClientOriginalName());
-                $extension = $request->file('coverImage')->extension();
-                $new_image_name = $image_name.'.'.$extension;
-                $datesBook['coverImage'] = $request->file('coverImage')->storeAs($destination_path, $new_image_name, $disk);
-                
-                ($datesBook['coverImage']) ? $notifications['coverImage'] = "La nueva imagen de Tapa se a guardado con éxito" : $notifications['coverImage'] = 'No se puedo guardar la nueva Imagen de Tapa';
+                $datesBook['coverImage'] = $request->file('coverImage')->store($destination_path, $disk);
             }
-            else
+            elseif(Storage::delete('public/'.$book->coverImage))
             {
-                $notifications['coverImage'] = "No se pudo eliminar la antarior Imagen de Tapa"; //Acá puedo mandar un mail con el error al programador
+                $datesBook['coverImage'] = $request->file('coverImage')->store($destination_path, $disk);
+                
+            }else{
+                Log::error("No se pudo eliminar la anterior Imagen de Tapa");
             }
         }
 
         if($request->hasFile('backCoverImage'))
         {
-            Storage::delete('public/'.$book->backCoverImage);
-
-            $image_name = Str::slug($request->file('backCoverImage')->getClientOriginalName());
-            $extension = $request->file('backCoverImage')->extension();
-            $new_image_name = $image_name.'.'.$extension;
-            $datesBook['backCoverImage'] = $request->file('backCoverImage')->storeAs($destination_path, $new_image_name, $disk);
-        }
-
-        if($request->hasFile('audioBook'))
-        {
-            Storage::delete('public/'.$book->audioBook);
-
-            $audioBook_name = Str::slug($request->file('audioBook')->getClientOriginalName());
-            $extension = $request->file('audioBook')->extension();
-            $new_image_name = $audioBook_name.'.'.$extension;
-            $datesBook['audioBook'] = $request->file('audioBook')->storeAs($destination_path, $audioBook_name, $disk);
-
-            $datesBook['format'] = $request->file('audioBook')->extension();
+            if( $book->title != $datesBook['title'] and ($book->backCoverImage == null or Storage::delete('public/'.$datesBook['backCoverImage'])) )
+            {
+                $datesBook['backCoverImage'] = $request->file('backCoverImage')->store($destination_path, $disk);
+            }
+            elseif($book->backCoverImage == null or Storage::delete('public/'.$book->backCoverImage))
+            {
+                $datesBook['backCoverImage'] = $request->file('backCoverImage')->store($destination_path, $disk);
+                
+            }else{
+                Log::error("No se pudo eliminar la anterior Imagen de Contra Tapa");
+            }
         }
 
         if($request->hasFile('downloadable'))
         {
-            Storage::delete('public/'.$book->downloadable);
+            if( $book->title != $datesBook['title'] and ($book->downloadable == null or Storage::delete('public/'.$datesBook['downloadable'])) )
+            {
+                $datesBook['downloadable'] = $request->file('downloadable')->store($destination_path, $disk);
+            }
+            elseif($book->downloadable == null or Storage::delete('public/'.$book->downloadable))
+            {
+                $datesBook['downloadable'] = $request->file('downloadable')->store($destination_path, $disk);
+            }else{
+                Log::error("No se pudo eliminar el downloadable anterior");
+            }
+            if($datesBook['downloadable']) $datesBook['format'] = $request->file('downloadable')->extension();
+        }
 
-            $image_name = Str::slug($request->file('downloadable')->getClientOriginalName());
-            $extension = $request->file('downloadable')->extension();
-            $new_image_name = $image_name.'.'.$extension;
-            $datesBook['downloadable'] = $request->file('downloadable')->storeAs($destination_path, $new_image_name, $disk);
+        if($request->hasFile('audioBook'))
+        {
+            if( $book->title != $datesBook['title'] and ($book->audioBook == null or Storage::delete('public/'.$datesBook['audioBook'])) )
+            {
+                $datesBook['audioBook'] = $request->file('audioBook')->store($destination_path, $disk);
+            }
+            elseif($book->audioBook == null or Storage::delete('public/'.$book->audioBook))
+            {
+                $datesBook['audioBook'] = $request->file('audioBook')->store($destination_path, $disk);                
+            }else{
+                Log::error("No se pudo eliminar el anterior audiobook");
+            }
+
         }
 
         
+
+        if( (isset($datesBook['coverImage']) and !$datesBook['coverImage']) or (isset($datesBook['backCoverImage']) and !$datesBook['backCoverImage']) or (isset($datesBook['downloadable']) and !$datesBook['downloadable']) or (isset($datesBook['audioBook']) and !$datesBook['audioBook']) ){
+            
+            Storage::deleteDirectory($disk . '/' . $destination_path);
+            //Notificaciones después de error al guardar achivos en el servidor
+            $titleNotification = __('general.error.notification.saveFiles.title');
+            $notification = __('general.error.notification.saveFiles.body', ['content' => __('general.content.book')]);
+            $request->session()->flash('titleNotification', $titleNotification);
+            $request->session()->flash('notification', $notification);
+            return redirect()->back();
+        }
         
         $book->update($datesBook);
 
@@ -562,29 +380,36 @@ class BookController extends Controller
             foreach ($book->extraImages as $previousImage) {
                 Storage::delete('public/'.$previousImage->image);
             }
-
+            $book->extraImages()->delete();
+            $errorImages = 0;
             $extraImages = $request->extraImages;
             
             foreach ($extraImages as $image) 
             {
                 //Guardar las nuevas imagenes
                     
-                    $image_name = Str::slug($image->getClientOriginalName());
-                    $extension = $image->extension();
-                    $new_image_name = $image_name.'.'.$extension;
-                    $path = $image->storeAs($destination_path, $new_image_name, $disk);
+                    $path = $image->store($destination_path, $disk);
 
+                    if(!$path){
+                        $errorImages++;
+                        continue;
+                    }
+                    
                     $book->extraImages()->create([
                         'image' => $path,
                     ]);
             }
+
+            if($errorImages > 0){
+                $request->session()->flash('errorExtraImages', __('general.error.notification.saveFiles.errorExtraImages', ['qty' => $errorImages]));
+            }
         }
 
-        
 
-        
-
-        $notification = "'$book->title' fue actualizado con éxito";
+        //Notificaciones después de editar un Book
+        $titleNotification = __('books.edit.notification.title');
+        $notification = __('books.edit.notification.body', ['title' => $book->title]);
+        $request->session()->flash('titleNotification', $titleNotification);
         $request->session()->flash('notification', $notification);
 
         return redirect()->route('book.edit', ['slug' => $book->slug]);
@@ -618,9 +443,9 @@ class BookController extends Controller
         $titleOfDeletedBook = $book->title;
         $book->delete();
         
-        $notification = "Se ha eliminado \"$titleOfDeletedBook\" y todo lo que contenía.";
-        
-        
+        $titleNotification = __('books.delete.notification.title');
+        $notification = __('books.delete.notification.body', ['title' => $titleOfDeletedBook]);
+        $request->session()->flash('titleNotification', $titleNotification);
         $request->session()->flash('notification', $notification);
 
         return redirect()->back();

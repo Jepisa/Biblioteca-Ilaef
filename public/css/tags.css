@@ -1,0 +1,23 @@
+#tags {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.content {
+    padding-right: 20px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.quantity {
+    padding: 3px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.content, .quantity {
+    background-color: rgba(0, 0, 0, 0.753);
+    color: white;
+}

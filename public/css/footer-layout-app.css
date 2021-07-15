@@ -8,8 +8,9 @@ footer{
 }
 
 .redes-sociales .img-red-social{
-    width: 31px;
-    margin: 0 5px;
+    width: 22.41px;
+    height: 22.27px;
+    margin: 0 2px;
     border-radius: 100%;
 }
     
@@ -18,13 +19,66 @@ footer{
     align-items: center;
 }
 .direction-contact, .logo-footer, .redes-sociales{
-        padding: 10px;
+        padding: 5px;
+        padding-left: 25px;
+        margin: auto;
     }
+
+.direction-contact {
+    font-size: 8px;
+    width: 60%;
+}
+
+footer img {
+    width: 70%;
+    height: 70%;
+}
+
 /*  */
 
-@media (max-width:360px){
-    
+@media (min-width:568){
+
+    #redes-sociales {
+        margin: auto !important;
+    }
+
+    footer .foot{
+        flex-direction: row;
+    }
+
+    .redes-sociales{
+        flex-direction: row;
+    }
+
+    .redes-sociales img {
+        margin-right: 5px;
+    }
+
 }
+
+@media (max-width:332px) {
+
+    footer .foot {
+        flex-direction: row !important;
+        align-items: flex-end;
+        font-size: 12px;
+
+    }
+
+    .direction-contact {
+        align-items: flex-start !important;
+    }
+}
+
+@media (min-width:330px){
+    footer .foot {
+        flex-direction: row !important;
+        align-items: flex-end;
+        font-size: 12px;
+
+    }
+}
+
 @media (max-width:568px){
     footer .foot{
         flex-direction: column;
@@ -40,14 +94,58 @@ footer{
     }
     .direction-contact{
         width: 100%;
-        align-items: center !important;
+        /* align-items: center !important; */
     }
     .direction-contact div{
         flex-direction: row;
     }
+
+    #footer, .logo-footer {
+        margin-left: 8px;
+    }
 }
-@media (max-width:639px){
-    
+
+@media (max-width:750px){
+    footer .foot{
+        flex-direction: column;
+    }
+
+    .logo-footer{
+        order: -1;
+        width: 100%;
+    }
+    .redes-sociales{
+        width: 100%;
+        flex-direction: row;
+    }
+    .direction-contact{
+        width: 100%;
+    }
+    .direction-contact div{
+        flex-direction: row;
+    }
+
+    #footer, .logo-footer {
+        margin-left: 8px;
+    }
+
+
+}
+
+
+
+@media (min-width:750px){
+    footer {
+        display: flex;
+        flex-direction: row;
+        /* height: 125px;         */
+    }
+    .logo-footer {
+        width: 33%;
+    }
+    #footer {
+        width: 66%;
+    }
 }
 
 @media (max-width:1024px){
@@ -56,9 +154,12 @@ footer{
     }
     .direction-contact{
         flex-direction: column-reverse;
-        align-items: start;
+        align-items: unset !important;
+               
     }
     .direction{
         margin: 0;
     }
+
+    
 }

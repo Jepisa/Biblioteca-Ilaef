@@ -4,7 +4,7 @@
 
 .carousel{
     color: white;
-    width: 86.4%;
+    width: 90%;
     margin: 19px auto;
     min-height: 200px;
 }
@@ -18,7 +18,6 @@
         justify-content: center;
         align-items: center;
         padding: 9px 16px;
-        margin-left: 28px;
     }
 
     .glide ul.glide__slides{
@@ -49,6 +48,8 @@
 .glide .glide__slide img{
     transition: 0.3s linear;
     width: 100%;
+    min-height: 200px;
+    max-height: 200px;
 }
     .glide .glide__slide img:hover{
         transform: scale(1.2);
@@ -67,11 +68,13 @@
     }
 
     .glide .glide__arrow--left{
-        left: -7% !important;
+        left: -4% !important;
+        top: 37% !important;
     }
 
     .glide .glide__arrow--right{
-        right: -7% !important;
+        right: -4% !important;
+        top: 37% !important;
     }
 
 
@@ -81,10 +84,12 @@
 
 .carousel-of-advertisement .image img{
     object-fit: cover;
-    /* min-height: 150px; */
+    min-height: 344px;
 }
 
-@media (max-width:1024px){
+
+
+@media (max-width: 1024px){
     .glide .glide__arrows{
         display: flex;
         height: 32px;
@@ -99,8 +104,77 @@
             .glide .glide__arrow svg {
                 margin: 0 55.5px;
             }
+
+    .carousel-of-advertisement .image img{
+        object-fit: cover;
+        min-height: 150px;
+    }
+}
+
+@media (min-width: 3201px){
+    .glide .glide__slide img{
+        min-height: 300px;
+        max-height: 300px;
+    }
+}
+
+@media (min-width: 2300px) and (max-width: 3200px){
+    .glide .glide__slide img{
+        min-height: 280px;
+        max-height: 280px;
+    }
+}
+
+@media (min-width:1366px) and (max-width:1540px){
+    .glide .glide__slide img{
+        min-height: 160px;
+        max-height: 160px;
+    }
+}
+
+@media (min-width:1281px) and (max-width:1366px){
+    .carousel{
+        width: 78.9%;
+    }
+    .glide .glide__slide img{
+        min-height: 126px;
+        max-height: 126px;
+    }
+}
+
+@media (min-width:1025px) and (max-width:1280px){
+    .glide .glide__slide img{
+        min-height: 134px;
+        max-height: 134px;
+    }
+}
+
+@media (max-width:1024px){
     .carousel{
         width: 100%;
         margin: 15px auto;
+    }
+    .title-of-carousel{
+        margin-left: 28px;
+    }
+}
+@media (min-width: 767px) and (max-width: 1024px){
+    .glide .glide__slide img{
+            min-height: 200px;
+            max-height: 200px;
+        }
+}
+
+@media (max-width: 428px){
+    .glide .glide__slide img{
+        min-height: 170px;
+        max-height: 170px;
+    }
+}
+
+@media (max-width: 380px){
+    .glide .glide__slide img{
+        min-height: 115px;
+        max-height: 115px;
     }
 }
