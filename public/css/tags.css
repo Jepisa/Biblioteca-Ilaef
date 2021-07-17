@@ -20,4 +20,18 @@
 .content, .quantity {
     background-color: rgba(0, 0, 0, 0.753);
     color: white;
+    margin-left: 1em;
+}
+
+#tag-svg {
+    height: 1.2em;
+    margin-left: 0.7em;
+    margin-top: 0.5em;
+}
+
+.tags {
+    display: flex;
+    flex-direction: row;
+    margin-left: 1em;
+    flex-wrap: wrap;
 }

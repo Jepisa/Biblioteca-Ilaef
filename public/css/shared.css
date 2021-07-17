@@ -1,0 +1,99 @@
+.favorites, .smile-register, .sell, .download, .shared-icons {
+    background-color: white;
+    position: absolute;
+    bottom: -7em;
+    width: 12em;
+    height: 7em;
+    padding: 1em;
+    border: 1px dashed #6C757D;
+    font-weight: bold;
+    color: black;
+    border-radius: 8px;
+    opacity: 1;
+    box-shadow: 10px 18px 18px #00000080;
+    display: none;
+    text-align: center;
+}
+
+.download p, .favorites p, .smile-register p, .sell p {
+    width: 100% !important;
+}
+
+.download svg, .favorites svg, .smile-register svg, .sell svg {
+    border: 0 !important;
+}
+
+#all-icons p {
+    display: inline-flex;
+    text-align: center;
+}
+
+#all-icons ul {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: -10.0em;
+
+}
+
+#all-icons ul li img {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 1em;
+}
+
+
+.icon-1, .icon-2, .icon-3, .icon-4 {
+    position: relative;
+    bottom: -9em;
+}
+
+.icon-2 {
+    left: 2em;
+}
+
+.icon-3 {
+    left: 4em;
+}
+
+.icon-4 {
+    left: 6em;
+}
+
+@media (min-width:360px) {
+    .favorites, .smile-register, .sell, .download, .shared-icons {
+        margin-left: 0.8em;
+        bottom: -6.5em;
+    }   
+}
+@media (min-width:410px) {
+    .favorites, .smile-register, .sell, .download, .shared-icons {
+        margin-left: 0.8em;
+        bottom: -11.5em;
+    }   
+}
+@media (min-width:460px) {
+    .favorites, .smile-register, .sell, .download, .shared-icons {
+        margin-left: 0.8em;
+        bottom: -10em;
+    }   
+}
+@media (min-width:550px) {
+    .favorites, .smile-register, .sell, .download, .shared-icons {
+        margin-left: 0.8em;
+        bottom: -9.5em;
+    }   
+}
+
+@media (min-width:768px) {
+    .favorites, .smile-register, .sell, .download, .shared-icons {
+        margin-left: 0.8em;
+        bottom: -10.5em;
+    }   
+}
+@media (min-width:1025px) {
+    .favorites, .smile-register, .sell, .download, .shared-icons {
+        bottom: -8.5em;
+        left: 43em;
+    }   
+}

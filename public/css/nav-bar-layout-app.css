@@ -34,19 +34,19 @@ nav.nav-principal{
     }
     .left-items{
         font-size:16px;
-        height:38px;
+        height:2.1em;
         padding: 9px 32px; 
         margin-left:14px; 
         display:flex; 
         justify-content: center;  
         align-items:center; 
         box-shadow: 0px 3px 6px #00000080; 
-        border: 1px solid #393E46; 
         border-radius: 4px;
     }
 
     a.register{
         background: #FFFFFF 0% 0% no-repeat padding-box;
+<<<<<<< HEAD
     }
 
 
@@ -59,6 +59,82 @@ nav.nav-principal{
         background-repeat: no-repeat;
         background-image: url(../img/navbar/navbar-tablet.png);
     }
+=======
+    }    
+
+    select {
+        background: #91091E;
+        color: white;
+        fill: white;
+    }    
+    
+    #select-search {
+        box-shadow: 0px 1px 1px #00000066;
+        border: 1px solid white;
+        border-radius: 3px;
+        width: 25%;
+        max-width: 5em;
+        text-align: center;
+        height: 1.75em;
+    }    
+    
+    #form-search {
+        height: 2.75em;
+        justify-content: space-around;
+        padding:0.5em 0.8em 0.5em 0.8em;
+        background: #91091E 0% 0% no-repeat padding-box;
+        box-shadow: 0px 3px 6px #00000080;
+        border: 1px solid #C1C1C1;
+        border-radius: 4px;
+    }    
+    
+    .advance-search {
+        height: 3em;
+        padding: unset;
+    }    
+    
+    .advance-search span, .advance-search svg {
+        height: 1.2em;
+    }    
+    
+    #search {
+        width: 45%;
+        color: #8E9EE0;
+        font-style: italic;
+        height: 2.65em;
+    }    
+    
+    .input-search {
+        background-color: unset !important;
+        position: relative;
+        margin: 0 8px;
+        width: 55%; 
+    }
+
+    #chevron-01, #chevron-02 {
+        display: none;
+    }
+
+    .py-2 {
+        margin-bottom: 1.5em;
+    }
+
+    .searcher {
+        z-index: 11111;
+        position: relative;
+    }
+
+    @media (max-width: 1024px){
+    
+    /*  */    
+    
+        nav.nav-principal{
+            padding: 0;
+            background-size: 100% 49px;
+            background-repeat: no-repeat;
+            background-image: url(../img/navbar/navbar-tablet.png);
+        }    
+>>>>>>> 70de49bdf6a78e2edeeead76250903de069075d6
         nav .navbar{
             padding: 3px 2.44%;
         }
@@ -74,6 +150,10 @@ nav.nav-principal{
             padding: 9px;
         }
 }
+
+        #capa-4 {
+            top: 7px !important;    
+        }
 
 @media (max-width:639px){
     nav.nav-principal{
@@ -172,7 +252,8 @@ nav.nav-principal{
 @media (min-width:500px) {
     .advance-search {
         padding-top: 0.60em;
-    }    
+        height: 2.5em;
+    }
 }    
 
 @media (max-width: 600px) {
@@ -183,9 +264,9 @@ nav.nav-principal{
         width: 101%;
         font-size: 10px;
         fill: white;
-        height: 101%;
         border-radius: 3px;
         padding-left: 30px;
+        font-style: italic;
     }
 
     
@@ -193,6 +274,7 @@ nav.nav-principal{
         font-size: 10px;
         padding-left: 0px;
         width: 120px;
+        color:#8E9EE0;
     }
 
     .advance-search {
@@ -220,7 +302,6 @@ nav.nav-principal{
         width: 101%;
         font-size: 10px;
         fill: white;
-        height: 101%;
         border-radius: 3px;
         padding-left: 30px;
     }

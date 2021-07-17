@@ -95,6 +95,18 @@
     min-height: 344px;
 }
 
+<<<<<<< HEAD
+=======
+select {
+    background-color: #91091F;
+    color: white;
+    border-radius: 5px;
+    border-color: white;
+    padding: unset;
+    max-width: 4em;
+    font-size: 0.9em;
+}
+>>>>>>> 70de49bdf6a78e2edeeead76250903de069075d6
 
 
 @media (max-width: 1024px){
