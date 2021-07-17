@@ -1,6 +1,6 @@
 
 #description {
-    color: white;
+    color: #d5e5e3;
     margin: 20px ;
     padding-right: 25px;
     padding-left: 15px;
@@ -91,13 +91,17 @@ svg {
     border-radius: 10px;
     border: 1px solid #97AFAC;
     opacity: 1;
-    padding: 2.5px;
+    padding: 3.5px;
 }
 
 .garrow svg {
     margin-bottom: 7%;
     height: 5em;
     width: 4em;
+}
+
+.garrow svg path:hover {
+    stroke: grey;
 }
 
 @media (min-width:415px) {
@@ -107,7 +111,7 @@ svg {
         padding-bottom: 5%;
         padding-right: 10%;
         bottom: -6.5em;
-        height: 34em;
+        height: 35em;
     }
 
     .text-title p {
@@ -151,6 +155,11 @@ svg {
     .garrow svg {
         margin-left: 45%;
     }
+
+    #description svg {
+        padding: 2.5px;
+    
+
 }
 
 @media (min-width: 1025px) {
@@ -198,4 +207,5 @@ svg {
         top: 13.7em !important;
     }
 
+}
 }
