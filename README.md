@@ -4,7 +4,7 @@
 
 - [XAMPP](https://www.apachefriends.org/es/download.html) Con la version 8 de PHP
 
-    Esto te descargar un Servider Web Local, Mysql, PHP, ...
+    Esto te descargar un Server Local, Mysql, PHP, ...
 - [COMPOSER](https://getcomposer.org/download/) (gestión de dependencias en PHP)
 - [NODEJS](https://nodejs.org/es/)  por defecto tambien npm (gestión de dependencias en JS)
 
@@ -45,7 +45,7 @@ Te tendría que quedar algo así.
 ## Comandos para llenar la base de datos y levantar el servidor
 ```
 php artisan migrate
-php aretisan db:seed
+php artisan db:seed
 ```
 
 ## Levantar el servidor e iniciar con un usuario admin
