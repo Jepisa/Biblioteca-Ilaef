@@ -5,7 +5,7 @@
 .carousel{
     color: white;
     width: 90%;
-    margin: 19px auto;
+    margin: 30px auto;
     min-height: 200px;
 }
     .title-of-carousel{
@@ -22,7 +22,7 @@
 
     .glide ul.glide__slides{
         position:relative;
-        padding-top: 13px;
+        padding-top: 25px;
         margin: 0px;
     }
     .div-slide{
@@ -32,6 +32,9 @@
         .div-slide .image{
             width: 100%;
             margin-bottom: 16px;
+            box-shadow: 1px 1px 15px 0px rgba(0,0,0,0.34);
+            -webkit-box-shadow: 1px 1px 15px 0px rgba(0,0,0,0.34);
+            -moz-box-shadow: 1px 1px 15px 0px rgba(0,0,0,0.34);
         }
         .div-slide .title-of-content{
             height: 50px;
@@ -46,13 +49,18 @@
 
 
 .glide .glide__slide img{
-    transition: 0.3s linear;
+    transition: 0.2s linear;
     width: 100%;
     min-height: 200px;
     max-height: 200px;
 }
     .glide .glide__slide img:hover{
+        position: relative;
         transform: scale(1.2);
+        z-index: 2;
+        box-shadow: 1px 1px 15px 0px rgba(0,0,0,0.34);
+        -webkit-box-shadow: 1px 1px 15px 0px rgba(0,0,0,0.34);
+        -moz-box-shadow: 1px 1px 15px 0px rgba(0,0,0,0.34);
     }
 
 

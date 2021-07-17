@@ -12,6 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/layout-app.css') }}">
 
         @livewireStyles
 
@@ -23,6 +24,7 @@
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
+        <x-footer-principal />
 
         @livewireScripts
     </body>

@@ -8,7 +8,7 @@
             @foreach ($contents as $content)                
                 <li class="glide__slide">
                     <div class="div-slide">
-                        <div class="image bg-gray-100">
+                        <div class="image">
                             <img id="" class="imagen-carousel " src="{{ asset('storage/'.$content->coverImage) }}" alt="{{ $content->title }}">
                         </div>
                         <div class="title-of-content">
