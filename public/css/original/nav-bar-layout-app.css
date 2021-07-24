@@ -5,13 +5,13 @@ nav.nav-principal{
     margin: auto;
     padding: 3px 4.3% 3px 2.44%;
     font-size: 20px;
-    box-shadow: 0px 3px 6px #00000080;
-    border-radius: 18px;
+    -webkit-box-shadow: 0px -5px 9px -1px rgba(0,0,0,0.21); 
+    box-shadow: 0px -5px 9px -1px rgba(0,0,0,0.21);
     opacity: 1;
 
     background-size: 100% 61px;
     background-repeat: no-repeat;
-    background-image: url(../img/navbar/navbar.png);
+    background-image: url("../../img/navbar/navbar.png");
 }
 .background-navbar{
     position: absolute;
@@ -25,7 +25,7 @@ nav.nav-principal{
         height: 53px;
         width: 147px;
         margin: 1px 0;
-        background: transparent url(../img/logo-celeste.png) 0% 0% no-repeat padding-box;
+        background: transparent url("../../img/logo-celeste.png") 0% 0% no-repeat padding-box;
         opacity: 1;
         background-size: cover;
     }
@@ -46,20 +46,6 @@ nav.nav-principal{
 
     a.register{
         background: #FFFFFF 0% 0% no-repeat padding-box;
-<<<<<<< HEAD
-    }
-
-
-/*  */
-
-@media (max-width: 1024px){
-    nav.nav-principal{
-        padding: 0;
-        background-size: 100% 49px;
-        background-repeat: no-repeat;
-        background-image: url(../img/navbar/navbar-tablet.png);
-    }
-=======
     }    
 
     select {
@@ -115,10 +101,6 @@ nav.nav-principal{
         display: none;
     }
 
-    .py-2 {
-        margin-bottom: 1.5em;
-    }
-
     .searcher {
         z-index: 11111;
         position: relative;
@@ -132,9 +114,8 @@ nav.nav-principal{
             padding: 0;
             background-size: 100% 49px;
             background-repeat: no-repeat;
-            background-image: url(../img/navbar/navbar-tablet.png);
+            background-image: url("../../img/navbar/navbar-tablet.png");
         }    
->>>>>>> 70de49bdf6a78e2edeeead76250903de069075d6
         nav .navbar{
             padding: 3px 2.44%;
         }
@@ -161,7 +142,7 @@ nav.nav-principal{
         
         background-size: 100% 49px;
         background-repeat: no-repeat;
-        background-image: url(../img/navbar/navbar-mobile.png);
+        background-image: url("../../img/navbar/navbar-mobile.png");
     }
 }
 

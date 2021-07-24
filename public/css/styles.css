@@ -1,0 +1,292 @@
+@import url(./original/app.css);
+@import url(./original/carousel.css);
+@import url(./original/description.css);
+@import url(./original/glide.core.min.css);
+@import url(./original/glide.theme.min.css);
+@import url(./original/imgs.css);
+@import url(./original/layout-app.css);
+@import url(./original/max-results.css);
+@import url(./original/nav-bar-layout-app.css);
+@import url(./original/pagination.css);
+@import url(./original/select2.min.css);
+@import url(./original/shared.css);
+@import url(./original/tags.css);
+.color_grisclaro {
+  color: #d5e5e3; }
+
+.background_grisclaro {
+  background-color: #d5e5e3; }
+
+.color_azuloscuro {
+  color: #383e56; }
+
+.background_azuloscuro {
+  background-color: #383e56; }
+
+.redhat_regular {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 400; }
+
+.redhat_bold {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700; }
+
+.size9 {
+  font-size: 9px; }
+
+.size15 {
+  font-size: 15px; }
+
+.size16 {
+  font-size: 16px; }
+
+.letterSpace-20 {
+  letter-spacing: 0.1em; }
+
+.h-fit {
+  height: fit-content; }
+
+.border_gris {
+  border: 3px solid #97afac;
+  border-radius: 10px; }
+
+.iconContainer:active {
+  background-color: #97afac;
+  transition: all 0.2s ease-in-out; }
+  .iconContainer:active svg .inner {
+    fill: #383e56; }
+
+.button-back_container svg path {
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  fill: #d5e5e3;
+  transition: all 0.1s ease-in-out; }
+  .button-back_container svg path:hover {
+    stroke: #383e56;
+    stroke-width: 15px;
+    stroke-dasharray: 50px;
+    stroke-linecap: round;
+    stroke-linejoin: round; }
+  .button-back_container svg path:active {
+    fill: #94bfba; }
+
+.background_color_main {
+  background-color: #383e56;
+  z-index: -1;
+  height: 100vh;
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  left: 0; }
+
+.background_login {
+  z-index: -1;
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  background-image: url("../img/assets/login/1920.jpg");
+  background-color: #cccccc;
+  background-position: 25% 75%;
+  background-repeat: no-repeat;
+  background-size: cover; }
+  @media (max-width: 1024px) {
+    .background_login {
+      background-image: url("../img/assets/login/768.jpg");
+      background-color: #cccccc;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover; } }
+
+.form_login {
+  font-size: 15px; }
+  @media (max-width: 1024px) {
+    .form_login {
+      font-size: 12px; } }
+
+.aboutUs_container {
+  font-size: 15px; }
+  @media (max-width: 1360px) {
+    .aboutUs_container {
+      font-size: 12px; } }
+  @media (max-width: 1024px) {
+    .aboutUs_container {
+      height: 80vh; } }
+  @media (max-width: 640px) {
+    .aboutUs_container {
+      height: 100%; } }
+  .aboutUs_container .background_color {
+    z-index: -2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #383E56; }
+  .aboutUs_container .background_aboutUs {
+    top: 0;
+    z-index: -1;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    background-image: url("../img/assets/aboutUs/aboutUs_background.jpg");
+    background-color: transparent;
+    background-position: -55vw;
+    background-repeat: no-repeat;
+    background-size: cover; }
+    @media (max-width: 1536px) {
+      .aboutUs_container .background_aboutUs {
+        background-size: cover;
+        background-position: -62vw; } }
+    @media (max-width: 1440px) {
+      .aboutUs_container .background_aboutUs {
+        background-size: cover;
+        background-position: -62vw; } }
+    @media (max-width: 1145px) {
+      .aboutUs_container .background_aboutUs {
+        background-size: cover;
+        background-position: -70vw; } }
+    @media (max-width: 1024px) {
+      .aboutUs_container .background_aboutUs {
+        background-size: 100%;
+        background-position: center -8vh; } }
+    @media (max-width: 640px) {
+      .aboutUs_container .background_aboutUs {
+        background-size: 160%;
+        position: absolute;
+        top: 0; } }
+  @media (min-width: 1025px) and (max-width: 1360px) {
+    .aboutUs_container .text_AboutUsContainer {
+      width: 60%; } }
+
+.latinoAmerica_image_container {
+  display: none;
+  width: 100%;
+  margin: 20px 0; }
+  @media (max-width: 640px) {
+    .latinoAmerica_image_container {
+      display: block; } }
+  .latinoAmerica_image_container img {
+    width: 100%; }
+
+.aboutUs_text {
+  line-height: 2; }
+
+.contact_container .background_color {
+  z-index: -2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: white; }
+.contact_container .background_contact {
+  top: 0;
+  left: 0;
+  z-index: -1;
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  background-image: url("../img/assets/contact/contact_background.jpg");
+  background-color: transparent;
+  background-position: -48vw;
+  background-repeat: no-repeat;
+  background-size: cover; }
+  @media (max-width: 1536px) {
+    .contact_container .background_contact {
+      background-size: cover;
+      background-position: -50vw; } }
+  @media (max-width: 1440px) {
+    .contact_container .background_contact {
+      background-size: cover;
+      background-position: -53vw; } }
+  @media (max-width: 1279px) {
+    .contact_container .background_contact {
+      position: absolute;
+      background-size: cover 100vh;
+      background-position: center; } }
+.contact_container .form_contact {
+  font-size: 15px; }
+  @media (max-width: 1024px) {
+    .contact_container .form_contact {
+      font-size: 12px; } }
+
+.border-open {
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px; }
+
+.border-close {
+  border-radius: 18px; }
+
+.menu_desplegable {
+  padding: 12px 0;
+  position: absolute;
+  background-color: #f1f9ed;
+  width: 95%;
+  -webkit-box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.21);
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.21);
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px; }
+
+.navlink {
+  font-size: 15px;
+  padding: 12px 10px;
+  margin-left: 10px; }
+
+.slide-in-top {
+  -webkit-animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+
+/* ----------------------------------------------
+ * Generated by Animista on 2021-7-24 11:49:51
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+/**
+ * ----------------------------------------
+ * animation slide-in-top
+ * ----------------------------------------
+ */
+@-webkit-keyframes slide-in-top {
+  0% {
+    -webkit-transform: translateY(-1000px);
+    transform: translateY(-1000px);
+    opacity: 0; }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1; } }
+@keyframes slide-in-top {
+  0% {
+    -webkit-transform: translateY(-1000px);
+    transform: translateY(-1000px);
+    opacity: 0; }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1; } }
+footer {
+  height: 85px; }
+  @media (max-width: 768px) {
+    footer {
+      height: 100px; } }
+
+.logo_container_footer {
+  height: fit-content;
+  width: 160px; }
+  @media (max-width: 768px) {
+    .logo_container_footer {
+      width: 100px; } }
+
+.contact_container {
+  font-size: 16px; }
+  @media (max-width: 1280px) {
+    .contact_container {
+      font-size: 12px; } }
+  @media (max-width: 1024px) {
+    .contact_container {
+      font-size: 9px; } }
+  @media (max-width: 640px) {
+    .contact_container {
+      font-size: 8px; } }
+
+/*# sourceMappingURL=styles.css.map */

@@ -12,14 +12,13 @@
         <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/layout-app.css') }}">
-
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
         {{ $css ?? '' }}
 
 
         <!-- Scripts -->
-        <script src="https://kit.fontawesome.com/93ee6606b0.js" crossorigin="anonymous"></script>
+        {{-- <script src="https://kit.fontawesome.com/93ee6606b0.js" crossorigin="anonymous"></script> --}}
         {{ $scripts ?? '' }}
         
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -27,7 +26,7 @@
 
     </head>
     <body class="">
-        <div class="min-h-screen">
+        <div class="min-h-screen flex flex-col justify-between">
             @include('layouts.navigation')
        
             <!-- Page Heading -->

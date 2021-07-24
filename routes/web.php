@@ -19,11 +19,11 @@ require __DIR__.'/admin.php';
 Route::get('/', HomeController::class)->name('home')->middleware('auth');
 
 Route::get('aboutUs', function () {
-    return 'Proximamente';
-})->name('aboutUs')->middleware('auth');
+    return view('aboutUs');
+})->middleware(['verified','auth'])->name('aboutUs');
 Route::get('contact', function () {
-    return 'Proximamente';
-})->name('contact')->middleware('auth');
+    return view('contact');
+})->middleware(['verified','auth'])->name('contact');
 
 Route::get('search', [SearchContentController::class, 'search'])->name('searchContent');
 

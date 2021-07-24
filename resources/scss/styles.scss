@@ -1,0 +1,124 @@
+@import "./original/app.css";
+@import "./original/carousel.css";
+@import "./original/description.css";
+@import "./original/glide.core.min.css";
+@import "./original/glide.theme.min.css";
+@import "./original/imgs.css";
+@import "./original/layout-app.css";
+@import "./original/max-results.css";
+@import "./original/nav-bar-layout-app.css";
+@import "./original/pagination.css";
+@import "./original/select2.min.css";
+@import "./original/shared.css";
+@import "./original/tags.css";
+
+//Variables
+
+$gris: #97afac;
+$gris_claro: #d5e5e3;
+$azul_oscuro: #383e56;
+
+.color_grisclaro {
+    color: $gris_claro;
+}
+.background_grisclaro {
+    background-color: $gris_claro;
+}
+
+.color_azuloscuro {
+    color: $azul_oscuro;
+}
+.background_azuloscuro {
+    background-color: $azul_oscuro;
+}
+
+//Fuentes
+
+.redhat_regular {
+    font-family: "Red Hat Display", sans-serif;
+    font-weight: 400;
+}
+
+.redhat_bold {
+    font-family: "Red Hat Display", sans-serif;
+    font-weight: 700;
+}
+
+.size9 {
+    font-size: 9px;
+}
+
+.size15 {
+    font-size: 15px;
+}
+.size16 {
+    font-size: 16px;
+}
+
+.letterSpace-20 {
+    letter-spacing: 0.1em;
+}
+
+//Sizing
+
+.h-fit {
+    height: fit-content;
+}
+
+.border_gris {
+    border: 3px solid $gris;
+    border-radius: 10px;
+}
+
+//BUTTONS
+.iconContainer {
+    &:active {
+        background-color: #97afac;
+        transition: all 0.2s ease-in-out;
+        svg {
+            .inner {
+                fill: $azul_oscuro;
+            }
+        }
+    }
+}
+.button-back_container {
+    svg {
+        path {
+            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+            fill: $gris_claro;
+            transition: all 0.1s ease-in-out;
+            &:hover {
+                stroke: $azul_oscuro;
+                stroke-width: 15px;
+                stroke-dasharray: 50px;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+            }
+            &:active {
+                fill: #94bfba;
+            }
+        }
+    }
+}
+
+.background_color_main {
+    background-color: #383e56;
+    z-index: -1;
+    height: 100vh;
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    left: 0;
+}
+
+//Login
+@import "./login/login.scss";
+//About Us
+@import "./aboutUs/aboutUs.scss";
+//Contact
+@import "./contact/contact.scss";
+//Navbar
+@import "./navbar/nav.scss";
+//Foter
+@import "./footer/footer.scss";

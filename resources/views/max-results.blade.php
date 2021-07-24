@@ -1,8 +1,8 @@
 <x-app-layout>
   <x-slot name="css">
-    <link rel="stylesheet" href="{{ asset('css/carousel.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('css/glide.core.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/glide.theme.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/glide.theme.min.css') }}"> --}}
   </x-slot>
     
   <x-slot name="scripts">

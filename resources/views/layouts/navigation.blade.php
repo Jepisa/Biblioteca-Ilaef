@@ -1,5 +1,5 @@
 <div class="py-2">
-    <nav class="nav-principal" x-data="{ open: false }" class="">
+    <nav class="nav-principal" x-data="{ open: false }" class="" :class="{'border-open': open, 'border-close': ! open}">
         {{-- <picture class="background-navbar">
             <source class="background-navbar" media="(max-width:100px)" srcset="{{ asset('img/navbar/navbar-mobile.png') }}">
             <source class="background-navbar" media="(max-width:640px)" srcset="{{ asset('img/navbar/navbar-tablet.png') }}">
@@ -107,8 +107,8 @@
                 </div>
 
                 <!-- Hamburger -->
-                <div class="-mr-2 flex items-center sm:hidden">
-                    <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                <div class="-mr-2 flex items-center sm:hidden bg-transparent">
+                    <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out bg-transparent">
                         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                             <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                             <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -119,8 +119,8 @@
         </div>
 
         <!-- Responsive Navigation Menu -->
-        <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden" style="background: #383E56; border: 2px solid #D5E5E3; border-radius: 0 0 12px 12px">
-            <div class="pt-2 pb-3 space-y-1">
+        <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden menu_desplegable">
+            <div class="">
                 <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                     {{ __('Inicio') }}
                 </x-responsive-nav-link>
@@ -133,7 +133,7 @@
             </div>
             
             <!-- Responsive Settings Options -->
-            <div class="pt-1 pb-1 border-t border-gray-200">
+            <div class="border-t-2 border-gray-200">
                 @guest
                     <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
                         {{ __('Registate') }}

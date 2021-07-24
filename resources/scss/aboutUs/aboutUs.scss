@@ -1,0 +1,78 @@
+.aboutUs_container {
+    font-size: 15px;
+    @media (max-width: 1360px) {
+        font-size: 12px;
+    }
+    @media (max-width: 1024px) {
+        height: 80vh;
+    }
+    @media (max-width: 640px) {
+        height: 100%;
+    }
+    .background_color{
+        z-index: -2;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        background-color: #383E56;
+    }
+    .background_aboutUs {
+        top: 0;
+        z-index: -1;
+        position: fixed;
+        height: 100vh;
+        width: 100%;
+        
+        background-image: url("../img/assets/aboutUs/aboutUs_background.jpg");
+        background-color: transparent;
+        background-position: -55vw;
+        background-repeat: no-repeat;
+        background-size: cover;
+        @media (max-width: 1536px) {
+            background-size: cover;
+            background-position: -62vw;
+        }
+        @media (max-width: 1440px) {
+            background-size: cover;
+            background-position: -62vw;
+        }
+        @media (max-width: 1145px) {
+            background-size: cover;
+            background-position: -70vw;
+        }
+        @media (max-width: 1024px) {
+            background-size: 100%;
+            background-position: center -8vh;
+        }
+        @media (max-width: 640px) {
+            background-size: 160%;
+            position: absolute;
+            top: 0;
+        }
+
+    }
+    .text_AboutUsContainer {
+        @media (min-width: 1025px) and (max-width: 1360px) {
+            width: 60%;
+        }
+    }    
+}
+
+.latinoAmerica_image_container {
+    display: none;
+    width: 100%;
+    @media (max-width: 640px) {
+        display: block;
+    }
+    margin: 20px 0;
+    img {
+        width: 100%;
+    }
+}
+
+.aboutUs_text {
+    line-height: 2;
+}
+

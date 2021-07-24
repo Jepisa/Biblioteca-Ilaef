@@ -3,7 +3,7 @@
 @import './imgs.css';
 @import './tags.css';
 @import './description.css';
-@import './banner.css';
+/* @import './banner.css'; */
 @import './shared.css';
 @import './max-results.css';
 @import './pagination.css';
@@ -11,13 +11,19 @@
 *{
     font-family: 'Red Hat Text', sans-serif;
 }
-body{
+/* body{
     background-color: #383E56;
-}
+} */
 
-.content-main{
+/* .content-main{
     min-height:calc(100vh - 77px - 85px);
 }
+@media(max-width:1024px){
+    .content-main{
+        min-height:calc(100vh - 65px - 85px);
+    }
+} */
+
 
 .pagination{
     margin: 10px 24px;
@@ -33,9 +39,4 @@ body{
     }
 }
 
-@media(max-width:1024px){
-    .content-main{
-        min-height:calc(100vh - 65px - 85px);
-    }
-}
 
