@@ -11,7 +11,7 @@
 
 <div {{ $attributes->merge(['class' => 'legalContainer']) }}>
     <div class="">
-        <x-title class="mb-10 text-2xl" textContent="{{ $title }}" />
+        <x-title class="sm:mb-10 mb-5 sm:text-2xl text-xl" textContent="{{ $title }}" />
         <x-regular-text textContent="{{ $editorial }}" />
         <x-regular-text textContent="{{ $pubYear }}" />
         <x-regular-text textContent="{{ $pubLoc }}" />
