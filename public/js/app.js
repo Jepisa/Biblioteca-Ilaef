@@ -21388,7 +21388,8 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // require('./tom-select.complete');
+
 
 __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
@@ -21433,8 +21434,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\Trabajos\Biblioteca-Ilaef\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\Trabajos\Biblioteca-Ilaef\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! D:\Trabajos\Biblioteca_Ilaef\Biblioteca-Ilaef\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Trabajos\Biblioteca_Ilaef\Biblioteca-Ilaef\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })

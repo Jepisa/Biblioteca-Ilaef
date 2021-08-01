@@ -9,7 +9,8 @@
                 <li class="glide__slide">
                     <div class="div-slide">
                         <div class="image">
-                            <img id="" class="imagen-carousel " src="{{ asset('storage/'.$content->coverImage) }}" alt="{{ $content->title }}">
+                        <img id="" class="imagen-carousel " src="{{ asset('img/'.$content->coverImage) }}" alt="{{ $content->title }}">
+                        {{-- <img id="" class="imagen-carousel " src="{{ asset('storage/'.$content->coverImage) }}" alt="{{ $content->title }}"> --}}
                         </div>
                         <div class="title-of-content">
                             <p title="{{ $content->title }}">{{ $content->title }}</p>

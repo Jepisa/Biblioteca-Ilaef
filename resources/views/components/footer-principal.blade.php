@@ -1,6 +1,5 @@
-<div>
     <!-- Knowing is not enough; we must apply. Being willing is not enough; we must do. - Leonardo da Vinci -->
-    <footer class="grid grid-cols-12 bg-black xl:px-20 sm:px-10 px-5">
+    <footer class="grid grid-cols-12 bg-black xl:px-20 sm:px-10 px-5 mt-auto">
         <div class="xl:hidden md:col-span-3 col-span-12 lg:col-span-3 flex justify-left items-center">
             <div class="mt-2 logo_container_footer">
                 <a class="" href="{{ route('home') }}">
@@ -50,4 +49,3 @@
         </div>
 
     </footer>
-</div>

@@ -1,4 +1,4 @@
-<div class="py-2">
+<div class="pt-2 mb-10">
     <nav class="nav-principal" x-data="{ open: false }" class="" :class="{'border-open': open, 'border-close': ! open}">
         {{-- <picture class="background-navbar">
             <source class="background-navbar" media="(max-width:100px)" srcset="{{ asset('img/navbar/navbar-mobile.png') }}">

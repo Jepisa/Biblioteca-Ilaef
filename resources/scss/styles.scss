@@ -6,9 +6,9 @@
 @import "./original/imgs.css";
 @import "./original/layout-app.css";
 @import "./original/max-results.css";
-@import "./original/nav-bar-layout-app.css";
+// @import "./original/nav-bar-layout-app.css";
 @import "./original/pagination.css";
-@import "./original/select2.min.css";
+// @import "./original/select2.min.css";
 @import "./original/shared.css";
 @import "./original/tags.css";
 
@@ -16,13 +16,30 @@
 
 $gris: #97afac;
 $gris_claro: #d5e5e3;
+$gris_oscuro: #5A6268;
 $azul_oscuro: #383e56;
+$rojo_oscuro: #91091e;
+
 
 .color_grisclaro {
     color: $gris_claro;
 }
 .background_grisclaro {
     background-color: $gris_claro;
+}
+
+.color_grisoscuro {
+    color: $gris_oscuro;
+}
+.background_grisoscuro {
+    background-color: $gris_oscuro;
+}
+
+.color_rojooscuro {
+    color: $rojo_oscuro;
+}
+.background_rojooscuro {
+    background-color: $rojo_oscuro;
 }
 
 .color_azuloscuro {
@@ -59,6 +76,13 @@ $azul_oscuro: #383e56;
     letter-spacing: 0.1em;
 }
 
+.text_responsive {
+    font-size: 15px;
+    @media (max-width: 1360px) {
+        font-size: 12px;
+    }
+}
+
 //Sizing
 
 .h-fit {
@@ -70,6 +94,16 @@ $azul_oscuro: #383e56;
     border-radius: 10px;
 }
 
+.border_1px {
+    border: 1px solid;
+}
+
+.zoomContent {
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    &:hover {
+        transform: scale(1.1);
+    }
+}
 //BUTTONS
 .iconContainer {
     &:active {
@@ -118,8 +152,13 @@ $azul_oscuro: #383e56;
 @import "./aboutUs/aboutUs.scss";
 //Contact
 @import "./contact/contact.scss";
+//Modals
+@import "./modals/modals.scss";
+//Search Bar
+@import "./searchBar/searchBar.scss";
 //Results
 @import "./results/results.scss";
+@import "./results/orderBy.scss";
 //Navbar
 @import "./navbar/nav.scss";
 //Foter
