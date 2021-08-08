@@ -1,13 +1,22 @@
+<div class="background_container overflow-hidden">
+    <div class="h-full">
+        <img src="{{ asset('img/assets/login/login_desktop.jpg') }}" class="hidden xl:block object-cover h-full w-full">
+        <img src="{{ asset('img/assets/login/tablet_login.jpg') }}" class="hidden md:block xl:hidden tablet_login object-cover h-full w-full">
+        <img src="{{ asset('img/assets/login/celular_login.jpg') }}" class="block md:hidden object-cover h-full w-full">
+    </div>
+    {{-- <div class="bg-white"></div> --}}
+</div>
+
 <x-guest-layout>
-    <x-auth-card>
+    <x-auth-card class="mt-0 md:mt-auto lg:mt-0 md:-mb-72 -mb-0 xl:-mb-0 lg:mx-20 pt-24 sm:pt-4">
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 md:w-56 w-32 xl:w-48 2xl:w-48 fill-current text-gray-500" />
+                <x-application-logo class="w-20 md:w-40 w-32 xl:w-40 2xl:w-40 fill-current text-gray-500" />
             </a>
         </x-slot>
 
-        <x-auth-card_body class="p-4 sm:p-10 xl:p-14 2xl:p-20 mx-4 sm:mx-10 xl:p-14 2xl:mx-20 xl:mx-14">
-            <div class="sm:rounded-lg p-5 xl:p-8 2xl:p-10 h-fit 2xl:w-5/12 xl:w-6/12 lg:w-1/2 w-full">
+        <x-auth-card_body class="p-4 sm:p-10 2xl:p-20 mx-4 sm:mx-10 xl:p-10 2xl:mx-20 xl:mx-14">
+            <div class="sm:rounded-lg p-5 xl:p-8 2xl:p-10 h-fit 2xl:w-5/12 xl:w-6/12 w-full">
                 <!-- Session Status -->
                 <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -21,7 +30,7 @@
                         <div>
 
 
-                            <x-input id="email" class="block  w-full" type="email" name="email" :value="old('email')"
+                            <x-input id="email" class="block w-full" type="email" name="email" :value="old('email')"
                                 required autofocus />
                             <x-label for="email" :value="__('Email')" class="mt-2" />
                         </div>
@@ -65,6 +74,12 @@
                 </form>
             </div>
         </x-auth-card_body>
+        <div class="w-full items-center justify-center flex mt-8">
+            <div class="w-1/2 mx-auto hidden xl:block"></div>
+            <a href="/" class="w-full xl:w-1/2 block">
+                <x-button-back class="mx-auto text-white 2xl:w-20 w-16" color="#91091E" />
+            </a>
+        </div>
 
     </x-auth-card>
 </x-guest-layout>

@@ -183,7 +183,7 @@
   z-index: 1;
   box-sizing: border-box;
   box-shadow: none;
-  border-radius: 0.25rem;
+  border-radius: 0.375rem;
   display: flex;
   flex-wrap: wrap; }
   .ts-control.multi .ts-input.has-items {

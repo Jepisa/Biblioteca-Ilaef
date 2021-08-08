@@ -2,6 +2,6 @@
     'textContent' => 'Lorem ipsum dolor'])
 
 
-<p {{ $attributes->merge(['class' => 'xl:text-base sm:text-sm text-xs']) }}>
+<p {{ $attributes->merge(['class' => 'text_responsive']) }}>
     {{ $textContent }}
 </p>

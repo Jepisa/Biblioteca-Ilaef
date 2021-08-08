@@ -1,5 +1,5 @@
-<div class="carousel none-carrousel">
-    <div class="title-of-carousel">
+<div class="carousel none-carrousel text_responsive">
+    <div class="bg-azuloscuro text-white p-2 xl:border-2 border rounded-md flex w-min truncate shadow-lg px-4 lg:ml-24 md:ml-20 ml-5 xl:ml-0 xl:font-medium cursor-default">
         {{ $titleOfCarousel }}
     </div>
     <div class="glide {{ $carousel }}">
@@ -13,7 +13,7 @@
                         {{-- <img id="" class="imagen-carousel " src="{{ asset('storage/'.$content->coverImage) }}" alt="{{ $content->title }}"> --}}
                         </div>
                         <div class="title-of-content">
-                            <p title="{{ $content->title }}">{{ $content->title }}</p>
+                            <p class="content_title_result" title="{{ $content->title }}">{{ $content->title }}</p>
                         </div>
                     </div>
                 </li>

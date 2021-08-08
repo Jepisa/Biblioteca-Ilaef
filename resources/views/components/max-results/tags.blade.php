@@ -1,5 +1,11 @@
 @props([
-    'results' => ['Tag1', 'Ciencia Ficcion', 'Familia', 'Empresa', 'Mejorar', 'Novela', 'Latinoamérica'],
+    'results' => ['Tag1', 
+    // 'Ciencia Ficcion',
+    // 'Familia', 
+    // 'Empresa',
+    // 'Mejorar', 
+    'Novela', 
+    'Latinoamérica'],
 ])
 
 @foreach ($results as $tag)

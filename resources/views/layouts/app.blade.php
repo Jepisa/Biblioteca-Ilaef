@@ -34,9 +34,11 @@
 
 </head>
 
-<body class="">
-    <div class="min-h-screen flex flex-col">
+<body x-data="{}" @overflow="toggle_Overflow()">
+    <div class="flex flex-col main_container_body" x-data="{}">
         @include('layouts.navigation')
+
+
 
         <!-- Page Heading -->
         {{-- <header class="bg-white shadow mt-20">
@@ -46,7 +48,7 @@
                 </header> --}}
 
         <!-- Page Content -->
-        <main class="content-main">
+        <main class="content-main h-full" x-data="{}">
             {{ $slot }}
         </main>
         <x-footer-principal />

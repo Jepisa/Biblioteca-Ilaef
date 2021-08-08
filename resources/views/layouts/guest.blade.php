@@ -17,13 +17,14 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <link rel="stylesheet" href="{{ asset('css/tom-select.bootstrap4.css') }}">
+    <script src="{{ asset('js/tom-select.complete.js') }}"></script>
 
 </head>
 
 <body>
-    <div class="h-screen flex flex-col justify-between">
-        <div class="background_login" ></div>
-        <div class="font-sans text-gray-900 antialiased h-full loginbackground">
+    <div class="min-h-screen flex flex-col">
+        <div class="font-sans text-gray-900 antialiased h-full loginbackground mt-auto">
             {{ $slot }}
         </div>
         <x-footer-principal />

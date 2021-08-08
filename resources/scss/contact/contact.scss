@@ -1,44 +1,21 @@
 .contact_container {
-    .background_color {
-        z-index: -2;
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        width: 100vw;
-        background-color: white;
-    }
-    .background_contact {
-        top: 0;
-        left: 0;
-        z-index: -1;
-        position: fixed;
-        height: 100vh;
-        width: 100%;
-        background-image: url("../img/assets/contact/contact_background.jpg");
-        background-color: transparent;
-        background-position: -48vw;
-        background-repeat: no-repeat;
-        background-size: cover;
-        @media (max-width: 1536px) {
-            background-size: cover;
-            background-position: -50vw;
-        }
-        @media (max-width: 1440px) {
-            background-size: cover;
-            background-position: -53vw;
-        }
-        @media (max-width: 1279px) {
-            position: absolute;
-            background-size: cover 100vh;
-            background-position: center;
-        }
-
-    }
     .form_contact{
         font-size: 15px;
         @media (max-width: 1024px) {
             font-size: 12px;
         }   
+    }
+}
+.background_contact {
+    background-image: url("../img/assets/contact/mensaje_desktop.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+    @media (max-width: 1279px) {
+        background-image: url("../img/assets/contact/mensaje_tablet.jpg");
+    }
+    @media (max-width: 767px) {
+        background-image: url("../img/assets/contact/mensaje_mobile.jpg");
     }
 }

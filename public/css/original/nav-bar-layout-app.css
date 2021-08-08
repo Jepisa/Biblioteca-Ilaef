@@ -131,8 +131,8 @@ nav.nav-principal{
 
 @media (max-width:639px){
     nav.nav-principal{
-        width: 95%;
-        
+        margin: 0 1rem;
+        width: auto;        
         background-size: 100% 49px;
         background-repeat: no-repeat;
         background-image: url("../../img/navbar/navbar-mobile.png");

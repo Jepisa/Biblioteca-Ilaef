@@ -23,10 +23,10 @@
     <div
         class="flex flex-col w-full items-center 2xl:px-20 xl:px-20 sm:px-10 sm:py-8 px-4 pt-4 color_grisclaro redhat_regular text_responsive">
         <div
-            class="border_gris rounded-lg flex justify-center items-center 2xl:p-20 sm:p-8 p-4 resultsSearch_Main md:mb-0 mb-8">
+            class="border_gris rounded-lg flex justify-center items-center 2xl:p-20 xl:pt-20 lg:pt-16 md:pt-16 sm:p-8 p-4 resultsSearch_Main md:mb-0 mb-8">
             <x-max-results.main />
         </div>
-        <a href="/" class="mb-8 sm:mb-0 2xl:w-20 w-20">
+        <a href="/" class="mb-8 sm:mb-0 2xl:w-20 w-16">
             <x-button-back class="mx-auto text-white w-full" />
         </a>
     </div>

@@ -52,7 +52,7 @@
     transition: 0.2s linear;
     width: 100%;
     min-height: 200px;
-    max-height: 200px;
+    max-height: 300px;
 }
     .glide .glide__slide img:hover{
         position: relative;
@@ -95,9 +95,7 @@
     min-height: 344px;
 }
 
-<<<<<<< HEAD
-=======
-select {
+/* select {
     background-color: #91091F;
     color: white;
     border-radius: 5px;
@@ -105,8 +103,7 @@ select {
     padding: unset;
     max-width: 4em;
     font-size: 0.9em;
-}
->>>>>>> 70de49bdf6a78e2edeeead76250903de069075d6
+} */
 
 
 @media (max-width: 1024px){

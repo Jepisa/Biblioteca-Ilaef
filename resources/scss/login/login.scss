@@ -1,28 +1,28 @@
 // src="./img/assets/login/1920.jpg
 
-.background_login{
-    z-index: -1;
-    position: fixed;
-    height: 100vh;
-    width: 100%;
-    background-image:  url("../img/assets/login/1920.jpg");
-    background-color: #cccccc;
-    background-position: 25% 75%;
-    background-repeat: no-repeat; 
-    background-size: cover; 
-    @media (max-width: 1024px) {
-        background-image:  url("../img/assets/login/768.jpg");
-        background-color: #cccccc;
-        background-position: center;
-        background-repeat: no-repeat; 
-        background-size: cover; 
-    }
-}
 
-.form_login{
+.tablet_login {
+    object-fit: cover;
+}
+// .background_login{
+
+//     background-image:  url("../img/assets/login/1920.jpg");
+//     background-color: #cccccc;
+//     background-position: 25% 75%;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     @media (max-width: 1024px) {
+//         background-image:  url("../img/assets/login/768.jpg");
+//         background-color: #cccccc;
+//         background-position: center;
+//         background-repeat: no-repeat;
+//         background-size: cover;
+//     }
+// }
+
+.form_login {
     font-size: 15px;
     @media (max-width: 1024px) {
         font-size: 12px;
-    }    
-
+    }
 }

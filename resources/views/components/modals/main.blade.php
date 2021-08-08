@@ -5,6 +5,8 @@
     'download' => '0',
     'fav' => '0',
     'contentID' => null,
+    'contentID' => null,
+    'register' => null,
 ])
 
 <div x-show="open" x-transition:enter="transition ease-out duration-200"
@@ -27,6 +29,9 @@
         @endif
         @if ($loginMessage != null)
         <x-modals.welcomeLogin loginMessage={{$loginMessage}}/>         
+        @endif
+        @if ($register != null)
+        <x-modals.register register={{$register}}/>         
         @endif
     </div>
 </div>

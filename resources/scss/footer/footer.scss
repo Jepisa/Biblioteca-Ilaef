@@ -1,3 +1,7 @@
+.main_container_body{
+    min-height: 100vh;
+}
+
 footer{
     height: 85px;
     @media (max-width: 768px) {
@@ -8,7 +12,7 @@ footer{
 
 .logo_container_footer{
     height: fit-content;
-    width: 160px;
+    width: 140px;
     @media (max-width: 768px) {
         width: 100px;
     }    

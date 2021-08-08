@@ -8,7 +8,7 @@
 
         <div class="w-2/3 w-full flex justify-between items-center color_azuloscuro">
             <x-title textContent="Búsqueda avanzada {{ $filter }}" class="font-medium text-base md:text-lg text-left" />
-            <div class="border cursor-pointer flex justify-between items-center" @click="open = false">
+            <div class="border cursor-pointer flex justify-between items-center modal_close" @click="open = false;$dispatch('overflow')">
                 <i class="fas fa-times p-2"></i>
             </div>
         </div>
@@ -69,8 +69,8 @@
         </div>
         {{-- BUTTON --}}
         <div class="px-4 flex items-center advance_search_button_container">
-            <x-button @click="open = false" class="px-8 py-3 background_rojooscuro text-white text-md redhat_bold flex justify-center letterSpace-20 m-0 uppercase rounded-xl advance_search_button
-                hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring-none"
+            <x-button @click="open = false;$dispatch('overflow')" class="px-8 py-3 background_rojooscuro text-white text-md redhat_bold flex justify-center letterSpace-20 m-0 uppercase rounded-xl advance_search_button
+                hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring-none modal_close"
                 style="margin-bottom: 0px">
                 Buscar
             </x-button>

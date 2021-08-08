@@ -42,11 +42,13 @@
 
 
     {{-- MODAL WELCOME --}}
-    @auth
-        <div x-data="{ open: true }" @click.away="open = false" @close.stop="open = false" class="">
-            <x-modals.main loginMessage="{{ Auth::user()->name }}" />
-        </div>
-    @endauth
+    @if (Session()->exists('notification'))
+        @auth
+            <div x-data="{ open: true }" @click.away="open = false" @close.stop="open = false" class="">
+                <x-modals.main loginMessage="{{ Auth::user()->name }}" />
+            </div>
+        @endauth
+    @endif
 
 
 

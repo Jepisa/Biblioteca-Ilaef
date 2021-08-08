@@ -20,7 +20,7 @@
                 </div> --}}
             </div>
             <div class="sm:col-span-6 xl:col-span-3 lg:col-span-6 md:col-span-4 md:col-start-9 col-span-6 sm:ml-0 ml-5 flex lg:items-end items-start">
-                <img src="{{ asset('img/content/0.jpg') }}" alt="" class="w-full" />
+                <img src="{{ asset('img/content/0.jpg') }}" alt="" class="w-full shadow_hard" />
             </div>
             <div class="col-span-12 xl:col-span-6 xl:flex flex-col justify-end xl:mt-10 sm:mt-0 mt-10">
                 <x-title class="sm:mb-10 mb-5 sm:text-3xl text-2xl" textContent="Titulo del libro largo" />

@@ -1,3 +1,13 @@
+<div class="background_container overflow-hidden">
+    <div class="h-full">
+        <img src="{{ asset('img/assets/login/login_desktop.jpg') }}" class="hidden xl:block object-cover h-full w-full">
+        <img src="{{ asset('img/assets/login/tablet_login.jpg') }}" class="hidden md:block xl:hidden tablet_login object-cover h-full w-full">
+        <img src="{{ asset('img/assets/login/celular_login.jpg') }}" class="block md:hidden object-cover h-full w-full">
+    </div>
+    {{-- <div class="bg-white"></div> --}}
+</div>
+
+
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">

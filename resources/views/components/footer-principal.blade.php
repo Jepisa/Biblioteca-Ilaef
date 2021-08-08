@@ -22,7 +22,7 @@
         </div>
 
         <div class="md:col-span-4 col-span-12 lg:col-span-3 xl:flex justify-center items-center hidden">
-            <div class="mt-2 logo_container_footer">
+            <div class="mt-2 logo_container_footer xl:w-3/4">
                 <a class="" href="{{ route('home') }}">
                     <img src="{{ asset('img/logo-letras-blancas.png') }}">
                 </a>
@@ -30,16 +30,16 @@
         </div>
 
         <div class="md:col-span-3 col-span-4 lg:col-span-3 flex justify-end md:items-center items-start">
-            <a href="" class="w-6 sm:w-8 lg:w-10 ml-2 lg:ml-4">
-                <img class="img-red-social" src="{{ asset('img/redes-sociales/icono-facebook.png') }}">
+            <a href="" class="w-6 sm:w-8 sm:h-8 lg:w-8 lg:h-8 ml-2 lg:ml-4">
+                <img class="" src="{{ asset('img/redes-sociales/icono-facebook.png') }}">
             </a>
-            <a href="" class="w-6 sm:w-8 lg:w-10 ml-2 lg:ml-4">
-                <img class="img-red-social" src="{{ asset('img/redes-sociales/icono-twitter.png') }}">
+            <a href="" class="w-6 sm:w-8 sm:h-8 lg:w-8 lg:h-8 ml-2 lg:ml-4">
+                <img class="" src="{{ asset('img/redes-sociales/icono-twitter.png') }}">
             </a>
-            <a href="" class="w-6 sm:w-8 lg:w-10 ml-2 lg:ml-4">
-                <img class="img-red-social" src="{{ asset('img/redes-sociales/icono-instagram.png') }}">
+            <a href="" class="w-6 sm:w-8 sm:h-8 lg:w-8 lg:h-8 ml-2 lg:ml-4">
+                <img class="" src="{{ asset('img/redes-sociales/icono-instagram.png') }}">
             </a>
-            <a href="" class="w-6 sm:w-8 lg:w-10 ml-2 lg:ml-4">
+            <a href="" class="w-6 sm:w-8 sm:h-8 lg:w-8 lg:h-8 ml-2 lg:ml-4">
                 <img class="" src="{{ asset('img/redes-sociales/icono-linkedin.png') }}">
             </a>
             {{-- <i class="fab fa-facebook-square"></i></a>

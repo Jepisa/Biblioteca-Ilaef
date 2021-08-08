@@ -1,25 +1,8 @@
 <div
-    class="color_azuloscuro background_rojooscuro w-full block sm:flex items-center p-3 rounded-lg searchBar_container relative z-50 text_responsive">
-    <div class="w-1/3 md:w-36 hidden md:block ">
-        <select id="content-select" autocomplete="off">
-            <option value="0" selected>Todo</option>
-            <option value="1">Autor</option>
-            <option value="2">Título</option>
-            <option value="3">Editorial</option>
-            <option value="4">Tema</option>
-            <option value="5">ISBN</option>
-        </select>
-    </div>
-    <div class="input_search_mainContainer mx-0 md:mx-4 text_responsive cursor-pointer">
-        <div class="w-4 h-4 absolute z-50 left-6 top-5 md:left-28 lg:left-32 2xl:left-36 md:top-5 magnifier_icon">
-            <i class="fas fa-search"></i>
-        </div>
-        <input class="input_biblio w-full" type="search" id="search" name="search"
-            placeholder="Buscar por título, autor, editorial..." autocomplete="off">
-    </div>
-    <div class="flex mt-3 md:mt-0">
-        <div class="w-1/3 md:w-36 md:hidden block md:ml-0 mr-2">
-            <select id="content-select2" autocomplete="off">
+    class="color_azuloscuro background_rojooscuro w-full block md:flex items-center p-3 rounded-lg searchBar_container relative z-50 text_responsive">
+    <div class="flex items-center justify-center w-full">
+        <div class="block">
+            <select id="content-select" autocomplete="off" class="text_responsive w-24">
                 <option value="0" selected>Todo</option>
                 <option value="1">Autor</option>
                 <option value="2">Título</option>
@@ -28,14 +11,31 @@
                 <option value="5">ISBN</option>
             </select>
         </div>
-        <div class="w-2/3 md:w-52 whitespace-nowrap md:ml-0 ml-1">
-            <select id="advance-search" autocomplete="off" class="">
+        <div class="input_search_mainContainer text_responsive cursor-pointer ml-4 mr-0 md:mr-4">
+            <div class="w-4 h-4 absolute z-50 left-6 top-5 md:left-28 lg:left-32 2xl:left-36 md:top-5 magnifier_icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <input class="w-full rounded-sm input_search text_responsive" type="search" id="search" name="search"
+                placeholder="Buscar por título, autor, editorial..." autocomplete="off">
+        </div>
+    </div>
+    <div class="flex mt-3 md:mt-0">
+        <div class="w-full md:w-52 whitespace-nowrap">
+            <select id="advance-search" autocomplete="off" class="advance_search_select">
                 <option value="0" selected>Busqueda avanzada</option>
-                <option value="1">Autor</option>
-                <option value="2">E-book</option>
-                <option value="3">Editorial</option>
-                <option value="4">Tema</option>
-                <option value="5">ISBN</option>
+                <option value="1">Audiovisual</option>
+                <option value="2">Caso de estudio</option>
+                <option value="3">Congreso</option>
+                <option value="4">Conferencia</option>
+                <option value="5">E-book</option>
+                <option value="6">Infografía</option>
+                <option value="7">Libro</option>
+                <option value="8">Material gráfico</option>
+                <option value="9">Revista</option>
+                <option value="10">Seminario</option>
+                <option value="11">Trabajo de investigación</option>
+                <option value="12">Tesis</option>
+                <option value="13">Podcast</option>
             </select>
         </div>
     </div>
@@ -85,12 +85,8 @@ border-radius: 4px;">
 
 </div>
 
-
 <script>
     new TomSelect('#content-select', {
-        plugins: ['dropdown_input'],
-    });
-    new TomSelect('#content-select2', {
         plugins: ['dropdown_input'],
     });
     new TomSelect('#advance-search', {
@@ -114,9 +110,11 @@ border-radius: 4px;">
             }
             // $("#filter_modal").attr("filter", response);
             $("#advance_search_modal").attr("x-data", "{ open: true }");
-            //revisar como hacerlo toggle
-            $("body").addClass("overflow-y-hidden");
+            toggle_Overflow();
         }
-
     });
+
+    function toggle_Overflow() {
+        $("body").toggleClass("overflow-hidden");
+    }
 </script>
