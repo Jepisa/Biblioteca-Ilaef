@@ -1,0 +1,158 @@
+/* Footer */
+footer{
+    width:100%;
+    min-height:85px;
+    background: #111214 0% 0% no-repeat padding-box;
+    opacity:1;
+    color:white;
+}
+
+.redes-sociales .img-red-social{
+    width: 22.41px;
+    height: 22.27px;
+    margin: 0 2px;
+    border-radius: 100%;
+}
+    
+.foot{
+    min-height: inherit;
+    align-items: center;
+}
+.direction-contact, .logo-footer, .redes-sociales{
+        padding-left: 25px;
+        margin: auto;
+    }
+
+.direction-contact {
+    font-size: 8px;
+    width: 60%;
+}
+
+
+
+/*  */
+
+@media (min-width:568){
+
+    #redes-sociales {
+        margin: auto !important;
+    }
+
+    footer .foot{
+        flex-direction: row;
+    }
+
+    .redes-sociales{
+        flex-direction: row;
+    }
+
+    .redes-sociales img {
+        margin-right: 5px;
+    }
+
+}
+
+@media (max-width:332px) {
+
+    footer .foot {
+        flex-direction: row !important;
+        align-items: flex-end;
+        font-size: 12px;
+
+    }
+
+    .direction-contact {
+        align-items: flex-start !important;
+    }
+}
+
+@media (min-width:330px){
+    footer .foot {
+        flex-direction: row !important;
+        align-items: flex-end;
+        font-size: 12px;
+        
+    }
+}
+
+@media (max-width:568px){
+    footer .foot{
+        flex-direction: column;
+    }
+    
+    .logo-footer{
+        order: -1;
+        width: 100%;
+    }
+    .redes-sociales{
+        width: 100%;
+        flex-direction: row;
+    }
+    .direction-contact{
+        width: 100%;
+        /* align-items: center !important; */
+    }
+    .direction-contact div{
+        flex-direction: row;
+    }
+    
+
+}
+
+
+@media (max-width:750px){
+    footer .foot{
+        flex-direction: column;
+    }
+
+    .logo-footer{
+        order: -1;
+        width: 100%;
+    }
+    .redes-sociales{
+        width: 100%;
+        flex-direction: row;
+    }
+    .direction-contact{
+        width: 100%;
+    }
+    .direction-contact div{
+        flex-direction: row;
+    }
+
+
+}
+
+
+
+@media (min-width:750px){
+    footer {
+        display: flex;
+        flex-direction: row;
+        /* height: 125px;         */
+    }
+    .logo-footer {
+        width: 33%;
+    }
+    #footer {
+        width: 66%;
+    }
+
+    .direction-contact{
+    font-size: 12px;
+}
+}
+@media (max-width:1024px){
+    footer{
+        font-size: 13px;
+    }
+    .direction-contact{
+        flex-direction: column-reverse;
+        align-items: unset !important;
+        
+    }
+    .direction{
+        margin: 0;
+    }    
+}
+

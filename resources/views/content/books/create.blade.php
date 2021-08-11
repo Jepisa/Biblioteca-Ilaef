@@ -339,17 +339,13 @@
 
 <x-notification />
 
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
-@stop
-
-@section('js')
+<x-slot name="css">
+    {{-- <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}"> --}}
+</x-slot>
+<x-slot name="scripts">
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+</x-slot>
+<x-slot name="scriptsDown">
     <script src="{{ asset('js/select2.min.js') }}"></script>
     <script>
         $(".multi-select").select2({

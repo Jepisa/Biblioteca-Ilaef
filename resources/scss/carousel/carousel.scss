@@ -1,0 +1,29 @@
+.carousel {
+    margin-top: 30px;
+}
+
+.glide__arrows {
+    margin-top: 20px;
+}
+
+.glide__track {
+    @media (max-width: 1280px) {
+        padding: 0px 20px;
+    }
+}
+
+.glide .glide__slide img{
+    @media (max-width: 1279px) {
+        min-height: 300px;
+        max-height: 300px;
+    }
+    @media (max-width: 1023px) {
+        min-height: 175px;
+        max-height: 175px;
+    }
+    @media (max-width: 767px) {
+        min-height: 150px;
+        max-height: 150px;
+    }
+
+}

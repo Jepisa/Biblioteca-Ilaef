@@ -1,6 +1,6 @@
 <div>
-    <div class="text-center my-4">
-        <h3 class="text-2xl">Creá una cuenta. Es gratis</h3>
+    <div class="text-left md:text-center mb-8 ">
+        <h3 class="text-lg md:text-2xl">Creá una cuenta. Es gratis</h3>
     </div>
 
     <!-- Validation Errors -->
@@ -21,29 +21,30 @@
 
     <form method="POST" action="{{ route('register') }}">
         @csrf
- 
-        <!-- Name and Last Name -->
-        <div class="w-full flex justify-between mb-6">
-            <!-- Name -->
-            <div class="w-input-form">
-                <x-input id="name" class="mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
-                <x-label for="name" :value="__('Name')" />
-            </div>
-            
-            <!-- Last Name -->
-            <div class="w-input-form">
-                <x-input id="lastName" class="mt-1 w-full" type="text" name="lastName" :value="old('lastName')" required />
-                <x-label for="lastName" :value="__('Last Name')" />
-            </div>
-        </div>
 
-        <!-- Country and State -->
-        <div class="w-full flex justify-between">
+        <!-- Name and Last Name -->
+        <div class="color_azuloscuro letterSpace-20 form_login grid grid-cols-2 gap-4">
+            <!-- Name -->
+            <div class="md:col-span-1 col-span-2">
+                <x-input id="name" class="block w-full mb-1" type="text" name="name" :value="old('name')" required
+                    autofocus />
+                <x-label for="name" :value="__('Name')" class="ml-2" />
+            </div>
+
+            <!-- Last Name -->
+            <div class="md:col-span-1 col-span-2">
+                <x-input id="lastName" class="block w-full mb-1" type="text" name="lastName" :value="old('lastName')"
+                    required />
+                <x-label for="lastName" :value="__('Last Name')" class="ml-2" />
+            </div>
+
+
 
             <!-- Country -->
-            <div class="w-input-form mb-6">
+            <div class="md:col-span-1 col-span-2">
                 {{-- <x-input id="country" class="mt-1 w-full" type="text" name="country" :value="old('country')" required autofocus /> --}}
-                <select id="country" class="w-full" name="country" wire:model="selectedCountry" :value="old('country')" required>
+                <select id="country" class="w-full tracking-normal mb-1" name="country" wire:model="selectedCountry"
+                    :value="old('country')" required>
                     <option selected disabled>
                         Seleccione un país
                     </option>
@@ -52,117 +53,116 @@
                             {{ $country->name }}
                         </option>
                     @endforeach
-                    
+
                 </select>
-                <x-label for="country" :value="__('Country')" />
+                <x-label for="country" :value="__('Country')" class="ml-2" />
             </div>
-            
+
             <!-- State -->
-            <div class="w-input-form mb-6">
+            <div class="md:col-span-1 col-span-2">
                 {{-- <x-input id="state" class="mt-1 w-full" type="text" name="state" :value="old('state')" required /> --}}
-                <select id="state" class="w-full" name="state" required>
-                    <option value="Seleccione una provincia" selected disabled>
-                        Seleccione una provincia
+                <select id="state" class="w-full tracking-normal mb-1" name="state" required>
+                    <option value="Lugar de Residencia" selected disabled>
+                        Lugar de Residencia...
                     </option>
                     @if ($states)
-                        
-                    @foreach ($states as $state)
-                        <option value="{{ $state->id }}">
-                            {{ $state->name }}
-                        </option>
-                    @endforeach
+                        @foreach ($states as $state)
+                            <option value="{{ $state->id }}">
+                                {{ $state->name }}
+                            </option>
+                        @endforeach
                     @endif
-                    
-                </select>
-                
-                <x-label for="state" :value="__('State')" />
-            </div>
-        </div>
 
-        <!-- Telephone and Email Address -->
-        <div class="w-full flex justify-between mb-6">
-            <div class="w-input-form">
-                <x-input id="phoneNumber" class="block mt-1 w-full" type="tel" name="phoneNumber" :value="old('phoneNumber')" required />
-                <x-label for="phoneNumber" :value="__('Telephone')" />
+                </select>
+                <x-label for="state" value="Lugar de Residencia" class="ml-2" />
             </div>
-            <div class="w-input-form">
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-                <x-label for="email" :value="__('Email')" />
+
+
+            <!-- Telephone and Email Address -->
+
+            <div class="md:col-span-1 col-span-2">
+                <x-input id="phoneNumber" class="block w-full" type="tel" name="phoneNumber"
+                    :value="old('phoneNumber')" required />
+                <x-label for="phoneNumber" :value="__('Telephone')" class="ml-2" />
             </div>
-        </div>
-        
-        <!-- Occupation and Referrer -->
-        <div class="w-full flex justify-between">
+            <div class="md:col-span-1 col-span-2">
+                <x-input id="email" class="block w-full" type="email" name="email" :value="old('email')"
+                    required />
+                <x-label for="email" :value="__('Email')" class="ml-2" />
+            </div>
+
+
+            <!-- Occupation and Referrer -->
+
 
             <!-- Occupation -->
-            <div class="w-input-form mb-6">
-                <select id="occupation" class="w-full" name="occupation" :value="old('occupation')" required >
+            <div class="md:col-span-1 col-span-2">
+                <select id="occupation" class="w-full tracking-normal mb-1" name="occupation" :value="old('occupation')"
+                    required>
                     <option selected disabled>
                         Selecciona una Ocupación
                     </option>
                     @foreach ($occupations as $occupation)
-                        <option value="{{ $occupation->id }}" >
+                        <option value="{{ $occupation->id }}">
                             {{ $occupation->name }}
                         </option>
                     @endforeach
-                    
+
                 </select>
-                <x-label for="occupation" :value="__('Occupation')" />
+                <x-label for="occupation" value="Ocupación" class="ml-2" />
             </div>
 
-            
-            
+
+
+
             <!-- Referrer -->
-            <div class="w-input-form mb-6">
-                <select id="referrer" class="w-full" name="referrer" required>
+            <div class="md:col-span-1 col-span-2">
+                <select id="referrer" class="w-full tracking-normal mb-1" name="referrer" required>
                     <option selected disabled>
                         Nos conoces por...
                     </option>
                     @if ($referrers)
-                        
-                    @foreach ($referrers as $referrer)
-                        <option value="{{ $referrer->id }}">
-                            {{ $referrer->name }}
-                        </option>
-                    @endforeach
+
+                        @foreach ($referrers as $referrer)
+                            <option value="{{ $referrer->id }}">
+                                {{ $referrer->name }}
+                            </option>
+                        @endforeach
                     @endif
-                    
+
                 </select>
-                
-                <x-label for="referrer" :value="__('Nos conocés por')" />
+
+                <x-label for="referrer" :value="__('Nos conocés por')" class="ml-2" />
             </div>
-        </div>
-        
-        <!--Password and Confirm Password -->
-        <div class="w-full flex justify-between mb-6">
+
+
+
+            <!--Password and Confirm Password -->
+
             <!-- Password -->
-            <div class="w-input-form">
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="new-password" />
-                <x-label for="password" :value="__('Password')" />
+            <div class="md:col-span-1 col-span-2">
+                <x-input id="password" class="block w-full mb-1" type="password" name="password" required
+                    autocomplete="new-password" />
+                <x-label for="password" :value="__('Password')" class="ml-2" />
             </div>
 
             <!-- Confirm Password -->
-            <div class="w-input-form">
+            <div class="md:col-span-1 col-span-2">
 
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
+                <x-input id="password_confirmation" class="block w-full mb-1" type="password"
+                    name="password_confirmation" required />
+                <x-label for="password_confirmation" :value="__('Confirm Password')" class="ml-2" />
             </div>
         </div>
         @auth
-        <!-- Roles -->
+            <!-- Roles -->
             @if (isset($roles))
-                
+
                 <!-- Role -->
                 <div class="mb-6">
                     <x-label for="role" :value="__('Role')" />
 
-                    {{--
-                    <x-input id="role" class="block mt-1 w-full" type="text" name="role_id" :value="old('role_id')" required />
+                    {{-- <x-input id="role" class="block mt-1 w-full" type="text" name="role_id" :value="old('role_id')" required />
 
                     <option {{ (Auth::user()->role->name == 'Administrador Principal') ? 'selected="selected"' : '' }} value="{{ HOla1 }}">
                         {{ Label }}
@@ -174,7 +174,7 @@
                                 {{ $role->name }}
                             </option>
                         @endforeach
-                        
+
                     </select>
 
                 </div>
@@ -182,12 +182,26 @@
             @endif
         @endauth
 
-
-        <div class="flex items-center justify-center mt-4">
-
-            <x-button class="w-3/6 justify-center">
+        <div class="flex mt-8 md:mt-16 w-full justify-center flex">
+            <x-button
+                class="xl:w-60 w-full background_azuloscuro redhat_bold flex justify-center letterSpace-20 mb-0">
                 {{ __('REGISTRATE') }}
             </x-button>
         </div>
     </form>
 </div>
+
+<script>
+    new TomSelect('#country', {
+        plugins: ['dropdown_input'],
+    });
+    new TomSelect('#state', {
+        plugins: ['dropdown_input'],
+    });
+    new TomSelect('#occupation', {
+        plugins: ['dropdown_input'],
+    });
+    new TomSelect('#referrer', {
+        plugins: ['dropdown_input'],
+    });
+</script>

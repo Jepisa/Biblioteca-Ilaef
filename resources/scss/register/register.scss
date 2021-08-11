@@ -1,0 +1,12 @@
+.background_register {
+    background-image: url("../img/assets/register/register_desktop.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    @media (max-width: 1279px) {
+        background-image: url("../img/assets/register/register_tablet.jpg");
+    }
+    @media (max-width: 767px) {
+        background-image: url("../img/assets/register/register_mobile.jpg");
+    }
+}

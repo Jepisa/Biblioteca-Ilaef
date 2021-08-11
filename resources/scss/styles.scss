@@ -1,0 +1,183 @@
+@import "./original/app.css";
+@import "./original/carousel.css";
+@import "./original/description.css";
+@import "./original/glide.core.min.css";
+@import "./original/glide.theme.min.css";
+@import "./original/imgs.css";
+@import "./original/layout-app.css";
+@import "./original/max-results.css";
+// @import "./original/nav-bar-layout-app.css";
+@import "./original/pagination.css";
+// @import "./original/select2.min.css";
+@import "./original/shared.css";
+@import "./original/tags.css";
+
+//Variables
+
+$gris: #97afac;
+$gris_claro: #d5e5e3;
+$gris_oscuro: #5a6268;
+$azul_oscuro: #383e56;
+$rojo_oscuro: #91091e;
+
+.color_grisclaro {
+    color: $gris_claro;
+}
+.background_grisclaro {
+    background-color: $gris_claro;
+}
+
+.color_grisoscuro {
+    color: $gris_oscuro;
+}
+.background_grisoscuro {
+    background-color: $gris_oscuro;
+}
+
+.color_rojooscuro {
+    color: $rojo_oscuro;
+}
+.background_rojooscuro {
+    background-color: $rojo_oscuro;
+}
+
+.color_azuloscuro {
+    color: $azul_oscuro;
+}
+.background_azuloscuro {
+    background-color: $azul_oscuro;
+}
+
+//Fuentes
+
+.redhat_regular {
+    font-family: "Red Hat Display", sans-serif;
+    font-weight: 400;
+}
+
+.redhat_bold {
+    font-family: "Red Hat Display", sans-serif;
+    font-weight: 700;
+}
+
+.size9 {
+    font-size: 9px;
+}
+
+.size15 {
+    font-size: 15px;
+}
+.size16 {
+    font-size: 16px;
+}
+
+.letterSpace-20 {
+    letter-spacing: 0.1em;
+}
+
+.text_responsive {
+    font-size: 15px;
+    @media (max-width: 1360px) {
+        font-size: 12px;
+    }
+}
+
+.shadow_hard {
+    box-shadow: 2px 0px 28px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 2px 0px 28px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 0px 28px 0px rgba(0, 0, 0, 0.75);
+}
+
+//Sizing
+
+.h-fit {
+    height: fit-content;
+}
+
+.border_gris {
+    border: 3px solid $gris;
+    border-radius: 10px;
+}
+
+.border_1px {
+    border: 1px solid;
+}
+
+.zoomContent {
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+//BUTTONS
+.iconContainer {
+    &:active {
+        background-color: #97afac;
+        transition: all 0.2s ease-in-out;
+        svg {
+            .inner {
+                fill: $azul_oscuro;
+            }
+        }
+    }
+}
+.button-back_container {
+    svg {
+        path {
+            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+            // fill: $gris_claro;
+            transition: all 0.1s ease-in-out;
+            &:hover {
+                stroke: $azul_oscuro;
+                stroke-width: 15px;
+                stroke-dasharray: 50px;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+            }
+            &:active {
+                fill: #94bfba;
+            }
+        }
+    }
+}
+
+.background_color_main {
+    background-color: #383e56;
+    z-index: -2;
+    height: 100vh;
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    left: 0;
+}
+.background_container {
+    top: 0;
+    z-index: -2;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+}
+
+//Login
+@import "./login/login.scss";
+//About Us
+@import "./aboutUs/aboutUs.scss";
+//Carousel
+@import "./carousel/carousel.scss";
+//Register
+@import "./register/register.scss";
+//Contact
+@import "./contact/contact.scss";
+//Modals
+@import "./modals/modals.scss";
+//Search Bar
+@import "./searchBar/searchBar.scss";
+//Results
+@import "./results/results.scss";
+@import "./results/orderBy.scss";
+//Navbar
+@import "./navbar/nav.scss";
+//Foter
+@import "./footer/footer.scss";
+//Animations
+@import "./animations/main_animations.scss";

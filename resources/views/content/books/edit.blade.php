@@ -344,7 +344,7 @@
     <x-notification />
     
     <x-slot name="css">
-        <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+        {{-- <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}"> --}}
     </x-slot>
     <x-slot name="scripts">
         <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>

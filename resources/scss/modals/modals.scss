@@ -1,0 +1,23 @@
+.modal_container{
+    height: 180px;
+    min-width: 300px;
+    border-radius: 8px;
+}
+
+.modal_inner{
+    height: calc(100% - 10px);
+    width: calc(100% - 10px);
+    border: 1px dashed #6C757D;
+    border-radius: 8px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.modal_welcome{
+    min-height: 300px;
+    min-width: 300px;
+    border: 1px dashed #91091e;
+    border-radius: 8px;
+    margin: 10px;
+    box-sizing: border-box;
+}

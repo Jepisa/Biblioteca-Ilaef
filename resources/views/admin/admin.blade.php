@@ -13,7 +13,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">

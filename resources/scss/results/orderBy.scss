@@ -1,0 +1,33 @@
+// .orderBy_container{
+//     position: absolute;
+// }
+
+.orderBy_button{
+    border: 2px solid $gris_claro;
+}
+.orderby_menu{
+    top: 100px;
+    @media (max-width: 1535px) {
+        top: 102px;
+    }
+    @media (max-width: 1279px) {
+        top: 86px;
+        right: 33px;
+        ul{
+            li{
+                padding: 0.25rem 0.25rem;
+                text-align: right;
+            }
+        }
+    }
+    @media (max-width: 639px) {
+        top: 233px;
+        right: 35px;
+        ul{
+            li{
+                padding: 0.25rem 0.25rem;
+                text-align: right;
+            }
+        }
+    }
+}

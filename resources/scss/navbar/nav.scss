@@ -1,0 +1,112 @@
+.menu_desplegable {
+  max-height: 0;
+  overflow: hidden;
+  z-index: 100;
+  // padding: 12px 0;
+  position: absolute;
+  background-color: #f1f9ed;
+  width: calc(100% - 2rem);
+  -webkit-box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.21);
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.21);
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  transition: max-height 0.15s ease-out;
+}
+
+.open-close {
+  max-height: 500px;
+  transition: max-height 0.25s ease-in;
+}
+
+.navlink {
+  font-size: 15px;
+  padding: 12px 10px;
+  margin-left: 10px;
+}
+
+/* Hamburger Icon */
+#hamburger-icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+#hamburger-icon span {
+  display: inline-block;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: $gris_oscuro;
+  border-radius: 3px;
+  opacity: 1;
+  left: 0;
+  margin-top: 6px;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.25s ease-in-out;
+  -moz-transition: 0.25s ease-in-out;
+  -o-transition: 0.25s ease-in-out;
+  transition: 0.25s ease-in-out;
+}
+
+/* Hamburger Lines  */
+
+#hamburger-icon span:nth-child(1) {
+  top: 0px;
+}
+
+#hamburger-icon span:nth-child(2),
+#hamburger-icon span:nth-child(3) {
+  top: 7px;
+}
+
+#hamburger-icon span:nth-child(4) {
+  top: 14px;
+}
+
+#hamburger-icon.hamburger-open span {
+  background: $gris_oscuro;
+  /* margin-left: 2%; */
+}
+
+#hamburger-icon.hamburger-open span:nth-child(1) {
+  top: 18px;
+  width: 0%;
+  left: 50%;
+}
+
+#hamburger-icon.hamburger-open span:nth-child(2) {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+#hamburger-icon.hamburger-open span:nth-child(3) {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+#hamburger-icon.hamburger-open span:nth-child(4) {
+  top: 18px;
+  width: 0%;
+  left: 50%;
+}
+
+.menu_desplegable_content
+{
+
+}

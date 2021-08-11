@@ -43,6 +43,7 @@
     "Disable": "Inhabilitar",
     "Done.": "Hecho.",
     "E-Mail Address": "Correo Electrónico",
+    "Subject": "Asunto",
     "Editor": "Editor",
     "Editor users have the ability to read, create, and update.": "Los editores están habilitados para leer, crear y actualizar.",
     "Email Password Reset Link": "Enviar enlace para restablecer contraseña",
@@ -125,6 +126,7 @@
     "results": "resultados",
     "Role": "Rol",
     "Save": "Guardar",
+    "Send": "Enviar",
     "Saved.": "Guardado.",
     "Select A New Photo": "Seleccione una nueva foto",
     "Send Password Reset Link": "Enviar enlace para restablecer la contraseña",
@@ -195,5 +197,8 @@
     "You may delete any of your existing tokens if they are no longer needed.": "Puede eliminar cualquiera de sus tokens existentes si ya no los necesita.",
     "You may not delete your personal team.": "No se puede borrar su equipo personal.",
     "You may not leave a team that you created.": "No se puede abandonar un equipo que usted creó.",
-    "Your email address is not verified.": "Su dirección de correo electrónico no está verificada."
+    "Your email address is not verified.": "Su dirección de correo electrónico no está verificada.",
+    "Type here": "Escriba aquí...",
+    "Message": "Mensaje",
+    "State": "Provincia"
 }

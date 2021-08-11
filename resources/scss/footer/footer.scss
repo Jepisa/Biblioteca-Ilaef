@@ -1,0 +1,33 @@
+.main_container_body{
+    min-height: 100vh;
+}
+
+footer{
+    height: 85px;
+    @media (max-width: 768px) {
+        height: 100px;
+    } 
+}
+
+
+.logo_container_footer{
+    height: fit-content;
+    width: 140px;
+    @media (max-width: 768px) {
+        width: 100px;
+    }    
+
+}
+
+.contact_container{
+    font-size: 16px;
+    @media (max-width: 1280px) {
+        font-size: 12px;
+    }    
+    @media (max-width: 1024px) {
+        font-size: 9px;
+    }    
+    @media (max-width: 640px) {
+        font-size: 8px;
+    } 
+}

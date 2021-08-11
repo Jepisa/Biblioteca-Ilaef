@@ -19,29 +19,29 @@ const configCarousel =
     gap: 10,
     //autoplay: 4000,
     breakpoints: {
-        1024: 
+        1279: 
         {
-            perView: 6.76
+            perView: 4.75
         },
         834:
         {
-            perView: 5.5
+            perView: 5.75
         },
         800:
         {
-            perView: 5.25
+            perView: 5.75
         },
         768: 
         {
-            perView: 5
+            perView: 5.75
         },
         650: 
         {
-            perView: 3.5
+            perView: 3.55
         },
         428:
         {
-            perView: 3.25
+            perView: 3.55
         }
     }
 };
