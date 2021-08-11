@@ -36,13 +36,16 @@
             <div class="row mb-4">
                 <div class="col">
                     <div class="form-outline">
-                    <input name="name" value="{{ old('name') ?? $advertisement->name }}" type="text" id="form6Example1" class="form-control" />
+                    <input name="name" type="text" id="form6Example1" class="form-control" 
+                    value="{{ old('name') ?? $advertisement->name }}"
+                    />
                     <label class="form-label" for="form6Example1">{{ __('advertisement.create.name') }}</label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-outline">
-                        <input name="owner" type="text" id="form6Example2" class="form-control" />
+                        <input name="owner" type="text" id="form6Example2" class="form-control" 
+                        value="{{ old('owner') ?? $advertisement->owner }}"/>
                         <label class="form-label" for="form6Example2">{{ __('advertisement.create.owner') }}</label>
                     </div>
                 </div>
@@ -57,27 +60,30 @@
         
             <!-- URL input -->
             <div class="form-outline mb-4">
-                <input name="url" type="text" id="form6Example4" class="form-control" />
+                <input name="url" type="text" id="form6Example4" class="form-control" 
+                value="{{ old('url') ?? $advertisement->url }}"/>
                 <label class="form-label" for="form6Example4">{{ __('advertisement.create.url') }}</label>
             </div>
             
-            <div class="d-flex justify-content-around mb-4 w-100">
+            <div class="row mb-4 d-flex justify-content-around w-100">
                 <!-- Launching input -->
                 <div class="mb-4">
-                    <input name="launching" type="date" id="form6Example5" class="form-control" />
+                    <input name="launching" type="date" id="form6Example5" class="form-control" 
+                    value="{{ old('launching') ?? $advertisement->launching }}"/>
                     <label class="form-label" for="form6Example5">{{ __('advertisement.create.lauching') }}</label>
                 </div>
             
                 <!-- Expiration input -->
                 <div class="mb-4">
-                    <input name="expiration" type="date" id="form6Example6" class="form-control" />
+                    <input name="expiration" type="date" id="form6Example6" class="form-control" 
+                    value="{{ old('expiration') ?? $advertisement->expiration }}"/>
                     <label class="form-label" for="form6Example6">{{ __('advertisement.create.expiration') }}</label>
                 </div>
             </div>
         
             <!-- Information input -->
             <div class="form-outline mb-4">
-                <textarea name="information" class="form-control" id="form6Example7" rows="4"></textarea>
+                <textarea name="information" class="form-control" id="form6Example7" rows="4">{{ old('owner') ?? $advertisement->owner }}</textarea>
                 <label class="form-label" for="form6Example7">Additional information</label>
             </div>
         
@@ -89,7 +95,7 @@
                     value="true"
                     name="status"
                     id="form6Example8"
-                    checked
+                    {{-- {{ !$errors->any() ? 'checked' : ( old('status') == 'true' ? 'checked' : '' )}} --}}
                 />
                 <label class="form-check-label" for="form6Example8"> Publicar ahora? </label>
             </div>
@@ -106,7 +112,6 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/layout-app.css') }}">
 @stop
 
 @section('js')
