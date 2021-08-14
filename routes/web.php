@@ -18,6 +18,11 @@ require __DIR__.'/admin.php';
 
 Route::get('/', HomeController::class)->name('home')->middleware('auth');
 
+
+Route::get('favorites', function () {
+    return view('favorites');
+})->middleware(['verified','auth'])->name('favorites');
+
 Route::get('aboutUs', function () {
     return view('aboutUs');
 })->middleware(['verified','auth'])->name('aboutUs');
