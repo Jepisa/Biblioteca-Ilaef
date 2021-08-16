@@ -20,6 +20,10 @@ $gris_oscuro: #5a6268;
 $azul_oscuro: #383e56;
 $rojo_oscuro: #91091e;
 
+.color_gris {
+    color: $gris;
+}
+
 .color_grisclaro {
     color: $gris_claro;
 }
@@ -164,10 +168,14 @@ $rojo_oscuro: #91091e;
 @import "./aboutUs/aboutUs.scss";
 //Carousel
 @import "./carousel/carousel.scss";
+//Favorites
+@import "./favorites/favorites.scss";
 //Register
 @import "./register/register.scss";
 //Contact
 @import "./contact/contact.scss";
+//Profile
+@import "./profile/profile.scss";
 //Modals
 @import "./modals/modals.scss";
 //Search Bar

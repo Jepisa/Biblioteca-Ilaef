@@ -66,8 +66,10 @@
 
         <div class="sm:rounded-lg ">
             @if (count($productList) <= 0)
-                <div class="text-center color_azuloscuro my-5">
-                    <i class="fas fa-times-circle" style="font-size: 150px;"></i>
+                <div class="text-center color_azuloscuro my-5 ">
+                    <div class="w-full flex items-center justify-center">
+                        <img src="{{ asset('img/assets/favorites/no_favorites.svg') }}" alt="" class="w-1/3">
+                    </div>
                     <p class="font-bold mt-4">Aún no tienes favoritos</p>
                 </div>
             @else
@@ -100,20 +102,19 @@
         class="flex items-center justify-center fixed left-0 bottom-0 w-full h-full z-50" style="display: none;">
         <div class="rounded-md shadow-lg bg-white color_azuloscuro modal_container flex justify-center items-center "
             @click.away="open = false">
-            <div class="modal_inner flex flex-col items-center justify-center">
-                <div class="flex items-center justify-center mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" id='favorites' height="50" viewBox="0 0 24 24" width="50">
-                        <path d="M0 0h24v24H0z" fill="none" />
-                        <path
-                            d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" />
-                    </svg>
-                    <p class="text-base md:text-center ml-10">
-                        Se eliminará <br><span id="modal_product_name" class="font-bold">...</span><br> de tus
+            <div class="modal_inner flex flex-col items-center justify-center" style="padding: 20px;">
+                <div class="flex items-center justify-center mb-4 w-full">
+                    <div class="flex items-center justify-center">
+                        <img src="{{ asset('img/assets/favorites/remove_favorites.svg') }}" alt="" class="h-24 w-24">
+                    </div>
+                    <p class="text-base ml-5 text-center whitespace-normal max-w-xs">
+                        Se eliminará <span id="modal_product_name" class="font-bold break-normal whitespace-normal">...</span> de tus
                         favoritos.
                     </p>
                 </div>
                 <div class="flex items-center justify-around w-full">
-                    <p class="font-bold text-base md:text-center cursor-pointer" id="modal_confirmDelete_button" product_id="">
+                    <p class="font-bold text-base md:text-center cursor-pointer" id="modal_confirmDelete_button"
+                        product_id="">
                         Aceptar
                     </p>
                     <p class="text-md md:text-center cursor-pointer font-bold" @click="open = false">
@@ -135,11 +136,12 @@
                 let product_name = e.target.attributes.product_name.value;
                 document.getElementById("modal_product_name").innerHTML = product_name;
                 document.getElementById("modal_unfavorite").attributes[0].value = "{ open: true}";
-                document.getElementById("modal_confirmDelete_button").attributes.product_id.value = product_id;
+                document.getElementById("modal_confirmDelete_button").attributes.product_id.value =
+                    product_id;
             })
         });
 
-        document.getElementById("modal_confirmDelete_button").addEventListener("click", function (e) {
+        document.getElementById("modal_confirmDelete_button").addEventListener("click", function(e) {
             let product_id = e.srcElement.attributes.product_id.value;
             console.log(product_id)
             // AJAX CALL

@@ -23,6 +23,14 @@ Route::get('favorites', function () {
     return view('favorites');
 })->middleware(['verified','auth'])->name('favorites');
 
+Route::get('profile', function () {
+    return view('profile');
+})->middleware(['verified', 'auth'])->name('profile');
+
+Route::get('changePassword', function () {
+    return view('changePassword');
+})->middleware(['verified', 'auth'])->name('changePassword');
+
 Route::get('aboutUs', function () {
     return view('aboutUs');
 })->middleware(['verified','auth'])->name('aboutUs');

@@ -1,6 +1,6 @@
 <x-guest-layout navbar_display="0">
     <div class="background_container lg:fixed lg:h-screen fixed overflow-hidden flex xl:flex-row flex-col">
-        <div class="background_contact h-full w-full 2xl:w-1/2 xl:w-5/12 fade-in-1_2 block"></div>
+        <div class="background_favorites h-full w-full 2xl:w-1/2 xl:w-5/12 fade-in-1_2 block"></div>
         <div class="bg-white 2xl:w-1/2 xl:w-7/12 h-full xl:block hidden"></div>
     </div>
 

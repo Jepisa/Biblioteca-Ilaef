@@ -59,12 +59,6 @@
 </x-guest-layout> --}}
 <div class="background_container lg:fixed lg:h-screen fixed overflow-hidden flex fade-in-1_2">
     <div class="background_register h-full w-full xl:w-1/2"></div>
-    {{-- <div class="xl:w-1/2"></div>
-    <div class="xl:w-1/2"></div>
-        <img src="{{ asset('img/assets/register/register_desktop.jpg') }}" class="hidden xl:block object-cover h-full w-full">
-        <img src="{{ asset('img/assets/register/register_tablet.jpg') }}" class="hidden md:block xl:hidden object-cover h-full w-full">
-        <img src="{{ asset('img/assets/register/register_mobile.jpg') }}" class="hidden md:hidden object-cover h-full w-full">
-    </div> --}}
     <div class="bg-white xl:w-7/12 h-full xl:block hidden"></div>
 </div>
 <x-guest-layout>
