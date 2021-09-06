@@ -17,21 +17,29 @@ $amount = count($authors);
 for ($i = 0; $i < $amount; $i++) {
     if ($i < 2) {
         if ($i == $amount - 1) {
-            $authorsTitle = $authorsTitle . $authors[$i];
-            $authorsTooltip = $authorsTooltip . $authors[$i];
+            $authorsTitle = $authorsTitle . $authors[$i] . '.';
+            $authorsTooltip = $authorsTooltip . $authors[$i] . '.';
         } else {
             $authorsTitle = $authorsTitle . $authors[$i] . ', ';
             $authorsTooltip = $authorsTooltip . $authors[$i] . ', ';
         }
     } else {
-        if ($i == 3) {
-            $authorsTitle = $authorsTitle . $authors[$i-1] . '...';
-        }
-        if ($i == $amount - 1) {
-            $authorsTooltip = $authorsTooltip . $authors[$i];
-        } else {
+        if ($i == 2 && $amount > 3) {
+            $authorsTitle = $authorsTitle . $authors[$i] . '...';
             $authorsTooltip = $authorsTooltip . $authors[$i] . ', ';
         }
+        elseif ($i == 2 && $amount == 3) {
+            $authorsTitle = $authorsTitle . $authors[$i] . '.';
+        }
+        else {
+            if ($i == $amount - 1) {
+            $authorsTooltip = $authorsTooltip . $authors[$i] . '.';
+            } 
+            else {
+                $authorsTooltip = $authorsTooltip . $authors[$i] . ', ';
+            }
+        }
+
     }
 }
 @endphp

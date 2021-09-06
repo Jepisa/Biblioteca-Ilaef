@@ -41,7 +41,7 @@
 
 
             <!-- Country -->
-            <div class="md:col-span-1 col-span-2">
+            <div class="md:col-span-1 col-span-2" wire:ignore>
                 {{-- <x-input id="country" class="mt-1 w-full" type="text" name="country" :value="old('country')" required autofocus /> --}}
                 <select id="country" class="w-full tracking-normal mb-1" name="country" wire:model="selectedCountry"
                     :value="old('country')" required>
@@ -96,7 +96,7 @@
 
 
             <!-- Occupation -->
-            <div class="md:col-span-1 col-span-2">
+            <div class="md:col-span-1 col-span-2" wire:ignore>
                 <select id="occupation" class="w-full tracking-normal mb-1" name="occupation" :value="old('occupation')"
                     required>
                     <option selected disabled>
@@ -116,7 +116,7 @@
 
 
             <!-- Referrer -->
-            <div class="md:col-span-1 col-span-2">
+            <div class="md:col-span-1 col-span-2" wire:ignore>
                 <select id="referrer" class="w-full tracking-normal mb-1" name="referrer" required>
                     <option selected disabled>
                         Nos conoces por...
@@ -158,25 +158,21 @@
             <!-- Roles -->
             @if (isset($roles))
 
-                <!-- Role -->
-                <div class="mb-6">
-                    <x-label for="role" :value="__('Role')" />
 
-                    {{-- <x-input id="role" class="block mt-1 w-full" type="text" name="role_id" :value="old('role_id')" required />
-
-                    <option {{ (Auth::user()->role->name == 'Administrador Principal') ? 'selected="selected"' : '' }} value="{{ HOla1 }}">
-                        {{ Label }}
-                    </option> --}}
-
-                    <select name="role_id">
-                        @foreach ($roles as $role)
-                            <option value="{{ $role->id }}">
-                                {{ $role->name }}
-                            </option>
-                        @endforeach
-
+                <div class="md:col-span-1 col-span-2">
+                    <select id="role_id" class="w-full tracking-normal mb-1" name="role_id" required>
+                        <option selected disabled>
+                            Rol...
+                        </option>
+    
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->id }}">
+                                    {{ $role->name }}
+                                </option>
+                            @endforeach
+    
                     </select>
-
+                    <x-label for="role_id" :value="__('Role')" class="ml-2"/>
                 </div>
 
             @endif
@@ -192,11 +188,18 @@
 </div>
 
 <script>
-    new TomSelect('#country', {
+
+    let state = new TomSelect('#state', {
+        create: true,
         plugins: ['dropdown_input'],
     });
-    new TomSelect('#state', {
+    new TomSelect('#country', {
         plugins: ['dropdown_input'],
+        onChange: () => {
+            setTimeout(() => {
+                destroyAndRebuildStatesSelect()
+            }, 200);            
+        } 
     });
     new TomSelect('#occupation', {
         plugins: ['dropdown_input'],
@@ -204,4 +207,25 @@
     new TomSelect('#referrer', {
         plugins: ['dropdown_input'],
     });
+
+    function destroyAndRebuildStatesSelect() {      
+        let options = $("#state").children("option");  
+        state.destroy();
+        state = new TomSelect('#state', {
+            create: true,
+            plugins: ['dropdown_input']
+        });
+
+        options.each(function () {
+            state.addOption({value:$(this).val(), text:$(this).html()})   
+        });
+    }    
+    window.onload = () => {
+        if (document.getElementById("role_id") != null){
+            new TomSelect('#role_id', {
+                plugins: ['dropdown_input'],
+            });
+        }
+    }
+
 </script>

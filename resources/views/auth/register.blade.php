@@ -63,7 +63,7 @@
 </div>
 <x-guest-layout>
     <x-auth-card logoJustify="justify-start" class="lg:pt-80 lg:-mb-20 xl:pt-10 xl:-mb-0 pt-72">
-        <div class="flex items-center justify-between w-full hidden lg:flex lg:mb-4 lg:mt-20">
+        <div class="flex items-center justify-between w-full hidden lg:flex lg:mb-4 lg:mt-5">
             <a href="/">
                 <x-application-logo class="w-20 w-32 fill-current text-gray-500" />
             </a>
