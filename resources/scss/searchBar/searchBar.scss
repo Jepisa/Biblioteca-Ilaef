@@ -177,17 +177,17 @@
         box-sizing: border-box;
         border-radius: 0px !important;
         margin-top: 0px !important;
-        color: white;
-        background-color: $rojo_oscuro !important;
+        color: #343a40;
+        background-color: white;
         border: 1px solid white;
         border-top: 1px solid $rojo_oscuro;
         .active {
-            background-color: white !important;
+            background-color: #ebebeb !important;
         }
         .ts-dropdown-content {
             div {
                 &:hover {
-                    background-color: white !important;
+                    background-color: #ebebeb !important;
                 }
             }
         }

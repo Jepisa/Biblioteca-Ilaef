@@ -411,14 +411,14 @@
   box-sizing: border-box;
   border-radius: 0px !important;
   margin-top: 0px !important;
-  color: white;
-  background-color: #91091e !important;
+  color: #343a40;
+  background-color: white;
   border: 1px solid white;
   border-top: 1px solid #91091e; }
   .advance_search_select .ts-dropdown .active {
-    background-color: white !important; }
+    background-color: #ebebeb !important; }
   .advance_search_select .ts-dropdown .ts-dropdown-content div:hover {
-    background-color: white !important; }
+    background-color: #ebebeb !important; }
 
 .text_responsive_results {
   font-size: 15px; }
