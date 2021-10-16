@@ -27,10 +27,6 @@ Route::get('contact', function () {
 
 Route::get('search', [SearchContentController::class, 'search'])->name('searchContent');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['verified','auth'])->name('dashboard'); //->middleware(['verified','auth'])
-
 //Books
 
 Route::get('book/{slug}', [BookController::class, 'show'])->name('book.show');

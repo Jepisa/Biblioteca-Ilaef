@@ -44,7 +44,7 @@ Route::get('/clear', function() {
 Route::get('/migrate', function() {
     $exitCode = Artisan::call('migrate');
     // Artisan::call('view:clear');
-    dd($exitCode);
+    // dd($exitCode);
     return 'Migraciones creadas';
 });
 

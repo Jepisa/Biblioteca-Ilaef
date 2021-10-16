@@ -52,7 +52,7 @@
 
     <div class="w-full items-center justify-center flex mb-8 2xl:mt-4 xl:-mt-2 lg:mt-4">
         <div class="2xl:w-1/3 xl:w-1/4 block xl:block hidden"></div>
-        <a href="/" class="xl:w-1/2 xl:pr-20 block">
+        <a href="{{ route('home') }}" class="xl:w-1/2 xl:pr-20 block">
             <x-button-back class="mx-auto text-white w-20" color="#d5e5e3" />
         </a>
     </div>

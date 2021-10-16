@@ -3,12 +3,12 @@
     <div class="flex items-center justify-center w-full">
         <div class="block">
             <select id="content-select" autocomplete="off" class="text_responsive w-24">
-                <option value="0" selected>Todo</option>
-                <option value="1">Autor</option>
-                <option value="2">Título</option>
-                <option value="3">Editorial</option>
-                <option value="4">Tema</option>
-                <option value="5">ISBN</option>
+                <option value="Todo" selected>Todo</option>
+                <option value="Autor">Autor</option>
+                <option value="Titulo">Título</option>
+                <option value="Editorial">Editorial</option>
+                <option value="Tema">Tema</option>
+                <option value="ISBN">ISBN</option>
             </select>
         </div>
         <div class="input_search_mainContainer text_responsive cursor-pointer ml-4 mr-0 md:mr-4">

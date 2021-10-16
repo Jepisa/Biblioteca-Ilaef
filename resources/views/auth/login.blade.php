@@ -10,7 +10,7 @@
 <x-guest-layout>
     <x-auth-card class="mt-0 md:mt-auto lg:mt-0 md:-mb-72 -mb-0 xl:-mb-0 lg:mx-20 pt-24 sm:pt-4">
         <x-slot name="logo">
-            <a href="/">
+            <a href="{{ route('home') }}">
                 <x-application-logo class="w-20 md:w-40 w-32 xl:w-40 2xl:w-40 fill-current text-gray-500" />
             </a>
         </x-slot>
@@ -76,7 +76,7 @@
         </x-auth-card_body>
         <div class="w-full items-center justify-center flex mt-8">
             <div class="w-1/2 mx-auto hidden xl:block"></div>
-            <a href="/" class="w-full xl:w-1/2 block">
+            <a href="{{ route('home') }}" class="w-full xl:w-1/2 block">
                 <x-button-back class="mx-auto text-white 2xl:w-20 w-16" color="#91091E" />
             </a>
         </div>

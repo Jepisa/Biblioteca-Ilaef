@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Books\StoreBookRequest;
+use App\Http\Requests\Podcast\StorePodcastRequest;
 use Illuminate\Support\Str;
 use App\Models\Author;
 use App\Models\Country;
@@ -12,6 +12,7 @@ use App\Models\Podcast;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -44,191 +45,130 @@ class PodcastController extends Controller
         return view('content.podcasts.create-edit', compact('authors', 'topics', 'languages', 'countries'));
     }
 
-    /**
+       /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Requests\Books\StoreBookRequest  $request
+     * @param  \Illuminate\Http\Requests\Podcast\StorePodcastRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBookRequest $request)
+    public function store(StorePodcastRequest $request)
     {   
+
         
         $validated = $request->validated();
 
         //Agunas cosas necesarias
-            $slugOfPodcast = Str::slug($validated['title']);
+            $code = Str::random(8);
+            $slugOfPodcast = Str::slug($validated['title']).'-'.$code;
             $destination_path = 'content/podcasts/'.$slugOfPodcast;
             $disk = 'public';
         //
+        if($request->hasFile('coverImage')) $pathCoverImage = $request->file('coverImage')->store($destination_path, $disk);
 
-        if($request->hasFile('coverImage'))
-        {
-            $image_name = Str::slug($request->file('coverImage')->getClientOriginalName());
-            $extension = $request->file('coverImage')->extension();
-            $new_image_name = $image_name.'.'.$extension;
-            $pathCoverImage = $request->file('coverImage')->storeAs($destination_path, $new_image_name, $disk);
-        }
-
-        if($request->hasFile('backCoverImage'))
-        {
-            $image_name = Str::slug($request->file('backCoverImage')->getClientOriginalName());
-            $extension = $request->file('backCoverImage')->extension();
-            $new_image_name = $image_name.'.'.$extension;
-            $pathBackCoverImage = $request->file('backCoverImage')->storeAs($destination_path, $new_image_name, $disk);
-        }
-
-        if($request->hasFile('audioPodcast'))
-        {
-            $audioPodcast_name = Str::slug($request->file('audioPodcast')->getClientOriginalName());
-            $extension = $request->file('audioPodcast')->extension();
-            $new_image_name = $image_name.'.'.$extension;
-            $pathAudioPodcast = $request->file('audioPodcast')->storeAs($destination_path, $audioPodcast_name, $disk);
-
-            $extension_audioPodcast = $request->file('audioPodcast')->extension();
-        }
+        if($request->hasFile('backCoverImage')) $pathBackCoverImage = $request->file('backCoverImage')->store($destination_path, $disk);
 
         if($request->hasFile('downloadable'))
         {
-            $image_name = Str::slug($request->file('downloadable')->getClientOriginalName());
-            $extension = $request->file('downloadable')->extension();
-            $new_image_name = $image_name.'.'.$extension;
-            $pathDownloadable = $request->file('downloadable')->storeAs($destination_path, $new_image_name, $disk);
+            $pathDownloadable = $request->file('downloadable')->store($destination_path, $disk);
+            if($pathDownloadable) $extension_downloadable = $request->file('downloadable')->extension();    
         }
 
-        //Crea Book en BD
+        if($request->hasFile('audiopodcast')) $pathAudiopodcast = $request->file('audiopodcast')->store($destination_path, $disk);
+
+        if( (isset($pathCoverImage) and !$pathCoverImage) or (isset($pathBackCoverImage) and !$pathBackCoverImage) or (isset($pathDownloadable) and !$pathDownloadable) or (isset($pathAudiopodcast) and !$pathAudiopodcast) ){
+            
+            Storage::deleteDirectory($disk . '/' . $destination_path);
+            //Notificaciones después de error al guardar achivos en el servidor
+            $titleNotification = __('general.error.notification.saveFiles.title');
+            $notification = __('general.error.notification.saveFiles.body', ['content' => __('general.content.podcast')]);
+            $request->session()->flash('titleNotification', $titleNotification);
+            $request->session()->flash('notification', $notification);
+            return redirect()->back();
+        }
+
+        //Crea Podcast en BD
         $podcast = Podcast::create([
-            'title' => $validated['title'],
-            'slug' => $slugOfPodcast,
-            'synopsis' => $request['synopsis-original'],
-            'note' => isset($validated['note']) ? $validated['note'] : null,
-            'year' => isset($validated['year']) ? $validated['year'] : null,
-            'collection' => isset($validated['collection']) ? $validated['collection'] : null,
-            'edition' => isset($validated['edition']) ? $validated['edition'] : null,
-            'editorial' => $validated['editorial'],
-            'language_id' => $validated['language_id'],
-            'city' => isset($validated['city']) ? $validated['city'] : null ,
-            'country_id' => $validated['country_id'],
-            'pages' => isset($validated['pages']) ? $validated['pages'] : null ,
-            'isbn' => isset($validated['isbn']) ? $validated['isbn'] : null,
-            'downloadable' => isset($pathDownloadable) ? $pathDownloadable : null,
-            'url' => isset($validated['url']) ? $validated['url'] : null ,
-            'coverImage' => isset($pathCoverImage) ? $pathCoverImage : 'public/content/podcasts/default', //Aún no existe una imagen por default
-            'backCoverImage' => isset($pathBackCoverImage) ? $pathBackCoverImage : 'public/content/podcasts/default', //Aún no existe una imagen por default
-            'audioPodcast' => isset($pathAudioPodcast) ? $pathAudioPodcast : null,
-            'format' => isset($extension_audioPodcast) ? $extension_audioPodcast : null,
+            'title'             => $validated['title'],
+            'slug'              => $slugOfPodcast,
+            'synopsis'          => $request['synopsis-original'],
+            'note'              => !empty($validated['note']) ? $validated['note'] : null,
+            'year'              => !empty($validated['year']) ? $validated['year'] : null,
+            'collection'        => !empty($validated['collection']) ? $validated['collection'] : null,
+            'edition'           => !empty($validated['edition']) ? $validated['edition'] : null,
+            'editorial'         => $validated['editorial'],
+            'language_id'       => $validated['language_id'],
+            'city'              => !empty($validated['city']) ? $validated['city'] : null,
+            'country_id'        => $validated['country_id'],
+            'pages'             => !empty($validated['pages']) ? $validated['pages'] : null,
+            'isbn'              => !empty($validated['isbn']) ? $validated['isbn'] : null,
+            'downloadable'      => isset($pathDownloadable) ? $pathDownloadable : null,
+            'url'               => !empty($validated['url']) ? $validated['url'] : null,
+            'coverImage'        => isset($pathCoverImage) ? $pathCoverImage : 'content/podcasts/default',
+            'backCoverImage'    => isset($pathBackCoverImage) ? $pathBackCoverImage : null,
+            'audiopodcast'         => isset($pathAudiopodcast) ? $pathAudiopodcast : null,
+            'format'            => isset($extension_downloadable) ? $extension_downloadable : null,
         ]);
+
+        // if(!$podcast) Log::channel('slack')->critical("Problm!\n We have a problem for save a Podcast!!!\nSaludos, Jean Piere");//This is for to send a message to Slack
 
         if (isset($request->extraImages)) {
             
             $extraImages = $request->extraImages;
-            
+            $errorImages = 0;
             foreach ($extraImages as $image) 
             {
                 //Guardar las imagenes en el servidor                    
-                    $image_name = Str::slug($image->getClientOriginalName());
-                    $extension = $image->extension();
-                    $new_image_name = $image_name.'.'.$extension;
-                    $path = $image->storeAs($destination_path, $new_image_name, $disk);
+                $path = $image->store($destination_path, $disk);
 
-                    $podcast->extraImages()->create([
-                        'image' => $path,
-                    ]);
+                if(!$path){
+                    $errorImages++;
+                    continue;
+                }
+                $podcast->extraImages()->create([
+                    'image' => $path,
+                ]);
+            }
+            if($errorImages > 0){
+                $request->session()->flash('errorExtraImages', __('general.error.notification.saveFiles.errorExtraImages', ['qty' => $errorImages]));
             }
         } 
 
-        //Después hay que remplazar esta manera de optener y cuardar los Authors and Topics
-        //Guardar y asignar Authors
-            $authors = explode(",", $validated['authorsName']);
+        //Guardar y asignar Authors - Topics existentes
+        $podcast->authors()->sync($validated['existAuthors']);
+        $podcast->topics()->sync($validated['existTopics']);
 
-            $existAuthors = [];
+        //Guardar nuevos Authors - Topics
+        if (!empty($validated['newAuthors'])) {
             $newAuthors = [];
 
-            $createdAuthors = [];
-
-            $authorsOfThePodcast = [];
-        
-            foreach ($authors as $authorName) {
-                $savedAuthor = Author::where('name', '=', $authorName)->first();
-                if($savedAuthor){
-                    if($savedAuthor->name == $authorName)
-                    {
-                        $existAuthors[] = $authorName;
-
-                        $authorsOfThePodcast[] = $savedAuthor->id;
-                    }
-                }
-                else 
-                {
-                    $createdAuthor = Author::create([
-                        'name' => trim($authorName),
-                    ]);
-
-                    $newAuthors[] = $createdAuthor->name;
-
-                    $createdAuthors[] = $createdAuthor->name;
-
-                    $authorsOfThePodcast[] = $createdAuthor->id;
-
-                }
+            foreach ($validated['newAuthors'] as $newAuthor) {
+                $newAuthors[] = Author::firstOrCreate([
+                    'name' => $newAuthor,
+                ])->id;
             }
 
-            $existAuthors = implode(", ", $existAuthors);
-            $newAuthors = implode(", ", $newAuthors);
+            $podcast->authors()->syncWithoutDetaching($newAuthors);
+        }
 
-            $notificationAuthors = "Estos autores se crearon exitosamente: $newAuthors. \r\n Estos ya estaban en nuestra base de datos: $existAuthors" ;
-            $request->session()->flash('notificationAuthors', $notificationAuthors);
-        //Guardar y asignar Topics
-            $topics = explode(",", $validated['topicsName']);
-
-            $existTopics = [];
+        if (!empty($validated['newTopics'])) {
             $newTopics = [];
 
-            $createdTopics = [];
-
-            $topicsOfThePodcast = [];
-
-        
-            foreach ($topics as $topicName) {
-                $savedTopic = Topic::where('name', '=', $topicName)->first();
-                
-                if($savedTopic)
-                {
-                    if($savedTopic->name == $topicName)
-                    {
-                        $existTopics[] = $topicName;
-                        $topicsOfThePodcast[] = $savedTopic->id;
-                    }
-                }
-                else 
-                {
-                    $createdTopic = Topic::create([
-                        'name' => $topicName,
-                    ]);
-
-                    $newTopics[] = $createdTopic->name;
-
-                    $createdTopics[] = $createdTopic->name;
-
-                    $topicsOfThePodcast[] = $createdTopic->id;
-
-                }
+            foreach ($validated['newTopics'] as $newTopic) {
+                $newTopics[] = Topic::firstOrCreate([
+                    'name' => $newTopic,
+                ])->id;
             }
 
-            $existTopics = implode(", ", $existTopics);
-            $newTopics = implode(", ", $newTopics);
+            $podcast->topics()->syncWithoutDetaching($newTopics);
+        }
 
-            $notificationTopics = "Estos autores se crearon exitosamente: $newTopics. \r\n Estos ya estaban en nuestra base de datos: $existTopics" ;
-            $request->session()->flash('notificationTopics', $notificationTopics);
-        // ----
-
-        $podcast->authors()->sync($authorsOfThePodcast);
-        $podcast->topics()->sync($topicsOfThePodcast);
-        
-        //Se crea el contador de views del Book
+        //Se crea el contador de views del Podcast
         $podcast->counter()->create(['views' => 0 ]);//A la table del contador le puedo poner más columnas (a parte de 'views'), como 'favorites', 'downloads'
         
-        //Notificaciones en después de cargar Book
-        $notification = "El podcast \"$podcast->title\" fue creado con éxito." ;
+        //Notificaciones después de crear un Podcast
+        $titleNotification = __('podcasts.create.notification.title');
+        $notification = __('podcasts.create.notification.body', ['title' => $podcast->title]);
+        $request->session()->flash('titleNotification', $titleNotification);
         $request->session()->flash('notification', $notification);
         return redirect()->back();
     }
@@ -242,12 +182,14 @@ class PodcastController extends Controller
     public function show($slug)
     {
         $podcast = Podcast::where('slug', '=', $slug)->firstOrFail();
-        //Contar las visitas a cada podcast
+        //Contar las visitas a cada libro
         $podcast->counter()->update([
-            'views' => $podcast->counter->views + 1,
+                'views' => $podcast->counter->views + 1,
+            ],[
+                'timestamps' => false
             ]);
-        
-        return view('podcast.show', compact('podcast'));
+        $podcast->counter->views++;
+        return view('content.podcasts.show', compact('podcast'));
     }
 
     /**
@@ -260,92 +202,42 @@ class PodcastController extends Controller
     {
         $podcast = Podcast::where('slug', '=', $slug)->firstOrFail();
         $authors = Author::all();
-        
-        $authorsArray = $podcast->authors->toArray();
-        $authorsArray = array_map(function($a)
-        {
-            return $a['name'];
-        }, $authorsArray);
-        $podcast->authorsArray = $authorsArray;
-
-        $authorsName = [];
-
-        foreach ($podcast->authors as $author) {
-            $authorsName[] = $author->name;
-        }
-        $authorsName = implode(", ", $authorsName);
-
-
-        $topicsName = [];
-        foreach ($podcast->topics as $topic) {
-            $topicsName[] = $topic->name;
-        }
-        $topicsName = implode(", ", $topicsName);
-
         $topics = Topic::all();
         $languages = Language::all();
         $countries = Country::all();
+        
+        $podcast->authors_id = array_column($podcast->authors->toArray(), 'id');
+        $podcast->topics_id = array_column($podcast->topics->toArray(), 'id');
 
-        return view('content.podcasts.create-edit', compact('podcast','authorsName', 'topicsName', 'languages', 'countries', 'authors'));
+
+        return view('content.podcasts.edit', compact('podcast', 'authors', 'topics', 'languages', 'countries'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Requests\Podcast\UpdatePodcastRequest  $request
      * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $slug)
+    public function update(UpdatePodcastRequest $request, $slug)
     {
-
         $podcast = Podcast::where('slug', '=', $slug)->firstOrFail();
 
-        $datesPodcast = $request->except('downloadable','coverImage','backCoverImage','extraimages','audioPodcast', '_token', '_method');
-        /* $datesPodcast = $request->validated()->except('downloadable','coverImage','backCoverImage','extraimages','audioPodcast'); //Esto sería se creo un request aparte para las validaciones */
+        $datesPodcast = $request->except('downloadable','coverImage','backCoverImage','extraimages','audiopodcast', '_token', '_method');
+        $datesPodcast['synopsis'] = $datesPodcast['synopsis-original'];
+
+        /* $datesPodcast = $request->validated()->except('downloadable','coverImage','backCoverImage','extraimages','audiopodcast'); //Esto sería se creo un request aparte para las validaciones */
 
         //Agunas cosas necesarias para el almacenamiennto de los archivos
-            $datesPodcast['slug'] = Str::slug($datesPodcast['title']);
+            $code = Str::random(8);
+            $datesPodcast['slug'] =  ($podcast->title != $datesPodcast['title']) ? Str::slug($datesPodcast['title']).'-'.$code : $podcast->slug;
             $destination_path = 'content/podcasts/'.$datesPodcast['slug'];
             $disk = 'public';
         //
 
         
-        $request['originalSynopsis'] = $request->synopsis;
-        $request['synopsis'] = str_replace("\r\n"," ",$request->synopsis);
-        
-        /** En el caso de que haga las validaciones, hace lo de 'store' para la synopsis */
-        $validated = $request->validate([
-            'title' => [Rule::unique('podcasts')->ignore($podcast->id)],
-            'authorsName' => 'required|string',
-            'topicsName' => 'required|string',
-            // 'authors' => 'required|array|min:1',
-            // 'authors.*' => 'required|integer|distinct|exists:authors,id',
-            // 'topics' => 'required|array|min:1',
-            // 'topics.*' => 'required|integer|distinct|exists:topics,id',
-            'synopsis' => 'required|min:400|max:1200',
-            'note' => 'nullable|string|max:600',
-            'year' => 'nullable|integer|min:1000|max:3000',
-            'collection' => 'nullable|string|max:255',
-            'edition' => 'nullable|string|max:255',
-            'editorial' => 'required|string|max:255',
-            'language_id' => 'required|integer|exists:languages,id',
-            'city' => 'nullable|string|max:255',
-            'country_id' => 'required|integer|exists:countries,id',
-            'pages' => 'nullable|integer',
-            'isbn' => ['nullable','string','max:255', Rule::unique('podcasts')->ignore($podcast->id)],
-            'downloadable' => 'file|mimes:pdf,doc',
-            'url' => 'nullable|url',
-            'coverImage' => 'file|mimes:jpg,png,jpeg|dimensions:min_width=600,min_height=800,max_width=1800,max_height=2300',
-            'extraimages' => 'array',
-            'extraimages.*' => 'file|mimes:jpg,png,jpeg|between:40,3000',
-            'backCoverImage' => 'file|mimes:jpg,png,jpeg|between:40,4000',
-            'audioPodcast' => 'nullable|file|mimes:mp3,wma,aac',
-        ]);
-
-        $datesPodcast['slug'] = Str::slug($datesPodcast['title']);
-        
-        if($podcast->title != $datesPodcast['title'] and $podcast->slug != $datesPodcast['slug'])
+        if($podcast->title != $datesPodcast['title'])
         { 
             if ( Storage::rename("public/content/podcasts/$podcast->slug", "public/content/podcasts/".$datesPodcast['slug']) ) 
             {
@@ -353,7 +245,7 @@ class PodcastController extends Controller
                 
                 ($podcast->backCoverImage) ? $datesPodcast['backCoverImage'] = Str::replaceFirst($podcast->slug, $datesPodcast['slug'], $podcast->backCoverImage) : '';
                 ($podcast->downloadable) ? $datesPodcast['downloadable'] = Str::replaceFirst($podcast->slug, $datesPodcast['slug'], $podcast->downloadable) : '';
-                ($podcast->audiobook) ? $datesPodcast['audioPodcast'] = Str::replaceFirst($podcast->slug, $datesPodcast['slug'], $podcast->audiobook) : '';
+                ($podcast->audiopodcast) ? $datesPodcast['audiopodcast'] = Str::replaceFirst($podcast->slug, $datesPodcast['slug'], $podcast->audiopodcast) : '';
 
                 if($podcast->extraImages)
                 {
@@ -367,193 +259,120 @@ class PodcastController extends Controller
             }
         }
 
-        if(isset($datesPodcast['authorsName']))
+        $a = $datesPodcast['existAuthors'];
+        sort($a);
+        $b = array_column($podcast->authors->toArray(), 'id');
+        sort($b);
+
+        if(!empty($datesPodcast['existAuthors']) and $a != $b)
         {
-            $authorsName = [];
-            foreach ($podcast->authors as $author) {
-                $authorsName[] = $author->name;
+            $podcast->authors()->sync($datesPodcast['existAuthors']);
+        }
+        if(!empty($datesPodcast['newAuthors']))
+        {
+            $newAuthors = [];
+
+            foreach ($datesPodcast['newAuthors'] as $newAuthor) {
+                $newAuthors[] = Author::firstOrCreate([
+                    'name' => $newAuthor,
+                ])->id;
             }
-            $authorsName = implode(", ", $authorsName);
 
-            $arrayAuthorsName = explode(',', $datesPodcast['authorsName']);
-
-            $datesPodcast['authorsName'] = [];
-            foreach ($arrayAuthorsName as $authorName) {
-                $datesPodcast['authorsName'][] = trim($authorName);
-            }
-
-            $datesPodcast['authorsName'] = implode(", ", $datesPodcast['authorsName']);
-
-            if($authorsName != $datesPodcast['authorsName'])
-            {
-            //Authors
-                $authors = explode(",", $datesPodcast['authorsName']);
-
-                $existAuthors = [];
-                $newAuthors = [];
-
-                $createdAuthors = [];
-
-                $authorsOfThePodcast = [];
-
-            
-                foreach ($authors as $authorName) {
-                    $savedAuthor = Author::where('name', '=', trim($authorName))->first();
-                    if($savedAuthor){
-                        if(Str::lower($savedAuthor->name) == Str::lower(trim($authorName)))
-                        {
-                            $existAuthors[] = $authorName;
-
-                            $authorsOfThePodcast[] = $savedAuthor->id;
-                        }
-                    }
-                    else 
-                    {
-                        $createdAuthor = Author::create([
-                            'name' => trim($authorName),
-                        ]);
-
-                        $newAuthors[] = $createdAuthor->name;
-
-                        $createdAuthors[] = $createdAuthor->name;
-
-                        $authorsOfThePodcast[] = $createdAuthor->id;
-
-                    }
-                }
-
-                $existAuthors = implode(", ", $existAuthors);
-                $newAuthors = implode(", ", $newAuthors);
-
-                $podcast->authors()->sync($authorsOfThePodcast);
-
-                $notificationAuthors = "Estos autores se crearon exitosamente: $newAuthors. \r\n Estos ya estaban en nuestra base de datos: $existAuthors" ;
-                $request->session()->flash('notificationAuthors', $notificationAuthors);
-            //
-            }
+            $podcast->authors()->syncWithoutDetaching($newAuthors);
         }
         
-        if(isset($datesPodcast['topicsName']))
+        
+        if(!empty($datesPodcast['existTopics']))
         {
-            $topicsName = [];
-            foreach ($podcast->topics as $topic) {
-                $topicsName[] = $topic->name;
+            $podcast->topics()->sync($datesPodcast['existTopics']);
+        }
+        if(!empty($datesPodcast['newTopics']))
+        {
+            $newTopics = [];
+
+            foreach ($datesPodcast['newTopics'] as $newTopic) {
+                $newTopics[] = Topic::firstOrCreate([
+                    'name' => $newTopic,
+                ])->id;
             }
-            $topicsName = implode(", ", $topicsName);
 
-            $arrayTopicsName = explode(',', $datesPodcast['topicsName']);
-
-            $datesPodcast['topicsName'] = [];
-            foreach ($arrayTopicsName as $topicName) {
-                $datesPodcast['topicsName'][] = trim($topicName);
-            }
-
-            $datesPodcast['topicsName'] = implode(", ", $datesPodcast['topicsName']);
-
-            if($topicsName != $datesPodcast['topicsName'])
-            {
-                //Topics
-                    $topics = explode(",", $datesPodcast['topicsName']);
-
-                    $existTopics = [];
-                    $newTopics = [];
-
-                    $createdTopics = [];
-
-                    $topicsOfThePodcast = [];
-
-                
-                    foreach ($topics as $topicName) {
-                        $savedTopic = Topic::where('name', '=', trim($topicName))->first();
-                        
-                        if($savedTopic)
-                        {
-                            if(Str::lower($savedTopic->name) == Str::lower(trim($topicName)))
-                            {
-                                $existTopics[] = $topicName;
-                                $topicsOfThePodcast[] = $savedTopic->id;
-                            }
-                        }
-                        else 
-                        {
-                            $createdTopic = Topic::create([
-                                'name' => trim($topicName),
-                            ]);
-
-                            $newTopics[] = $createdTopic->name;
-
-                            $createdTopics[] = $createdTopic->name;
-
-                            $topicsOfThePodcast[] = $createdTopic->id;
-
-                        }
-                    }
-
-                    $existTopics = implode(", ", $existTopics);
-                    $newTopics = implode(", ", $newTopics);
-
-                    $podcast->topics()->sync($topicsOfThePodcast);
-
-
-                    $notificationTopics = "Estos autores se crearon exitosamente: $newTopics. \r\n Estos ya estaban en nuestra base de datos: $existTopics" ;
-                    $request->session()->flash('notificationTopics', $notificationTopics);
-                // ----
-            }
+            $podcast->topics()->syncWithoutDetaching($newTopics);
         }
 
         
 
         if($request->hasFile('coverImage'))
         {
-            /** Replicar la parte de las notificaciones y los 'if' por cada cambio detectado y también ver la posibilidad de que no haga un update si nada a cambiado (si es posibli también hacer que no pueda hacerse un submit si no hubo un cambio y se agrego algo, como nuevos archivos)*/
-            if(!Storage::exists('public/'.$podcast->coverImage) or Storage::delete('public/'.$podcast->coverImage))
+            if( $podcast->title != $datesPodcast['title'] and Storage::delete('public/'.$datesPodcast['coverImage']))
             {
-                $image_name = Str::slug($request->file('coverImage')->getClientOriginalName());
-                $extension = $request->file('coverImage')->extension();
-                $new_image_name = $image_name.'.'.$extension;
-                $datesPodcast['coverImage'] = $request->file('coverImage')->storeAs($destination_path, $new_image_name, $disk);
-                
-                ($datesPodcast['coverImage']) ? $notifications['coverImage'] = "La nueva imagen de Tapa se a guardado con éxito" : $notifications['coverImage'] = 'No se puedo guardar la nueva Imagen de Tapa';
+                $datesPodcast['coverImage'] = $request->file('coverImage')->store($destination_path, $disk);
             }
-            else
+            elseif(Storage::delete('public/'.$podcast->coverImage))
             {
-                $notifications['coverImage'] = "No se pudo eliminar la antarior Imagen de Tapa"; //Acá puedo mandar un mail con el error al programador
+                $datesPodcast['coverImage'] = $request->file('coverImage')->store($destination_path, $disk);
+                
+            }else{
+                Log::error("No se pudo eliminar la anterior Imagen de Tapa");
             }
         }
 
         if($request->hasFile('backCoverImage'))
         {
-            Storage::delete('public/'.$podcast->backCoverImage);
-
-            $image_name = Str::slug($request->file('backCoverImage')->getClientOriginalName());
-            $extension = $request->file('backCoverImage')->extension();
-            $new_image_name = $image_name.'.'.$extension;
-            $datesPodcast['backCoverImage'] = $request->file('backCoverImage')->storeAs($destination_path, $new_image_name, $disk);
-        }
-
-        if($request->hasFile('audioPodcast'))
-        {
-            Storage::delete('public/'.$podcast->audioBook);
-
-            $audioPodcast_name = Str::slug($request->file('audioPodcast')->getClientOriginalName());
-            $extension = $request->file('audioPodcast')->extension();
-            $new_image_name = $audioPodcast_name.'.'.$extension;
-            $datesPodcast['audioPodcast'] = $request->file('audioPodcast')->storeAs($destination_path, $audioPodcast_name, $disk);
-
-            $datesPodcast['format'] = $request->file('audioPodcast')->extension();
+            if( $podcast->title != $datesPodcast['title'] and ($podcast->backCoverImage == null or Storage::delete('public/'.$datesPodcast['backCoverImage'])) )
+            {
+                $datesPodcast['backCoverImage'] = $request->file('backCoverImage')->store($destination_path, $disk);
+            }
+            elseif($podcast->backCoverImage == null or Storage::delete('public/'.$podcast->backCoverImage))
+            {
+                $datesPodcast['backCoverImage'] = $request->file('backCoverImage')->store($destination_path, $disk);
+                
+            }else{
+                Log::error("No se pudo eliminar la anterior Imagen de Contra Tapa");
+            }
         }
 
         if($request->hasFile('downloadable'))
         {
-            Storage::delete('public/'.$podcast->downloadable);
+            if( $podcast->title != $datesPodcast['title'] and ($podcast->downloadable == null or Storage::delete('public/'.$datesPodcast['downloadable'])) )
+            {
+                $datesPodcast['downloadable'] = $request->file('downloadable')->store($destination_path, $disk);
+            }
+            elseif($podcast->downloadable == null or Storage::delete('public/'.$podcast->downloadable))
+            {
+                $datesPodcast['downloadable'] = $request->file('downloadable')->store($destination_path, $disk);
+            }else{
+                Log::error("No se pudo eliminar el downloadable anterior");
+            }
+            if($datesPodcast['downloadable']) $datesPodcast['format'] = $request->file('downloadable')->extension();
+        }
 
-            $image_name = Str::slug($request->file('downloadable')->getClientOriginalName());
-            $extension = $request->file('downloadable')->extension();
-            $new_image_name = $image_name.'.'.$extension;
-            $datesPodcast['downloadable'] = $request->file('downloadable')->storeAs($destination_path, $new_image_name, $disk);
+        if($request->hasFile('audiopodcast'))
+        {
+            if( $podcast->title != $datesPodcast['title'] and ($podcast->audiopodcast == null or Storage::delete('public/'.$datesPodcast['audiopodcast'])) )
+            {
+                $datesPodcast['audiopodcast'] = $request->file('audiopodcast')->store($destination_path, $disk);
+            }
+            elseif($podcast->audiopodcast == null or Storage::delete('public/'.$podcast->audiopodcast))
+            {
+                $datesPodcast['audiopodcast'] = $request->file('audiopodcast')->store($destination_path, $disk);                
+            }else{
+                Log::error("No se pudo eliminar el anterior audiopodcast");
+            }
+
         }
 
         
+
+        if( (isset($datesPodcast['coverImage']) and !$datesPodcast['coverImage']) or (isset($datesPodcast['backCoverImage']) and !$datesPodcast['backCoverImage']) or (isset($datesPodcast['downloadable']) and !$datesPodcast['downloadable']) or (isset($datesPodcast['audiopodcast']) and !$datesPodcast['audiopodcast']) ){
+            
+            Storage::deleteDirectory($disk . '/' . $destination_path);
+            //Notificaciones después de error al guardar achivos en el servidor
+            $titleNotification = __('general.error.notification.saveFiles.title');
+            $notification = __('general.error.notification.saveFiles.body', ['content' => __('general.content.podcast')]);
+            $request->session()->flash('titleNotification', $titleNotification);
+            $request->session()->flash('notification', $notification);
+            return redirect()->back();
+        }
         
         $podcast->update($datesPodcast);
 
@@ -562,32 +381,39 @@ class PodcastController extends Controller
             foreach ($podcast->extraImages as $previousImage) {
                 Storage::delete('public/'.$previousImage->image);
             }
-
+            $podcast->extraImages()->delete();
+            $errorImages = 0;
             $extraImages = $request->extraImages;
             
             foreach ($extraImages as $image) 
             {
                 //Guardar las nuevas imagenes
                     
-                    $image_name = Str::slug($image->getClientOriginalName());
-                    $extension = $image->extension();
-                    $new_image_name = $image_name.'.'.$extension;
-                    $path = $image->storeAs($destination_path, $new_image_name, $disk);
+                    $path = $image->store($destination_path, $disk);
 
+                    if(!$path){
+                        $errorImages++;
+                        continue;
+                    }
+                    
                     $podcast->extraImages()->create([
                         'image' => $path,
                     ]);
             }
+
+            if($errorImages > 0){
+                $request->session()->flash('errorExtraImages', __('general.error.notification.saveFiles.errorExtraImages', ['qty' => $errorImages]));
+            }
         }
 
-        
 
-        
-
-        $notification = "'$podcast->title' fue actualizado con éxito";
+        //Notificaciones después de editar un Podcast
+        $titleNotification = __('podcasts.edit.notification.title');
+        $notification = __('podcasts.edit.notification.body', ['title' => $podcast->title]);
+        $request->session()->flash('titleNotification', $titleNotification);
         $request->session()->flash('notification', $notification);
 
-        return redirect()->route('book.edit', ['slug' => $podcast->slug]);
+        return redirect()->route('podcast.edit', ['slug' => $podcast->slug]);
     }
 
     /**
@@ -598,29 +424,29 @@ class PodcastController extends Controller
      */
     public function destroy(Request $request, $slug)
     {
-        $book = Podcast::where('slug', '=', $slug)->firstOrFail();
+        $podcast = Podcast::where('slug', '=', $slug)->firstOrFail();
         
         //Eliminar la vinculación en la bd con los autores y los temas
-            $book->authors()->detach();
-            $book->topics()->detach();
+            $podcast->authors()->detach();
+            $podcast->topics()->detach();
 
         //Eliminar la vinculación en la bd con las Imagenes extras
-            $book->extraImages()->delete();
+            $podcast->extraImages()->delete();
 
         //Eliminar Archivo descargable  //Eliminar Imagen de Tapa //Eliminar Imagen de Contratapa 
-        // Y Eliminar Audiopodcast //Eliminar las imagenes extras (todo del servidor) 
-        // Y Eliminar hasta la carpeta (directorio) del podcast
-            Storage::deleteDirectory('public/content/podcasts/'.$book->slug);
+        // Y Eliminar Audiolibro //Eliminar las imagenes extras (todo del servidor) 
+        // Y Eliminar hasta la carpeta (directorio) del libro
+            Storage::deleteDirectory('public/content/podcasts/'.$podcast->slug);
         
         //Eliminar su Contador
-            $book->counter()->delete();
+            $podcast->counter()->delete();
         //
-        $titleOfDeletedBook = $book->title;
-        $book->delete();
+        $titleOfDeletedPodcast = $podcast->title;
+        $podcast->delete();
         
-        $notification = "Se ha eliminado \"$titleOfDeletedBook\" y todo lo que contenía.";
-        
-        
+        $titleNotification = __('podcasts.delete.notification.title');
+        $notification = __('podcasts.delete.notification.body', ['title' => $titleOfDeletedPodcast]);
+        $request->session()->flash('titleNotification', $titleNotification);
         $request->session()->flash('notification', $notification);
 
         return redirect()->back();

@@ -41,7 +41,7 @@
 
 
             <!-- Country -->
-            <div class="md:col-span-1 col-span-2">
+            <div class="md:col-span-1 col-span-2" wire:ignore>
                 {{-- <x-input id="country" class="mt-1 w-full" type="text" name="country" :value="old('country')" required autofocus /> --}}
                 <select id="country" class="w-full tracking-normal mb-1" name="country" wire:model="selectedCountry"
                     :value="old('country')" required>

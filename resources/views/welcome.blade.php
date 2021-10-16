@@ -1,10 +1,6 @@
 <x-app-layout>
     <div class="background_color_main"></div>
-    <x-slot name="css">
-        {{-- <link rel="stylesheet" href="{{ asset('css/carousel.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/glide.core.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/glide.theme.min.css') }}"> --}}
-    </x-slot>
+    <x-slot name="css"></x-slot>
 
     <x-slot name="scripts">
         <script src="{{ asset('js/glide.min.js') }}"></script>

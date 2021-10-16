@@ -32,6 +32,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        session()->flash('notification', 'bienvenido/a');
+
         return redirect(RouteServiceProvider::HOME);
     }
 
