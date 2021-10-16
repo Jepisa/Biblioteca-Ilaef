@@ -89,7 +89,7 @@
         new TomSelect('#content-select', {
             plugins: ['dropdown_input'],
         });
-        new TomSelect('#advance-search', {
+        const advance_search_instance = new TomSelect('#advance-search', {
             plugins: ['dropdown_input'],
         });
 
@@ -103,6 +103,9 @@
 
         function toggle_Overflow() {
             $("body").toggleClass("overflow-hidden");
+            if ($("body")[0].classList.value == "") {
+            resetSelectedValueOnDropdown();   
+            }            
         }
 
         function showAdvanceForm(valueSelected) {
@@ -112,7 +115,15 @@
             defineAdvanceSearchFormRoute(valueSelected);
             getInputsAdvanceForm(valueSelected).forEach(element => {
                 $("#" + element).removeClass("hidden");
-            });                     
+            });
+        }
+
+        function resetSelectedValueOnDropdown() {
+
+                advance_search_instance.activeOption.classList.remove("active");
+                advance_search_instance.clear(true);
+                advance_search_instance.setValue(0, true);
+
         }
 
         function getTitleAdvanceForm() {
