@@ -55,5 +55,4 @@
     </div>
     {{ $scriptsDown ?? '' }}
 </body>
-
 </html>

@@ -22,7 +22,7 @@
             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             x-description="Modal panel, show/hide based on modal state."
             class="inline-block advance_search_container bg-white rounded-md shadow-xl transform transition-all">
-            <x-search-bar.options filter="e-book" id="filter_modal"/>
+            <x-search-bar.options/>
         </div>
 
     </div>

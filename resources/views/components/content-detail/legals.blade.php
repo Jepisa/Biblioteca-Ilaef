@@ -24,15 +24,22 @@ for ($i = 0; $i < $amount; $i++) {
             $authorsTooltip = $authorsTooltip . $authors[$i] . ', ';
         }
     } else {
-        if ($i == 2 && $i != $amount-1 ) {
+        if ($i == 2 && $amount > 3) {
             $authorsTitle = $authorsTitle . $authors[$i] . '...';
-        }
-        else if ($i == $amount - 1 && $i <= 2) {
-            $authorsTitle = $authorsTitle . $authors[$i] . '.';
-            $authorsTooltip = $authorsTooltip . $authors[$i];
-        } else {
             $authorsTooltip = $authorsTooltip . $authors[$i] . ', ';
         }
+        elseif ($i == 2 && $amount == 3) {
+            $authorsTitle = $authorsTitle . $authors[$i] . '.';
+        }
+        else {
+            if ($i == $amount - 1) {
+            $authorsTooltip = $authorsTooltip . $authors[$i] . '.';
+            } 
+            else {
+                $authorsTooltip = $authorsTooltip . $authors[$i] . ', ';
+            }
+        }
+
     }
 }
 @endphp

@@ -1,0 +1,12 @@
+.background_profile {
+    background-image: url("../img/assets/profile/profile_desktop.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    @media (max-width: 1279px) {
+        background-image: url("../img/assets/profile/profile_tablet.jpg");
+    }
+    @media (max-width: 767px) {
+        background-image: url("../img/assets/profile/profile_mobile.jpg");
+    }
+}

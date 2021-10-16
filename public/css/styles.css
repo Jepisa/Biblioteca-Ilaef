@@ -9,6 +9,9 @@
 @import url(./original/pagination.css);
 @import url(./original/shared.css);
 @import url(./original/tags.css);
+.color_gris {
+  color: #97afac; }
+
 .color_grisclaro {
   color: #d5e5e3; }
 
@@ -175,6 +178,18 @@
     min-height: 150px;
     max-height: 150px; } }
 
+.background_favorites {
+  background-image: url("../img/assets/favorites/favorites_desktop.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; }
+  @media (max-width: 1279px) {
+    .background_favorites {
+      background-image: url("../img/assets/favorites/favorites_tablet.jpg"); } }
+  @media (max-width: 767px) {
+    .background_favorites {
+      background-image: url("../img/assets/favorites/favorites_mobile.jpg"); } }
+
 .background_register {
   background-image: url("../img/assets/register/register_desktop.jpg");
   background-position: center;
@@ -205,6 +220,18 @@
   @media (max-width: 767px) {
     .background_contact {
       background-image: url("../img/assets/contact/mensaje_mobile.jpg"); } }
+
+.background_profile {
+  background-image: url("../img/assets/profile/profile_desktop.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; }
+  @media (max-width: 1279px) {
+    .background_profile {
+      background-image: url("../img/assets/profile/profile_tablet.jpg"); } }
+  @media (max-width: 767px) {
+    .background_profile {
+      background-image: url("../img/assets/profile/profile_mobile.jpg"); } }
 
 .modal_container {
   height: 180px;
@@ -384,14 +411,14 @@
   box-sizing: border-box;
   border-radius: 0px !important;
   margin-top: 0px !important;
-  color: white;
-  background-color: #91091e !important;
+  color: #343a40;
+  background-color: white;
   border: 1px solid white;
   border-top: 1px solid #91091e; }
   .advance_search_select .ts-dropdown .active {
-    background-color: white !important; }
+    background-color: #ebebeb !important; }
   .advance_search_select .ts-dropdown .ts-dropdown-content div:hover {
-    background-color: white !important; }
+    background-color: #ebebeb !important; }
 
 .text_responsive_results {
   font-size: 15px; }

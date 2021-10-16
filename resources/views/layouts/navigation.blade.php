@@ -189,19 +189,21 @@
     </nav>
 </div>
 
-<script>
-    $("#open-close-nav").on('click', function(e) {
-        e.preventDefault();
-        $(".menu_desplegable").toggleClass("open-close");
-        $("#hamburger-icon").toggleClass("hamburger-open");
-        if ($(".nav-principal").hasClass("rounded-b-none")) {
-            setTimeout(() => {
+
+    <script>
+        $("#open-close-nav").on('click', function(e) {
+            e.preventDefault();
+            $(".menu_desplegable").toggleClass("open-close");
+            $("#hamburger-icon").toggleClass("hamburger-open");
+            if ($(".nav-principal").hasClass("rounded-b-none")) {
+                setTimeout(() => {
+                    $(".nav-principal").toggleClass("rounded-b-none");
+                }, 150);
+            }
+            else {
                 $(".nav-principal").toggleClass("rounded-b-none");
-            }, 150);
-        }
-        else {
-            $(".nav-principal").toggleClass("rounded-b-none");
-        }
-        
-    });
-</script>
+            }
+            
+        });
+    </script>
+
