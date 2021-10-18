@@ -5,13 +5,11 @@
     <div class="glide {{ $carousel }}">
         <div class="glide__track" data-glide-el="track">
         <ul  class="glide__slides">
-            @foreach ($contents as $content)                
+            @foreach ($contents as $content)
                 <li class="glide__slide">
                     <div class="div-slide">
                         <div class="image">
-                            <img id="" class="imagen-carousel " src="{{ asset('storage/content/books/como-deshacerse-del-equipaje-emocional-de-las-familias-empresarias/41cXzsye9HL.jpg') }}" alt="{{ $content->title }}">
-                            {{-- <img id="" class="imagen-carousel " src="{{ asset('img/'.$content->coverImage) }}" alt="{{ $content->title }}"> --}}
-                        {{-- <img id="" class="imagen-carousel " src="{{ asset('storage/'.$content->coverImage) }}" alt="{{ $content->title }}"> --}}
+                            <img id="" class="imagen-carousel " src="{{ asset("storage/$content->coverImage") }}" alt="{{ $content->title }}">
                         </div>
                         <div class="title-of-content">
                             <p class="content_title_result" title="{{ $content->title }}">{{ $content->title }}</p>

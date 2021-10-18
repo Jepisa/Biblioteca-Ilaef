@@ -7,6 +7,7 @@ use App\Models\ContentList;
 use App\Models\Ebook;
 use Illuminate\Http\Request;
 
+
 class SearchContentController extends Controller
 {
     public function search(Request $request)
@@ -22,16 +23,19 @@ class SearchContentController extends Controller
         if (!in_array($search_type, $search_types)) return redirect()->route('home');
 
         if ($search_type != 'all') {
-            $contents = ContentList::where($search_type, 'like', '%' . $search . '%')->get();
+            $contents = ContentList::where($search_type, 'like', '%' . $search . '%');
         } else {
-            $contents = ContentList::where('authors', 'like', '%' . $search . '%')
-                                    ->orWhere('title', 'like', '%' . $search . '%')
-                                    ->orWhere('editorial', 'like', '%' . $search . '%')
-                                    ->orWhere('topics', 'like', '%' . $search . '%')
-                                    ->orWhere('isbn', 'like', '%' . $search . '%')
-                                    ->get();
+            $contents = ContentList::where('authors',       'like', '%' . $search . '%')
+                                    ->orWhere('title',      'like', '%' . $search . '%')
+                                    ->orWhere('editorial',  'like', '%' . $search . '%')
+                                    ->orWhere('topics',     'like', '%' . $search . '%')
+                                    ->orWhere('isbn',       'like', '%' . $search . '%')
+                                    ;
         }
 
-        return dd($contents);
+        $types_content = array_unique($contents->pluck('type')->toArray());
+        $contents = $contents->paginate(21)->appends($request->except('page'));
+
+        return view('max-results',compact('contents', 'search', 'types_content'));
     }
 }

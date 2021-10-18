@@ -82,5 +82,7 @@ Route::delete('author{name}', [AuthorController::class, 'destroy'])->name('autho
 
 
 
-Route::view('results', 'results');
+Route::view('results', 'results')->name('results');
 Route::view('max-results', 'max-results');
+
+Route::get('max-search', [SearchContentController::class, 'search'])->name('max-search');

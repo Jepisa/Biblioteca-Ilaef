@@ -1,17 +1,5 @@
 @props([
-    'tags' => ['Libro', 
-    'Ciencia Ficcion',
-    'Familia', 
-    'Empresa',
-    'Mejorar', 
-    'E-Book', 
-    'Latinoamérica',
-    'Libro', 
-    'Ciencia Ficcion',
-    'Familia', 
-    'Empresa',
-    'Mejorar', 
-    'E-Book', ]
+    'tags' => $typesContent
 ])
 
 @foreach ($tags as $tag)

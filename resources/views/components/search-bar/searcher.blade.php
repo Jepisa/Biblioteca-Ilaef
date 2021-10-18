@@ -1,6 +1,30 @@
 <div
     class="color_azuloscuro background_rojooscuro w-full block md:flex items-center p-3 rounded-lg searchBar_container relative z-50 text_responsive">
-    <div class="flex items-center justify-center w-full">
+    {{-- <div class="flex items-center justify-center w-full"> --}}
+        <form class="flex items-center justify-center w-full" action="{{ route('max-search') }}" method="get">
+            <div class="block">
+                <select name="searchType" id="content-select" autocomplete="off" class="text_responsive w-24">
+                    <option value="all" @if(isset($_GET["searchType"]) && $_GET["searchType"] == 'all') selected @endif>Todo</option>
+                    <option value="authors" @if(isset($_GET["searchType"]) && $_GET["searchType"] == 'authors') selected @endif>Autor</option>
+                    <option value="title" @if(isset($_GET["searchType"]) && $_GET["searchType"] == 'title') selected @endif>Título</option>
+                    <option value="editorial" @if(isset($_GET["searchType"]) && $_GET["searchType"] == 'editorial') selected @endif>Editorial</option>
+                    <option value="topics" @if(isset($_GET["searchType"]) && $_GET["searchType"] == 'topics') selected @endif>Tema</option>
+                    <option value="isbn" @if(isset($_GET["searchType"]) && $_GET["searchType"] == 'isbn') selected @endif>ISBN</option>
+                </select>
+            </div>
+            <div class="input_search_mainContainer text_responsive cursor-pointer ml-4 mr-0 md:mr-4">
+                <button type='submit' class="w-4 h-4 absolute z-50 left-6 top-5 md:left-28 lg:left-32 2xl:left-36 md:top-5 magnifier_icon">
+                    <i class="fas fa-search"></i>
+                </button>
+                <input class="w-full rounded-sm input_search text_responsive" type="search" id="search" name="search"
+                    placeholder="Buscar por título, autor, editorial..." autocomplete="off" value="{{ $search ?? '' }}">
+            </div>
+        </form>
+    {{-- </div> --}}
+
+    
+    
+    {{-- <div class="flex items-center justify-center w-full">
         <div class="block">
             <select id="content-select" autocomplete="off" class="text_responsive w-24">
                 <option value="Todo" selected>Todo</option>
@@ -18,7 +42,7 @@
             <input class="w-full rounded-sm input_search text_responsive" type="search" id="search" name="search"
                 placeholder="Buscar por título, autor, editorial..." autocomplete="off">
         </div>
-    </div>
+    </div> --}}
     <div class="flex mt-3 md:mt-0">
         <div class="w-full md:w-52 whitespace-nowrap">
             <select id="advance-search" autocomplete="off" class="advance_search_select">

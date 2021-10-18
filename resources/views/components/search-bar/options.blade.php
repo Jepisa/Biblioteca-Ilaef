@@ -1,5 +1,5 @@
 <form method="GET" action="" id="advanceSearch_form">
-    @csrf
+    {{-- @csrf --}}
     <div {{ $attributes->merge(['class' => 'bg-white border_dashed m-4 p-4 px-4 sm:px-8']) }}>
 
         <div class="w-2/3 w-full flex justify-between items-center color_azuloscuro">
