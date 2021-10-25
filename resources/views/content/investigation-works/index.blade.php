@@ -58,7 +58,7 @@
                                                 <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width:340px;"
                                                     class="text-sm text-center font-medium text-gray-900"
                                                     title="{{ $investigation_work->title }}">
-                                                    <a href="{{ route('investigationwork.show', ['slug' => $investigation_work->slug]) }}">{{ $investigation_work->title }}</a>
+                                                    <a href="{{ route('investigation-work.show', ['slug' => $investigation_work->slug]) }}">{{ $investigation_work->title }}</a>
                                                 </div>
                                                 <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width:340px;"
                                                     class="text-sm text-center text-gray-500"

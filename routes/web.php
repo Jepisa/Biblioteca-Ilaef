@@ -65,7 +65,7 @@ Route::delete('ebook/{slug}', [EbookController::class, 'destroy'])->name('ebook.
 //Investigation Work
 Route::get('investigation-works', [InvestigationWorkController::class, 'index'])->name('investigationworks.index')->middleware('auth');
 Route::get('investigation-work/create', [InvestigationWorkController::class, 'create'])->name('investigationwork.create')->middleware(['auth']);
-Route::get('investigation-work/{slug}', [InvestigationWorkController::class, 'show'])->name('investigationwork.show');
+Route::get('investigation-work/{slug}', [InvestigationWorkController::class, 'show'])->name('investigation-work.show');
 Route::post('investigation-work',[InvestigationWorkController::class, 'store'])->name('investigationwork.store')->middleware('auth');
 Route::get('investigation-work/{slug}/edit', [InvestigationWorkController::class, 'edit'])->name('investigationwork.edit');
 Route::put('investigation-work/{slug}', [InvestigationWorkController::class, 'update'])->name('investigationwork.update');
