@@ -90,7 +90,7 @@ Route::get('max-search', [SearchContentController::class, 'search'])->name('max-
 
 Route::get('testdb', function(){
     DB::statement("CREATE OR REPLACE
-    ALGORITHM = UNDEFINED VIEW `biblioteca_ilaef`.`content_list` AS
+    ALGORITHM = UNDEFINED VIEW `ilaeforg_biblioteca_test`.`content_list` AS
     select
         'book' AS `type`,
         `b`.`title` AS `title`,
@@ -108,11 +108,11 @@ Route::get('testdb', function(){
             `b`.`id` AS `id`,
             concat(group_concat(`a2`.`name` separator ','), '.') AS `authors`
         from
-            ((`biblioteca_ilaef`.`books` `b`
-        join `biblioteca_ilaef`.`authorables` `a` on
+            ((`ilaeforg_biblioteca_test`.`books` `b`
+        join `ilaeforg_biblioteca_test`.`authorables` `a` on
             (((`a`.`authorable_id` = `b`.`id`)
                 and (`a`.`authorable_type` = 'App\\Models\\Book'))))
-        join `biblioteca_ilaef`.`authors` `a2` on
+        join `ilaeforg_biblioteca_test`.`authors` `a2` on
             ((`a`.`author_id` = `a2`.`id`)))
         group by
             `b`.`id`) `authors`
@@ -121,16 +121,16 @@ Route::get('testdb', function(){
             `b`.`id` AS `id`,
             concat(group_concat(`t2`.`name` separator ','), '.') AS `topics`
         from
-            ((`biblioteca_ilaef`.`books` `b`
-        join `biblioteca_ilaef`.`topicables` `t` on
+            ((`ilaeforg_biblioteca_test`.`books` `b`
+        join `ilaeforg_biblioteca_test`.`topicables` `t` on
             (((`t`.`topicable_id` = `b`.`id`)
                 and (`t`.`topicable_type` = 'App\\Models\\Book'))))
-        join `biblioteca_ilaef`.`topics` `t2` on
+        join `ilaeforg_biblioteca_test`.`topics` `t2` on
             ((`t`.`topic_id` = `t2`.`id`)))
         group by
             `b`.`id`) `topics`)
-    join `biblioteca_ilaef`.`books` `b`)
-    join `biblioteca_ilaef`.`counters` `c`)
+    join `ilaeforg_biblioteca_test`.`books` `b`)
+    join `ilaeforg_biblioteca_test`.`counters` `c`)
     where
         ((`b`.`id` = `authors`.`id`)
             and (`b`.`id` = `topics`.`id`)
@@ -154,11 +154,11 @@ Route::get('testdb', function(){
             `eb`.`id` AS `id`,
             concat(group_concat(`a2`.`name` separator ','), '.') AS `authors`
         from
-            ((`biblioteca_ilaef`.`ebooks` `eb`
-        join `biblioteca_ilaef`.`authorables` `a` on
+            ((`ilaeforg_biblioteca_test`.`ebooks` `eb`
+        join `ilaeforg_biblioteca_test`.`authorables` `a` on
             (((`a`.`authorable_id` = `eb`.`id`)
                 and (`a`.`authorable_type` = 'App\\Models\\Ebook'))))
-        join `biblioteca_ilaef`.`authors` `a2` on
+        join `ilaeforg_biblioteca_test`.`authors` `a2` on
             ((`a`.`author_id` = `a2`.`id`)))
         group by
             `eb`.`id`) `authors`
@@ -167,16 +167,16 @@ Route::get('testdb', function(){
             `eb`.`id` AS `id`,
             concat(group_concat(`t2`.`name` separator ','), '.') AS `topics`
         from
-            ((`biblioteca_ilaef`.`ebooks` `eb`
-        join `biblioteca_ilaef`.`topicables` `t` on
+            ((`ilaeforg_biblioteca_test`.`ebooks` `eb`
+        join `ilaeforg_biblioteca_test`.`topicables` `t` on
             (((`t`.`topicable_id` = `eb`.`id`)
                 and (`t`.`topicable_type` = 'App\\Models\\Ebook'))))
-        join `biblioteca_ilaef`.`topics` `t2` on
+        join `ilaeforg_biblioteca_test`.`topics` `t2` on
             ((`t`.`topic_id` = `t2`.`id`)))
         group by
             `eb`.`id`) `topics`)
-    join `biblioteca_ilaef`.`ebooks` `eb`)
-    join `biblioteca_ilaef`.`counters` `c`)
+    join `ilaeforg_biblioteca_test`.`ebooks` `eb`)
+    join `ilaeforg_biblioteca_test`.`counters` `c`)
     where
         ((`eb`.`id` = `authors`.`id`)
             and (`eb`.`id` = `topics`.`id`)
@@ -200,11 +200,11 @@ Route::get('testdb', function(){
             `iw`.`id` AS `id`,
             concat(group_concat(`a2`.`name` separator ','), '.') AS `authors`
         from
-            ((`biblioteca_ilaef`.`investigation_works` `iw`
-        join `biblioteca_ilaef`.`authorables` `a` on
+            ((`ilaeforg_biblioteca_test`.`investigation_works` `iw`
+        join `ilaeforg_biblioteca_test`.`authorables` `a` on
             (((`a`.`authorable_id` = `iw`.`id`)
                 and (`a`.`authorable_type` = 'App\\Models\\InvestigationWork'))))
-        join `biblioteca_ilaef`.`authors` `a2` on
+        join `ilaeforg_biblioteca_test`.`authors` `a2` on
             ((`a`.`author_id` = `a2`.`id`)))
         group by
             `iw`.`id`) `authors`
@@ -213,16 +213,16 @@ Route::get('testdb', function(){
             `iw`.`id` AS `id`,
             concat(group_concat(`t2`.`name` separator ','), '.') AS `topics`
         from
-            ((`biblioteca_ilaef`.`investigation_works` `iw`
-        join `biblioteca_ilaef`.`topicables` `t` on
+            ((`ilaeforg_biblioteca_test`.`investigation_works` `iw`
+        join `ilaeforg_biblioteca_test`.`topicables` `t` on
             (((`t`.`topicable_id` = `iw`.`id`)
                 and (`t`.`topicable_type` = 'App\\Models\\InvestigationWork'))))
-        join `biblioteca_ilaef`.`topics` `t2` on
+        join `ilaeforg_biblioteca_test`.`topics` `t2` on
             ((`t`.`topic_id` = `t2`.`id`)))
         group by
             `iw`.`id`) `topics`)
-    join `biblioteca_ilaef`.`investigation_works` `iw`)
-    join `biblioteca_ilaef`.`counters` `c`)
+    join `ilaeforg_biblioteca_test`.`investigation_works` `iw`)
+    join `ilaeforg_biblioteca_test`.`counters` `c`)
     where
         ((`iw`.`id` = `authors`.`id`)
             and (`iw`.`id` = `topics`.`id`)
