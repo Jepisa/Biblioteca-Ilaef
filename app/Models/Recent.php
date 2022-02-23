@@ -12,7 +12,7 @@ class Recent extends Model
 
     public static function recents($limit)
     {
-        $books = Book::orderBy('created_at')->limit($limit)->get();
+        $books = Book::orderBy('created_at', 'desc')->limit($limit)->get();
         $podcasts = Podcast::orderBy('created_at')->limit($limit)->get();
         
         return $books;
