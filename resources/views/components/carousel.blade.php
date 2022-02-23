@@ -8,9 +8,11 @@
             @foreach ($contents as $content)
                 <li class="glide__slide">
                     <div class="div-slide">
-                        <div class="image">
-                            <img id="" class="imagen-carousel " src="{{ asset("storage/$content->coverImage") }}" alt="{{ $content->title }}">
-                        </div>
+                        <a href="{{ route($content->type . '.show', ['slug' => $content->slug]) }}">
+                            <div class="image">
+                                <img id="" class="imagen-carousel " src="{{ asset("storage/$content->coverImage") }}" alt="{{ $content->title }}">
+                            </div>
+                        </a>
                         <div class="title-of-content">
                             <p class="content_title_result" title="{{ $content->title }}">{{ $content->title }}</p>
                         </div>
