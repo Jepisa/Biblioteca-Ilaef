@@ -40,7 +40,7 @@
     {{-- MODAL WELCOME --}}
     @if (Session()->exists('notification'))
         @auth
-            <div x-data="{ open: true }" @click.away="open = false" @close.stop="open = false" class="">
+            <div x-data="{ open: true }" @click.away="open = false" @close.stop="open = false" class="" style="z-index: 999; top:55%; position: absolute;">
                 <x-modals.main loginMessage="{{ Auth::user()->name }}" />
             </div>
         @endauth

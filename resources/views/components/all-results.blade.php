@@ -8,12 +8,12 @@
         <div id='sort2'><button>Ordenar por</button>
         <div class="sort-expand" id="sort-expand">
             <ul>
-                <li>Fecha (el más reciente)</li>
-                <li>Fecha (el más antiguo)</li>
-                <li>Título (de la A a la Z)</li>
-                <li>Fecha Autor (de la A a la Z)</li>
-                <li>Por relevancia</li>
-                <li>Por formato</li>
+                <a href=""><li>Fecha (el más reciente)</li></a>
+                <a href="#"><li>Fecha (el más antiguo)</li></a>
+                <a href="#"><li>Título (de la A a la Z)</li></a>
+                <a href="#"><li>Fecha Autor (de la A a la Z)</li></a>
+                <a href="#"><li>Por relevancia</li></a>
+                <a href="#"><li>Por formato</li></a>
             </ul>
         </div>
         </div>

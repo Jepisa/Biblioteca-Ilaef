@@ -2,11 +2,12 @@
     'loginMessage' => null,
     'share' => '0',
     'buy' => '0',
-    'download' => '0',
+    'download' => $download ?? '',
     'fav' => '0',
     'contentID' => null,
     'contentID' => null,
     'register' => null,
+    'downloadable' => $downloadable ?? ''
 ])
 
 <div x-show="open" x-transition:enter="transition ease-out duration-200"
@@ -22,7 +23,7 @@
         <x-modals.fav contentID={{$contentID}}/>       
         @endif
         @if ($download == "1")
-        <x-modals.download contentID={{$contentID}}/>           
+        <x-modals.download downloadable={{$downloadable}}/>           
         @endif
         @if ($buy == "1")
         <x-modals.buy contentID={{$contentID}}/>       

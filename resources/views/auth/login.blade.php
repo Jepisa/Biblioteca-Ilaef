@@ -76,7 +76,7 @@
         </x-auth-card_body>
         <div class="w-full items-center justify-center flex mt-8">
             <div class="w-1/2 mx-auto hidden xl:block"></div>
-            <a href="{{ route('home') }}" class="w-full xl:w-1/2 block">
+            <a href="{{ url()->previous() }}" class="w-full xl:w-1/2 block">
                 <x-button-back class="mx-auto text-white 2xl:w-20 w-16" color="#91091E" />
             </a>
         </div>

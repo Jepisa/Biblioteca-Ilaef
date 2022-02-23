@@ -69,7 +69,7 @@
                                     </div>
                                 </div>
                                 <div class="col-span-4 items-center justify-center flex mb-8 xl:hidden relative md:top-10 top-5">
-                                    <a href="{{ route('home') }}" class="w-full block">
+                                    <a href="{{ url()->previous() }}" class="w-full block">
                                         <x-button-back class="mx-auto text-white md:w-20 w-16" color="#91091E" />
                                     </a>
                                 </div>
@@ -81,7 +81,7 @@
         </x-auth-card>
         <div class="w-full items-center justify-center flex mb-8 hidden xl:flex">
             <div class="w-1/2 mx-auto hidden xl:block"></div>
-            <a href="{{ route('home') }}" class="w-full xl:w-1/2 block 2xl:pr-0 xl:pr-40">
+            <a href="{{ url()->previous() }}" class="w-full xl:w-1/2 block 2xl:pr-0 xl:pr-40">
                 <x-button-back class="mx-auto text-white w-20" color="#91091E" />
             </a>
         </div>

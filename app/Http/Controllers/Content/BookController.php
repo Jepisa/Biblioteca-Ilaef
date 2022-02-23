@@ -180,15 +180,15 @@ class BookController extends Controller
      */
     public function show($slug)
     {
-        $book = Book::where('slug', '=', $slug)->firstOrFail();
+        $content = Book::where('slug', '=', $slug)->firstOrFail();
         //Contar las visitas a cada libro
-        $book->counter()->update([
-                'views' => $book->counter->views + 1,
+        $content->counter()->update([
+                'views' => $content->counter->views + 1,
             ],[
                 'timestamps' => false
             ]);
-        $book->counter->views++;
-        return view('content.books.show', compact('book'));
+        $content->counter->views++;
+        return view('results', compact('content'));
     }
 
     /**

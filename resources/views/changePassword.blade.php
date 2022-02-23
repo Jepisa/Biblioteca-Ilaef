@@ -31,7 +31,7 @@
                 {{-- ARROW BACK --}}
                 <div class="w-full items-center justify-center flex mb-2 mt-8 flex flex xl:hidden">
                     <div class="w-1/2 mx-auto hidden xl:block"></div>
-                    <a href="/" class="w-full xl:w-1/2 block 2xl:pr-0 xl:pr-40">
+                    <a href="{{ url()->previous() }}" class="w-full xl:w-1/2 block 2xl:pr-0 xl:pr-40">
                         <x-button-back class="mx-auto text-white md:w-20 w-16" color="#91091E" />
                     </a>
                 </div>
@@ -42,7 +42,7 @@
 
     <div class="w-full items-center justify-center flex mb-8 hidden xl:flex">
         <div class="w-1/2 mx-auto hidden xl:block"></div>
-        <a href="/" class="w-full xl:w-1/2 block 2xl:pr-40 xl:pr-32">
+        <a href="{{ url()->previous() }}" class="w-full xl:w-1/2 block 2xl:pr-40 xl:pr-32">
             <x-button-back class="mx-auto text-white w-20" color="#91091E" />
         </a>
     </div>

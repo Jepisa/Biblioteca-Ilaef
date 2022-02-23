@@ -4,6 +4,7 @@
     'download' => '0',
     'fav' => '0',
     'mail' => '0',
+    'downloadable' => $downloadable
 ])
 
 
@@ -49,7 +50,7 @@
             </g>
         </svg>
     </div>
-    <x-modals.main download={{ $download }} />
+    <x-modals.main download={{ $download }} :downloadable="$downloadable"/>
 </div>
 
 <div x-data="{ open: false }" @click.away="open = false" @close.stop="open = false" class="col-span-2">

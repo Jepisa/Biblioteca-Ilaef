@@ -33,7 +33,7 @@
             <x-max-results.main :contents="$contents" :search="$search" :typesContent="$types_content"/>
             <div class="links links-white mt-10">{{ $contents->links() }}</div>
         </div>
-        <a href="{{ route('home') }}" class="mb-8 sm:mb-0 2xl:w-20 w-16">
+        <a href="{{ url()->previous() }}" class="mb-8 sm:mb-0 2xl:w-20 w-16">
             <x-button-back class="mx-auto text-white w-full" />
         </a>
     </div>

@@ -1,6 +1,6 @@
 @props([
     'download' => '0',
-    'contentID' => null,
+    'downloadable' => null,
 ])
 
 @auth
@@ -22,7 +22,7 @@
             </svg>
         </div>
         <p class="font-bold text-base md:text-center text-sm">
-            Iniciar descarga
+            <a href="{{ asset("storage/$downloadable") }}" download>Iniciar descarga</a>
         </p>
     @endauth
     @guest

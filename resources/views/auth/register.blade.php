@@ -49,7 +49,7 @@
 
     <div class="w-full items-center justify-center flex mb-8">
         <div class="w-1/2 hidden xl:block"></div>
-        <a href="{{ route('home') }}" class="xl:w-1/2 xl:pr-20 xl:block">
+        <a href="{{ url()->previous() }}" class="xl:w-1/2 xl:pr-20 xl:block">
             <x-button-back class="mx-auto text-white md:w-20 w-16 " color="#91091e" />
         </a>
     </div>

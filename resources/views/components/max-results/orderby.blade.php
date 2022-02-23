@@ -14,22 +14,22 @@
         <div class="bg-white color_azuloscuro rounded-sm shadow-lg pt-4">
             <ul class="p-2">
                 <li class="py-1 px-4 cursor-pointer hover:bg-gray-200 rounded-sm">
-                    <a>Fecha (el más reciente)</a>
+                    <a href="{{ url()->full() . '&order=recientes' }}">Fecha (el más reciente)</a>
                 </li>
                 <li class="py-1 px-4 cursor-pointer hover:bg-gray-200 rounded-sm">
-                    <a class="py-2">Fecha (el más antiguo)</a>
+                    <a href="{{ url()->full() . '&order=antiguos' }}" class="py-2">Fecha (el más antiguo)</a>
                 </li>
                 <li class="py-1 px-4 cursor-pointer hover:bg-gray-200 rounded-sm">
-                    <a class="py-2">Titulo (de la A a la Z)</a>
+                    <a href="{{ url()->full() . '&order=titleDesc' }}" class="py-2">Titulo (de la A a la Z)</a>
                 </li>
                 <li class="py-1 px-4 cursor-pointer hover:bg-gray-200 rounded-sm">
-                    <a class="py-2">Autor (de la A a la Z)</a>
+                    <a href="{{ url()->full() . '&order=authorDesc' }}" class="py-2">Autor (de la A a la Z)</a>
                 </li>
                 <li class="py-1 px-4 cursor-pointer hover:bg-gray-200 rounded-sm">
-                    <a class="py-2">Por relevancia</a>
+                    <a href="{{ url()->full() . '&order=relevant' }}" class="py-2">Por relevancia</a>
                 </li>
                 <li class="py-1 px-4 cursor-pointer hover:bg-gray-200 rounded-sm">
-                    <a class="py-2">Por formato</a>
+                    <a href="{{ url()->full() . '&order=type' }}" class="py-2">Por formato</a>
                 </li>
             </ul>
         </div>
