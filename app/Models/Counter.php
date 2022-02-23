@@ -32,7 +32,8 @@ class Counter extends Model
     }
 
     private static function nameModelType($modelName)
-    {
+    {    
+        $modelName = str_replace('App\\Models\\', '', $modelName);
         $nameModel = Str::slug($modelName);
         return $nameModel;
     }
